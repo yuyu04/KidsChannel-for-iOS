@@ -1,0 +1,15 @@
+PODS:
+  - MobileVLCKit (2.2.2)
+  - SlideMenuControllerSwift (3.0.1)
+
+DEPENDENCIES:
+  - MobileVLCKit
+  - SlideMenuControllerSwift
+
+SPEC CHECKSUMS:
+  MobileVLCKit: 75c2c36b0e3478c3f18cac3a2e7fa127cda0ff92
+  SlideMenuControllerSwift: 9a163b16d54afab734add42858cba7ef7c307755
+
+PODFILE CHECKSUM: b4548ae13161427c98785fd864a4ac36193c188d
+
+COCOAPODS: 1.1.1
