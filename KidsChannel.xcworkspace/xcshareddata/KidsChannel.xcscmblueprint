@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "01A136D4A7BEE52C3B190601486394E0176DD291",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "01A136D4A7BEE52C3B190601486394E0176DD291" : 9223372036854775807,
+    "FE6F5C9261C2ACFE6F9470765F985B63CA79A824" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "F5E5FA93-3A03-4861-A69B-BC4AD919E1D8",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "01A136D4A7BEE52C3B190601486394E0176DD291" : "KidsChannel-for-iOS\/",
+    "FE6F5C9261C2ACFE6F9470765F985B63CA79A824" : "iOSOnvifFramework\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "KidsChannel",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "KidsChannel.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/yuyu04\/KidsChannel-for-iOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "01A136D4A7BEE52C3B190601486394E0176DD291"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/yuyu04\/iOSOnvifFramework.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "FE6F5C9261C2ACFE6F9470765F985B63CA79A824"
+    }
+  ]
+}

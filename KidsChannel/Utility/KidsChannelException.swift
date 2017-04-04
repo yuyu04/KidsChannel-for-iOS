@@ -20,4 +20,5 @@ public enum KidsChannelException: Error {
     case ServerConnectionFail()
     /// 서버와 시도시 발생되는 네트워크 Error
     case NetworkError(Error)
+    case ErrorFromServer(String)
 }

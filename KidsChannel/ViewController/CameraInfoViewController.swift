@@ -9,16 +9,38 @@
 import UIKit
 
 class CameraInfoViewController: UIViewController {
+    @IBOutlet weak var tableView: UITableView!
+    var cameras = [Camera]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.tableView.registerCellNib(CameraListTableViewCell.self)
+        self.tableView.separatorColor = UIColor.clear
+        self.tableView.tableFooterView = UIView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
+        
+        guard let userId = AppConfigure.sharedInstance.userDefaults.string(forKey: "UserId"),
+            AppConfigure.sharedInstance.isLoginUser,
+            cameras.count == 0 else {
+                return
+        }
+        
+        NetworkManager.requestCameraSearch(userId: userId) { (cameraArray) in
+            guard let cameraList = cameraArray else {
+                return
+            }
+            
+            self.cameras = cameraList
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,15 +48,57 @@ class CameraInfoViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func confirm(_ sender: Any) {
+        DispatchQueue.main.async {
+            AppConfigure.sharedInstance.leftMenuDelegate?.changeViewController(LeftMenu.mainView)
+        }
     }
-    */
+}
 
+extension CameraInfoViewController : UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CameraListTableViewCell.height()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if self.tableView == scrollView {
+            
+        }
+    }
+}
+
+extension CameraInfoViewController : UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return cameras.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 20
+    }
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView(frame:CGRect (x: 0, y: 0, width: tableView.frame.size.width, height: 20) ) as UIView
+        view.backgroundColor = UIColor.clear
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let camera: Camera = cameras[indexPath.section] else {
+            return UITableViewCell()
+        }
+        
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: CameraListTableViewCell.identifier) as! CameraListTableViewCell
+        let cameraUrl = camera.ip + ":" + camera.port
+        let data = CameraListTableViewCellData(imageName: "", cameraName: camera.name, cameraUrl: cameraUrl, cameraId: camera.id)
+        cell.setData(data)
+        
+        return cell
+    }
 }

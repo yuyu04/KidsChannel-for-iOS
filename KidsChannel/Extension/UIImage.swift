@@ -25,4 +25,8 @@ extension UIImage {
         
         return image
     }
+    
+    func setBackgroundImage(image: UIImage) {
+        
+    }
 }

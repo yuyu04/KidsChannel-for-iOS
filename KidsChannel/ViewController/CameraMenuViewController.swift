@@ -26,9 +26,9 @@ class CameraMenuViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var menus = ["", "4ch 카메라 뷰어", "8ch 카메라 뷰어", "18ch 카메라 뷰어", "갤러리 뷰어"]
     var mainViewController: UIViewController!
-    var fourChCameraViewController: UIViewController!
-    var eightChCameraViewController: UIViewController!
-    var eightTeenChCameraViewController: UIViewController!
+    var fourChViewController: UIViewController!
+    var eightChViewController: UIViewController!
+    var sixteenChViewController: UIViewController!
     var galleryViewController: UIViewController!
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,20 +42,17 @@ class CameraMenuViewController: UIViewController {
         self.tableView.separatorColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
         //self.tableView.backgroundColor = UIColor.clear
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        /*let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        self.loginViewController = UINavigationController(rootViewController: loginViewController)
+        let fourChViewController = storyboard.instantiateViewController(withIdentifier: "FourChannelCameraViewController") as! FourChannelCameraViewController
+        self.fourChViewController = UINavigationController(rootViewController: fourChViewController)
         
-        let userInfoViewController = storyboard.instantiateViewController(withIdentifier: "UserInfoViewController") as! UserInfoViewController
-        self.userInfoViewController = UINavigationController(rootViewController: userInfoViewController)
+        let eightChViewController = storyboard.instantiateViewController(withIdentifier: "EightChannelCameraViewController") as! EightChannelCameraViewController
+        self.eightChViewController = UINavigationController(rootViewController: eightChViewController)
         
-        let cameraInfoViewController = storyboard.instantiateViewController(withIdentifier: "CameraInfoViewController") as! CameraInfoViewController
-        self.cameraInfoViewController = UINavigationController(rootViewController: cameraInfoViewController)
+        let sixteenChViewController = storyboard.instantiateViewController(withIdentifier: "SixteenChannelCameraViewController") as! SixteenChannelCameraViewController
+        self.sixteenChViewController = UINavigationController(rootViewController: sixteenChViewController)
         
-        let skinSelectionViewController = storyboard.instantiateViewController(withIdentifier: "SkinSelectionViewController") as! SkinSelectionViewController
-        self.skinSelectionViewController = UINavigationController(rootViewController: skinSelectionViewController)
-        
-        let versionInfoViewController = storyboard.instantiateViewController(withIdentifier: "VersionInfoViewController") as! VersionInfoViewController
-        self.versionInfoViewController = UINavigationController(rootViewController: versionInfoViewController)*/
+        let galleryViewController = storyboard.instantiateViewController(withIdentifier: "GalleryViewController") as! GalleryViewController
+        self.galleryViewController = UINavigationController(rootViewController: galleryViewController)
         
         self.tableView.registerCellNib(ButtonTableViewCell.self)
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
@@ -69,18 +66,18 @@ class CameraMenuViewController: UIViewController {
 
 extension CameraMenuViewController : RightMenuProtocol {
     func changeViewController(_ menu: RightMenu) {
-        /*switch menu {
-        case .login where AppConfigure.sharedInstance.isLoginUser:
-            self.slideMenuController()?.changeMainViewController(self.userInfoViewController, close: true)
-        case .login:
-            self.slideMenuController()?.changeMainViewController(self.loginViewController, close: true)
-        case .cameraInfo:
-            self.slideMenuController()?.changeMainViewController(self.cameraInfoViewController, close: true)
-        case .skinSelection:
-            self.slideMenuController()?.changeMainViewController(self.skinSelectionViewController, close: true)
-        case .versionInfo:
-            self.slideMenuController()?.changeMainViewController(self.versionInfoViewController, close: true)
-        }*/
+        switch menu {
+        case .fourChennel:
+            self.slideMenuController()?.changeMainViewController(self.fourChViewController, close: true)
+        case .eightChennel:
+            self.slideMenuController()?.changeMainViewController(self.eightChViewController, close: true)
+        case .eighteenChennel:
+            self.slideMenuController()?.changeMainViewController(self.sixteenChViewController, close: true)
+        case .gellery:
+            self.slideMenuController()?.changeMainViewController(self.galleryViewController, close: true)
+        default:
+            return
+        }
     }
 }
 

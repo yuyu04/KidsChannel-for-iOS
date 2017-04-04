@@ -1,5 +1,5 @@
 //
-//  EighteenChannelCameraViewController.swift
+//  GalleyViewController.swift
 //  KidsChannel
 //
 //  Created by sungju on 2017. 3. 29..
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EighteenChannelCameraViewController: UIViewController {
+class GalleryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

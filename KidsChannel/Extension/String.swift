@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CryptoSwift
 
 extension String {
     static func className(_ aClass: AnyClass) -> String {
@@ -19,5 +20,16 @@ extension String {
     
     var length: Int {
         return self.characters.count
+    }
+    
+    func encryptMD5() -> String {
+        guard let plainData: Data = self.data(using: .utf8) else {
+            return ""
+        }
+        
+        let encryptedData = plainData.md5()
+        let result: String = encryptedData.base64EncodedString()
+        
+        return result
     }
 }

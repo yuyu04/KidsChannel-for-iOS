@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import SlideMenuControllerSwift
 
 class LoginViewController: UIViewController {
-
+    
+    @IBOutlet weak var loginImage: UIImageView!
+    @IBOutlet weak var userId: UITextField!
+    @IBOutlet weak var password: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,15 +31,36 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func login(_ sender: Any) {
+        guard let id = userId.text,
+            let pw = password.text else {
+            return
+        }
+            
+        NetworkManager.requestLogin(fromUserId: id, password: pw) { (kindergardenName, serverMessage) in
+            if kindergardenName.isEmpty {
+                AppConfigure.sharedInstance.userDefaults.set("", forKey: "UserId")
+                AppConfigure.sharedInstance.userDefaults.set("", forKey: "UserPassword")
+                self.showAlertView(message: serverMessage)
+                return
+            }
+            
+            self.showAlertView(message: "로그인에 성공했습니다.")
+            AppConfigure.sharedInstance.isLoginUser = true
+            AppConfigure.sharedInstance.kindergartenName = kindergardenName
+            AppConfigure.sharedInstance.userDefaults.set(id, forKey: "UserId")
+            AppConfigure.sharedInstance.userDefaults.set(pw, forKey: "UserPassword")
+            self.cancel(self)
+        }
     }
-    */
-
+    
+    @IBAction func showUserJoinView(_ sender: Any) {
+        AppConfigure.sharedInstance.leftMenuDelegate?.changeViewController(LeftMenu.joinView)
+    }
+    
+    @IBAction func cancel(_ sender: Any) {
+        DispatchQueue.main.async {
+            AppConfigure.sharedInstance.leftMenuDelegate?.changeViewController(LeftMenu.mainView)
+        }
+    }
 }

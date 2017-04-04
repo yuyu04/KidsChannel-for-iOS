@@ -7,6 +7,8 @@ target 'KidsChannel' do
 	pod 'MobileVLCKit'
 	pod 'SlideMenuControllerSwift'
     pod 'ReachabilitySwift', '~> 3'
+    pod 'CryptoSwift'
+    pod 'IQKeyboardManagerSwift'
 end
 
 target 'KidsChannelTests' do

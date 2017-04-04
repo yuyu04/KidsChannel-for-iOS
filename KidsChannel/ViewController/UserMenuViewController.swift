@@ -14,6 +14,8 @@ enum LeftMenu: Int {
     case cameraInfo
     case skinSelection
     case versionInfo
+    case mainView = 100
+    case joinView
 }
 
 protocol LeftMenuProtocol : class {
@@ -29,6 +31,8 @@ class UserMenuViewController: UIViewController {
     var cameraInfoViewController: UIViewController!
     var skinSelectionViewController: UIViewController!
     var versionInfoViewController: UIViewController!
+    
+    var userJoinViewController: UIViewController!
     var imageHeaderView: ImageHeaderView!
     
     required init?(coder aDecoder: NSCoder) {
@@ -57,11 +61,26 @@ class UserMenuViewController: UIViewController {
         let versionInfoViewController = storyboard.instantiateViewController(withIdentifier: "VersionInfoViewController") as! VersionInfoViewController
         self.versionInfoViewController = UINavigationController(rootViewController: versionInfoViewController)
         
+        let userJoinViewController = storyboard.instantiateViewController(withIdentifier: "UserJoinViewController") as! UserJoinViewController
+        self.userJoinViewController = UINavigationController(rootViewController: userJoinViewController)
+        
+        AppConfigure.sharedInstance.leftMenuDelegate = self
+        
         self.tableView.registerCellNib(ButtonTableViewCell.self)
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         self.imageHeaderView = ImageHeaderView.loadNib()
         self.view.addSubview(self.imageHeaderView)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if AppConfigure.sharedInstance.isLoginUser, let userId = AppConfigure.sharedInstance.userDefaults.string(forKey: "UserId") {
+            imageHeaderView.userId.text = userId
+        } else {
+            imageHeaderView.userId.text = ""
+        }
+        
+        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -83,6 +102,10 @@ extension UserMenuViewController : LeftMenuProtocol {
             self.slideMenuController()?.changeMainViewController(self.skinSelectionViewController, close: true)
         case .versionInfo:
             self.slideMenuController()?.changeMainViewController(self.versionInfoViewController, close: true)
+        case .mainView:
+            self.slideMenuController()?.changeMainViewController(self.mainViewController, close: true)
+        case .joinView:
+            self.slideMenuController()?.changeMainViewController(self.userJoinViewController, close: true)
         }
     }
 }
@@ -93,6 +116,8 @@ extension UserMenuViewController : UITableViewDelegate {
             switch menu {
             case .login, .cameraInfo, .skinSelection, .versionInfo:
                 return ButtonTableViewCell.height()
+            default:
+                return 0
             }
         }
         return 0
@@ -132,6 +157,8 @@ extension UserMenuViewController : UITableViewDataSource {
                 data = ButtonTableViewCellData(imageName: menus[indexPath.row], text: menus[indexPath.row])
             case .cameraInfo, .skinSelection, .versionInfo:
                 data = ButtonTableViewCellData(imageName: menus[indexPath.row], text: menus[indexPath.row+1])
+            default:
+                data = nil
             }
             cell.setData(data)
             return cell

@@ -10,10 +10,20 @@ import UIKit
 
 class VersionInfoViewController: UIViewController {
 
+    @IBOutlet weak var versionInfo: UILabel!
+    @IBOutlet weak var environment: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        var versionString = "버전 "
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            versionString.append(version)
+        } else {
+            versionString.append("1.0")
+        }
+        versionInfo.text = versionString
+        environment.text = "지원환경 iOS 9.0 이상"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -26,6 +36,9 @@ class VersionInfoViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func confirm(_ sender: Any) {
+        AppConfigure.sharedInstance.leftMenuDelegate?.changeViewController(LeftMenu.mainView)
+    }
 
     /*
     // MARK: - Navigation

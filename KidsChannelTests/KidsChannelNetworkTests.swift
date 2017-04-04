@@ -20,4 +20,52 @@ class KidsChannelNetworkTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
+    
+    func testRequestLogin() {
+        let asyncExpection = expectation(description: "networkRunningFunction")
+        NetworkManager.requestLogin(fromUserId: "tttt", password: "tttt") { (kindergardenName, serverMessage) in
+            XCTAssert(kindergardenName.length < 1)
+            asyncExpection.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5) { error in
+            
+        }
+    }
+    
+    func testRequestUserUpdate() {
+        let asyncExpection = expectation(description: "networkRunningFunction")
+        NetworkManager.requestUserUpdate(userId: "tttt", password: "tttt", kindergartenName: "AAAA") { (message) in
+            XCTAssert(message.length < 1)
+            asyncExpection.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5) { error in
+            
+        }
+    }
+    
+    func testRequestUserJoin() {
+        let asyncExpection = expectation(description: "networkRunningFunction")
+        NetworkManager.requestUserUpdate(userId: "tttt", password: "tttt", kindergartenName: "AAAA") { (message) in
+            XCTAssert(message.length < 1)
+            asyncExpection.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5) { error in
+            
+        }
+    }
+    
+    func testRequestCameraSearch() {
+        let asyncExpection = expectation(description: "networkRunningFunction")
+        NetworkManager.requestCameraSearch(userId: "tttt") { (camera) in
+            XCTAssert(camera != nil)
+            asyncExpection.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5) { error in
+            
+        }
+    }
 }
