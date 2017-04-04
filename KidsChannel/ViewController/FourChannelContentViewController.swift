@@ -14,7 +14,6 @@ class FourChannelContentViewController: UIViewController {
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     @IBOutlet var collectionOfViews: [UIView]!
-    @IBOutlet weak var pageNum: UILabel!
     
     var pageIndex: Int!
     var camerasList: [URL]?
@@ -23,18 +22,17 @@ class FourChannelContentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*guard let list = camerasList else {
+        guard let list = camerasList else {
             return
         }
         
-        pageNum.text = "pageNum : \(pageIndex)"
-        
         for i in 0 ..< list.count  {
             let cameraUrl = list[i]
+            //collectionOfViews[i].backgroundColor = UIColor(hex: "000000")
             let cv = CameraView(cameraUrl: cameraUrl, view: collectionOfViews[i])
             cv.startPlay()
             cameraView?.append(cv)
-        }*/
+        }
     }
 
     override func didReceiveMemoryWarning() {

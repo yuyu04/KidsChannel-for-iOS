@@ -17,6 +17,11 @@ class CameraView: NSObject {
         super.init()
         self.cameraUrlPath = cameraUrl
         self.movieView = view
+        //self.movieView.frame = view.bounds
+        //view.addSubview(self.movieView)
+        
+        let media = VLCMedia(url: self.cameraUrlPath)
+        mediaPlayer?.media = media
         
         mediaPlayer?.delegate = self
         mediaPlayer?.drawable = self.movieView

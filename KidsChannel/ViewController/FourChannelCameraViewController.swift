@@ -58,12 +58,11 @@ class FourChannelCameraViewController: UIViewController {
         
         let viewControllers = [startingViewController]
         self.pageController!.setViewControllers(viewControllers as [UIViewController], direction: .forward, animated: false, completion: nil)
-        pageController?.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         self.addChildViewController(self.pageController!)
         self.view.addSubview(self.pageController!.view)
         
-        let pageViewRect = self.view.bounds
-        self.pageController!.view.frame = pageViewRect
+        //let pageViewRect = self.view.bounds
+        self.pageController!.view.frame = CGRect(x: 0, y: 62, width: self.view.frame.size.width, height: self.view.frame.size.height-62)
         self.pageController!.didMove(toParentViewController: self)
     }
 
