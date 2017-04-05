@@ -8,11 +8,11 @@
 
 import UIKit
 
-class EightChannelCameraViewController: UIViewController {
+class EightChannelCameraViewController: FourChannelCameraViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.listSectionCount = 8
         // Do any additional setup after loading the view.
     }
 
@@ -21,15 +21,17 @@ class EightChannelCameraViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewControllerAtIndex(index: Int) -> UIViewController? {
+        if self.pageContent.count == 0 || index >= self.pageContent.count {
+            return nil
+        }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let dataViewController = storyboard.instantiateViewController(withIdentifier: "EightChannelContentViewController") as! EightChannelContentViewController
+        dataViewController.pageIndex = index
+        dataViewController.camerasList = pageContent[index]
+        
+        return UINavigationController(rootViewController: dataViewController)
     }
-    */
 
 }

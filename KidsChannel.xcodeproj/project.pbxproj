@@ -52,6 +52,8 @@
 		C1B46C151E9241AF00FA0BA6 /* iOSOnvif.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1B46C141E9241AF00FA0BA6 /* iOSOnvif.framework */; };
 		C1B46C1B1E9243AD00FA0BA6 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B46C1A1E9243AD00FA0BA6 /* CameraView.swift */; };
 		C1B46C1F1E924F9700FA0BA6 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B46C1E1E924F9700FA0BA6 /* CameraManager.swift */; };
+		C1B46C231E948B7800FA0BA6 /* EightChannelContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B46C221E948B7800FA0BA6 /* EightChannelContentViewController.swift */; };
+		C1B46C251E94BFB100FA0BA6 /* FullCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B46C241E94BFB100FA0BA6 /* FullCameraViewController.swift */; };
 		C1C0105B1E8B970A0031225C /* AppSkin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C0105A1E8B970A0031225C /* AppSkin.swift */; };
 		C1C0105D1E8B9B100031225C /* FourChannelCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C0105C1E8B9B100031225C /* FourChannelCameraViewController.swift */; };
 		C1C0105F1E8B9B210031225C /* EightChannelCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C0105E1E8B9B200031225C /* EightChannelCameraViewController.swift */; };
@@ -132,6 +134,8 @@
 		C1B46C1A1E9243AD00FA0BA6 /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		C1B46C1C1E92446300FA0BA6 /* KidsChannel-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KidsChannel-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		C1B46C1E1E924F9700FA0BA6 /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
+		C1B46C221E948B7800FA0BA6 /* EightChannelContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EightChannelContentViewController.swift; sourceTree = "<group>"; };
+		C1B46C241E94BFB100FA0BA6 /* FullCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullCameraViewController.swift; sourceTree = "<group>"; };
 		C1C0105A1E8B970A0031225C /* AppSkin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSkin.swift; sourceTree = "<group>"; };
 		C1C0105C1E8B9B100031225C /* FourChannelCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourChannelCameraViewController.swift; sourceTree = "<group>"; };
 		C1C0105E1E8B9B200031225C /* EightChannelCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EightChannelCameraViewController.swift; sourceTree = "<group>"; };
@@ -288,7 +292,9 @@
 				C1C0105C1E8B9B100031225C /* FourChannelCameraViewController.swift */,
 				C1B46C121E922C3100FA0BA6 /* FourChannelContentViewController.swift */,
 				C1C0105E1E8B9B200031225C /* EightChannelCameraViewController.swift */,
+				C1B46C221E948B7800FA0BA6 /* EightChannelContentViewController.swift */,
 				C1C010601E8B9B2E0031225C /* SixteenChannelCameraViewController.swift */,
+				C1B46C241E94BFB100FA0BA6 /* FullCameraViewController.swift */,
 				C1C010621E8B9B390031225C /* GalleryViewController.swift */,
 			);
 			path = ViewController;
@@ -433,7 +439,7 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 22X77ENQ2H;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					C160EFFC1E89EA3400789D5E = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -669,12 +675,14 @@
 				C160F05E1E8A39C900789D5E /* ExSlideMenuController.swift in Sources */,
 				C160F0591E8A28A200789D5E /* BaseTableViewCell.swift in Sources */,
 				C14E6B3E1E91CD47000488BB /* Camera.swift in Sources */,
+				C1B46C231E948B7800FA0BA6 /* EightChannelContentViewController.swift in Sources */,
 				C1B46C131E922C3100FA0BA6 /* FourChannelContentViewController.swift in Sources */,
 				C160F0351E8A047200789D5E /* CameraMenuViewController.swift in Sources */,
 				C160F0271E89F21000789D5E /* MainViewController.swift in Sources */,
 				C160F0421E8A063200789D5E /* UIImage.swift in Sources */,
 				C160F0501E8A1FEA00789D5E /* VersionInfoViewController.swift in Sources */,
 				C160EFEA1E89EA3400789D5E /* AppDelegate.swift in Sources */,
+				C1B46C251E94BFB100FA0BA6 /* FullCameraViewController.swift in Sources */,
 				C160F0611E8A4FAE00789D5E /* ButtonTableViewCell.swift in Sources */,
 				C1B46C1F1E924F9700FA0BA6 /* CameraManager.swift in Sources */,
 				C160F04A1E8A1FAF00789D5E /* UserInfoViewController.swift in Sources */,
@@ -848,6 +856,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.inka.kidschannel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "dc36f935-2473-4db8-aa89-cec838ffd58a";
+				PROVISIONING_PROFILE_SPECIFIER = "Sungju Profile";
 				SWIFT_OBJC_BRIDGING_HEADER = "KidsChannel-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -860,8 +870,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 22X77ENQ2H;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 4EA7F6225J;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -877,6 +887,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.inka.kidschannel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "bfb5d92e-1de8-4731-b3ab-6c9a35cb0267";
+				PROVISIONING_PROFILE_SPECIFIER = InHouse_sungju;
 				SWIFT_OBJC_BRIDGING_HEADER = "KidsChannel-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

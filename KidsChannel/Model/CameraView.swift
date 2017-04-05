@@ -8,15 +8,27 @@
 
 import UIKit
 
+protocol CameraViewDelegate {
+    func cameraView(didTapFullScreenMode cameraView: CameraView)
+}
+
 class CameraView: NSObject {
     var cameraUrlPath: URL!
     var movieView: UIView!
     var mediaPlayer: VLCMediaPlayer? = VLCMediaPlayer(options: ["--avi-index=2"])
+    var container: UIView?
+    var isFullScreenMode = false
+    var delegate: CameraViewDelegate?
     
     init(cameraUrl: URL, view: UIView) {
         super.init()
         self.cameraUrlPath = cameraUrl
         self.movieView = view
+        
+        //Add tap gesture to movieView for play/pause
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(CameraView.movieViewTapped(_:)))
+        self.movieView.addGestureRecognizer(gesture)
+        
         //self.movieView.frame = view.bounds
         //view.addSubview(self.movieView)
         
@@ -30,16 +42,61 @@ class CameraView: NSObject {
     func startPlay() {
         self.mediaPlayer?.play()
     }
+    
+    func stopPlay() {
+        self.mediaPlayer?.stop()
+    }
+    
+    func showActivityIndicatory() {
+        if self.container != nil {
+            return
+        }
+        
+        self.container = UIView()
+        container?.frame = self.movieView.frame
+        container?.center = self.movieView.center
+        container?.backgroundColor = UIColor(hex: "ffffff", alpha: 0.3)
+        
+        let loadingView: UIView = UIView()
+        loadingView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
+        loadingView.center = self.movieView.center
+        loadingView.backgroundColor = UIColor(hex: "444444", alpha: 0.7)
+        loadingView.clipsToBounds = true
+        loadingView.layer.cornerRadius = 10
+        
+        let actInd: UIActivityIndicatorView = UIActivityIndicatorView()
+        actInd.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        actInd.activityIndicatorViewStyle = .whiteLarge
+            actInd.center = CGPoint(x: loadingView.frame.size.width / 2,
+                                    y: loadingView.frame.size.height / 2)
+        loadingView.addSubview(actInd)
+        container?.addSubview(loadingView)
+        self.movieView.addSubview(container!)
+        actInd.startAnimating()
+    }
+    
+    func closeActivityIndicatory() {
+        if self.container == nil {
+            return
+        }
+        
+        self.container?.removeFromSuperview()
+        self.container = nil
+    }
+    
+    func movieViewTapped(_ sender: UITapGestureRecognizer) {
+        self.delegate?.cameraView(didTapFullScreenMode: self)
+    }
 }
 
 extension CameraView: VLCMediaPlayerDelegate {
     
     func mediaPlayerStateChanged(_ aNotification: Notification!) {
-        print("mediaPlayerStateChanged(_ aNotification: Notification!)")
+        //self.showActivityIndicatory()
     }
     
     func mediaPlayerTimeChanged(_ aNotification: Notification!) {
-        print("mediaPlayerTimeChanged(_ aNotification: Notification!)")
+        //self.closeActivityIndicatory()
     }
     
 }

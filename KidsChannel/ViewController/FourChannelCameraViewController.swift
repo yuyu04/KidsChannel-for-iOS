@@ -13,16 +13,21 @@ class FourChannelCameraViewController: UIViewController {
     var pageController: UIPageViewController?
     var pageContent = [[URL]]()
     var cameras: [Any]?
+    var listSectionCount = 4
+    
+    var testViewController: UIViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.searchCameraStreamUrl()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
+        
+        if AppConfigure.sharedInstance.isLoginUser, cameras == nil {
+            self.searchCameraStreamUrl()
+        }
     }
     
     func searchCameraStreamUrl() {
@@ -32,7 +37,7 @@ class FourChannelCameraViewController: UIViewController {
                 var list = [URL]()
                 for streamUrl in streamUrlList {
                     list.append(streamUrl)
-                    if list.count >= 4 {
+                    if list.count >= self.listSectionCount {
                         self.pageContent.append(list)
                         list.removeAll()
                     }
@@ -52,7 +57,7 @@ class FourChannelCameraViewController: UIViewController {
         self.pageController?.delegate = self
         self.pageController?.dataSource = self
         
-        guard let startingViewController: FourChannelContentViewController = self.viewControllerAtIndex(index: 0) else {
+        guard let startingViewController: UIViewController = self.viewControllerAtIndex(index: 0) else {
             return
         }
         
@@ -62,7 +67,7 @@ class FourChannelCameraViewController: UIViewController {
         self.view.addSubview(self.pageController!.view)
         
         //let pageViewRect = self.view.bounds
-        self.pageController!.view.frame = CGRect(x: 0, y: 62, width: self.view.frame.size.width, height: self.view.frame.size.height-62)
+        self.pageController!.view.frame = CGRect(x: 0, y: 20, width: self.view.frame.size.width, height: self.view.frame.size.height-20)
         self.pageController!.didMove(toParentViewController: self)
     }
 
@@ -71,7 +76,7 @@ class FourChannelCameraViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func viewControllerAtIndex(index:Int) -> FourChannelContentViewController? {
+    func viewControllerAtIndex(index:Int) -> UIViewController? {
         if self.pageContent.count == 0 || index >= self.pageContent.count {
             return nil
         }
@@ -81,24 +86,8 @@ class FourChannelCameraViewController: UIViewController {
         dataViewController.pageIndex = index
         dataViewController.camerasList = pageContent[index]
         
-        return dataViewController
+        return UINavigationController(rootViewController: dataViewController)
     }
-    
-    /*func indexOfViewController(viewController: FourChannelContentViewController) -> Int {
-        guard let list = viewController.camerasList else {
-            return NSNotFound
-        }
-        
-        let index = self.pageContent.index(where: { (item) -> Bool in
-            item[0] == list[0]
-        })
-        
-        if index != nil {
-            return index!
-        }
-        
-        return NSNotFound
-    }*/
 }
 
 extension FourChannelCameraViewController: UIPageViewControllerDataSource {
@@ -134,7 +123,7 @@ extension FourChannelCameraViewController: UIPageViewControllerDataSource {
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return 3
+        return pageContent.count
     }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {

@@ -17,7 +17,7 @@ class FourChannelContentViewController: UIViewController {
     
     var pageIndex: Int!
     var camerasList: [URL]?
-    var cameraView: [CameraView]?
+    var cameraView = [CameraView]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,16 +28,46 @@ class FourChannelContentViewController: UIViewController {
         
         for i in 0 ..< list.count  {
             let cameraUrl = list[i]
-            //collectionOfViews[i].backgroundColor = UIColor(hex: "000000")
             let cv = CameraView(cameraUrl: cameraUrl, view: collectionOfViews[i])
-            cv.startPlay()
-            cameraView?.append(cv)
+            cameraView.append(cv)
+            cameraView[i].startPlay()
+            cameraView[i].delegate = self
+        }
+        
+        let constraint = (self.view.frame.size.height-(self.view.frame.size.width-25))/2
+        topConstraint.constant = constraint
+        bottomConstraint.constant = constraint
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        for camera in self.cameraView  {
+            camera.startPlay()
         }
     }
+    
+    /*override func viewWillDisappear(_ animated: Bool) {
+        for camera in self.cameraView  {
+            camera.stopPlay()
+        }
+    }*/
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+}
+
+extension FourChannelContentViewController: CameraViewDelegate {
+    func cameraView(didTapFullScreenMode cameraView: CameraView) {
+        for camera in self.cameraView  {
+            camera.stopPlay()
+        }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let fullCameraViewController = storyboard.instantiateViewController(withIdentifier: "FullCameraViewController") as! FullCameraViewController
+        fullCameraViewController.cameraUrl = cameraView.cameraUrlPath
+        self.present(fullCameraViewController, animated: true) { () in
+            
+        }
+    }
 }
