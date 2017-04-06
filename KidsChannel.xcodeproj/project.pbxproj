@@ -54,6 +54,9 @@
 		C1B46C1F1E924F9700FA0BA6 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B46C1E1E924F9700FA0BA6 /* CameraManager.swift */; };
 		C1B46C231E948B7800FA0BA6 /* EightChannelContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B46C221E948B7800FA0BA6 /* EightChannelContentViewController.swift */; };
 		C1B46C251E94BFB100FA0BA6 /* FullCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B46C241E94BFB100FA0BA6 /* FullCameraViewController.swift */; };
+		C1B694191E95E24A00AF50B6 /* AlbumVideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B694181E95E24A00AF50B6 /* AlbumVideoModel.swift */; };
+		C1B6941B1E95FE2800AF50B6 /* KidsChannelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B6941A1E95FE2800AF50B6 /* KidsChannelTests.swift */; };
+		C1B6941D1E961EE400AF50B6 /* PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B6941C1E961EE400AF50B6 /* PHAsset.swift */; };
 		C1C0105B1E8B970A0031225C /* AppSkin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C0105A1E8B970A0031225C /* AppSkin.swift */; };
 		C1C0105D1E8B9B100031225C /* FourChannelCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C0105C1E8B9B100031225C /* FourChannelCameraViewController.swift */; };
 		C1C0105F1E8B9B210031225C /* EightChannelCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C0105E1E8B9B200031225C /* EightChannelCameraViewController.swift */; };
@@ -136,6 +139,9 @@
 		C1B46C1E1E924F9700FA0BA6 /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		C1B46C221E948B7800FA0BA6 /* EightChannelContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EightChannelContentViewController.swift; sourceTree = "<group>"; };
 		C1B46C241E94BFB100FA0BA6 /* FullCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullCameraViewController.swift; sourceTree = "<group>"; };
+		C1B694181E95E24A00AF50B6 /* AlbumVideoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumVideoModel.swift; sourceTree = "<group>"; };
+		C1B6941A1E95FE2800AF50B6 /* KidsChannelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KidsChannelTests.swift; sourceTree = "<group>"; };
+		C1B6941C1E961EE400AF50B6 /* PHAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PHAsset.swift; sourceTree = "<group>"; };
 		C1C0105A1E8B970A0031225C /* AppSkin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSkin.swift; sourceTree = "<group>"; };
 		C1C0105C1E8B9B100031225C /* FourChannelCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourChannelCameraViewController.swift; sourceTree = "<group>"; };
 		C1C0105E1E8B9B200031225C /* EightChannelCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EightChannelCameraViewController.swift; sourceTree = "<group>"; };
@@ -236,6 +242,7 @@
 			children = (
 				C160F0031E89EA3400789D5E /* Info.plist */,
 				C160F02E1E89FBD300789D5E /* KidsChannelNetworkTests.swift */,
+				C1B6941A1E95FE2800AF50B6 /* KidsChannelTests.swift */,
 			);
 			path = KidsChannelTests;
 			sourceTree = "<group>";
@@ -305,6 +312,7 @@
 			children = (
 				C14E6B3D1E91CD47000488BB /* Camera.swift */,
 				C1B46C1A1E9243AD00FA0BA6 /* CameraView.swift */,
+				C1B694181E95E24A00AF50B6 /* AlbumVideoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -320,6 +328,7 @@
 				C160F03C1E8A063200789D5E /* UITableViewExtension.swift */,
 				C160F03D1E8A063200789D5E /* UIView.swift */,
 				C160F03E1E8A063200789D5E /* UIViewController.swift */,
+				C1B6941C1E961EE400AF50B6 /* PHAsset.swift */,
 			);
 			name = Extension;
 			path = KidsChannel/Extension;
@@ -667,6 +676,7 @@
 				C14E6B341E8E3056000488BB /* UserJoinViewController.swift in Sources */,
 				C160F0331E8A046000789D5E /* UserMenuViewController.swift in Sources */,
 				C160F02D1E89FB9500789D5E /* NetworkManager.swift in Sources */,
+				C1B694191E95E24A00AF50B6 /* AlbumVideoModel.swift in Sources */,
 				C160F04E1E8A1FE000789D5E /* SkinSelectionViewController.swift in Sources */,
 				C1C010631E8B9B390031225C /* GalleryViewController.swift in Sources */,
 				C160F04C1E8A1FCE00789D5E /* CameraInfoViewController.swift in Sources */,
@@ -693,6 +703,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1B6941D1E961EE400AF50B6 /* PHAsset.swift in Sources */,
+				C1B6941B1E95FE2800AF50B6 /* KidsChannelTests.swift in Sources */,
 				C160F02F1E89FBD300789D5E /* KidsChannelNetworkTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

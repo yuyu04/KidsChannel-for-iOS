@@ -8,27 +8,14 @@
 
 import UIKit
 
-class EightChannelContentViewController: UIViewController {
-
-    @IBOutlet var collectionOfViews: [UIView]!
-    
-    var pageIndex: Int!
-    var camerasList: [URL]?
-    var cameraView = [CameraView]()
+class EightChannelContentViewController: FourChannelContentViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        guard let list = camerasList else {
-            return
-        }
+    }
+    
+    override func setupConstraint() {
         
-        for i in 0 ..< list.count  {
-            let cameraUrl = list[i]
-            let cv = CameraView(cameraUrl: cameraUrl, view: collectionOfViews[i])
-            cameraView.append(cv)
-            cameraView[i].startPlay()
-        }
     }
 
     override func didReceiveMemoryWarning() {

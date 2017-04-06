@@ -988,7 +988,7 @@
                                         <rect key="frame" x="17" y="587" width="30" height="30"/>
                                         <state key="normal" title="닫기"/>
                                         <connections>
-                                            <action selector="close:" destination="HXM-bb-Pg3" eventType="touchUpInside" id="lA3-Ne-24k"/>
+                                            <action selector="close:" destination="HXM-bb-Pg3" eventType="touchUpInside" id="aXZ-0V-AE3"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i85-3w-YZ1">
@@ -997,9 +997,9 @@
                                             <constraint firstAttribute="height" constant="60" id="reP-EJ-eUI"/>
                                             <constraint firstAttribute="width" constant="60" id="x6F-QJ-mcu"/>
                                         </constraints>
-                                        <state key="normal" title="Button"/>
+                                        <state key="normal" title="Record"/>
                                         <connections>
-                                            <action selector="recordScreen:" destination="HXM-bb-Pg3" eventType="touchUpInside" id="ERo-94-06l"/>
+                                            <action selector="startRecordScreen:" destination="HXM-bb-Pg3" eventType="touchUpInside" id="7bJ-pF-DYe"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1027,6 +1027,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="recordStartButton" destination="i85-3w-YZ1" id="unN-qC-bG1"/>
+                        <outlet property="recordStopButton" destination="i85-3w-YZ1" id="rAa-FJ-aMo"/>
                         <outlet property="screenView" destination="5Iw-0t-chq" id="hVs-mt-fX1"/>
                     </connections>
                 </viewController>
@@ -1063,12 +1065,27 @@
                     <view key="view" contentMode="scaleToFill" id="ybX-Kh-6f9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bPB-ZW-GYg">
+                                <rect key="frame" x="36" y="70" width="303" height="567"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bPB-ZW-GYg" firstAttribute="leading" secondItem="ybX-Kh-6f9" secondAttribute="leadingMargin" constant="20" id="XOq-5M-Vma"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bPB-ZW-GYg" secondAttribute="trailing" constant="20" id="boA-3C-uW2"/>
+                            <constraint firstItem="M6V-Jo-YzI" firstAttribute="top" secondItem="bPB-ZW-GYg" secondAttribute="bottom" constant="30" id="p2y-qt-LjR"/>
+                            <constraint firstItem="bPB-ZW-GYg" firstAttribute="top" secondItem="KyB-qF-cZO" secondAttribute="bottom" constant="50" id="rWa-Ut-ght"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="bPB-ZW-GYg" id="olU-bB-3Ua"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qUU-lH-Csc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="956" y="3278"/>
+            <point key="canvasLocation" x="956" y="3277.5112443778112"/>
         </scene>
     </scenes>
 </document>

@@ -18,10 +18,13 @@ class CameraView: NSObject {
     var mediaPlayer: VLCMediaPlayer? = VLCMediaPlayer(options: ["--avi-index=2"])
     var container: UIView?
     var isFullScreenMode = false
+    var isLoadingComplete = false
     var delegate: CameraViewDelegate?
     
     init(cameraUrl: URL, view: UIView) {
         super.init()
+        
+        isLoadingComplete = false
         self.cameraUrlPath = cameraUrl
         self.movieView = view
         
@@ -45,6 +48,14 @@ class CameraView: NSObject {
     
     func stopPlay() {
         self.mediaPlayer?.stop()
+        isLoadingComplete = false
+    }
+    
+    func isPlayerPlaying() -> Bool {
+        guard let isPlaying = self.mediaPlayer?.isPlaying else {
+            return false
+        }
+        return isPlaying
     }
     
     func showActivityIndicatory() {
@@ -85,7 +96,9 @@ class CameraView: NSObject {
     }
     
     func movieViewTapped(_ sender: UITapGestureRecognizer) {
-        self.delegate?.cameraView(didTapFullScreenMode: self)
+        if isLoadingComplete {
+            self.delegate?.cameraView(didTapFullScreenMode: self)
+        }        
     }
 }
 
@@ -97,6 +110,7 @@ extension CameraView: VLCMediaPlayerDelegate {
     
     func mediaPlayerTimeChanged(_ aNotification: Notification!) {
         //self.closeActivityIndicatory()
+        isLoadingComplete = true
     }
     
 }

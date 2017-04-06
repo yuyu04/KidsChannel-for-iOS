@@ -93,7 +93,9 @@ class FourChannelCameraViewController: UIViewController {
 extension FourChannelCameraViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         //var index = self.indexOfViewController(viewController: viewController as! FourChannelContentViewController)
-        let controller = viewController as! FourChannelContentViewController
+        let navigationController = viewController as! UINavigationController
+        let controller = navigationController.viewControllers.first as! FourChannelContentViewController
+        
         var index = controller.pageIndex as Int
         
         if index == 0 || index == NSNotFound {
@@ -106,7 +108,9 @@ extension FourChannelCameraViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         //var index = self.indexOfViewController(viewController: viewController as! FourChannelContentViewController)
-        let controller = viewController as! FourChannelContentViewController
+        let navigationController = viewController as! UINavigationController
+        let controller = navigationController.viewControllers.first as! FourChannelContentViewController
+        
         var index = controller.pageIndex as Int
         
         if index == NSNotFound {

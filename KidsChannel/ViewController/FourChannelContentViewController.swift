@@ -34,9 +34,7 @@ class FourChannelContentViewController: UIViewController {
             cameraView[i].delegate = self
         }
         
-        let constraint = (self.view.frame.size.height-(self.view.frame.size.width-25))/2
-        topConstraint.constant = constraint
-        bottomConstraint.constant = constraint
+        self.setupConstraint()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +52,12 @@ class FourChannelContentViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setupConstraint() {
+        let constraint = (self.view.frame.size.height-(self.view.frame.size.width-25))/2
+        topConstraint.constant = constraint
+        bottomConstraint.constant = constraint
     }
 }
 
