@@ -13,6 +13,7 @@ class FourChannelContentViewController: UIViewController {
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
+    
     @IBOutlet var collectionOfViews: [UIView]!
     
     var pageIndex: Int!
@@ -27,8 +28,7 @@ class FourChannelContentViewController: UIViewController {
         }
         
         for i in 0 ..< list.count  {
-            let cameraUrl = list[i]
-            let cv = CameraView(cameraUrl: cameraUrl, view: collectionOfViews[i])
+            let cv = CameraView(cameraUrl: list[i], view: collectionOfViews[i])
             cameraView.append(cv)
             cameraView[i].startPlay()
             cameraView[i].delegate = self
@@ -70,8 +70,18 @@ extension FourChannelContentViewController: CameraViewDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let fullCameraViewController = storyboard.instantiateViewController(withIdentifier: "FullCameraViewController") as! FullCameraViewController
         fullCameraViewController.cameraUrl = cameraView.cameraUrlPath
+        fullCameraViewController.delegate = self
         self.present(fullCameraViewController, animated: true) { () in
             
+        }
+    }
+}
+
+extension FourChannelContentViewController: FullCameraViewControllerDelegate {
+    func fullCameraViewControllerDidFinish(_ fullCameraViewController: FullCameraViewController) {
+        dismiss(animated: true) { () in
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.shouldRotate = false
         }
     }
 }

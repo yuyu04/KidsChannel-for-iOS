@@ -60,8 +60,12 @@
 		C1C0105B1E8B970A0031225C /* AppSkin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C0105A1E8B970A0031225C /* AppSkin.swift */; };
 		C1C0105D1E8B9B100031225C /* FourChannelCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C0105C1E8B9B100031225C /* FourChannelCameraViewController.swift */; };
 		C1C0105F1E8B9B210031225C /* EightChannelCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C0105E1E8B9B200031225C /* EightChannelCameraViewController.swift */; };
-		C1C010611E8B9B2E0031225C /* SixteenChannelCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C010601E8B9B2E0031225C /* SixteenChannelCameraViewController.swift */; };
+		C1C010611E8B9B2E0031225C /* CameraListChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C010601E8B9B2E0031225C /* CameraListChannelViewController.swift */; };
 		C1C010631E8B9B390031225C /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C010621E8B9B390031225C /* GalleryViewController.swift */; };
+		D5E4E89E1E98B1E700D36EB4 /* PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B6941C1E961EE400AF50B6 /* PHAsset.swift */; };
+		D5E4E8A01E98B84C00D36EB4 /* GalleryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E4E89F1E98B84C00D36EB4 /* GalleryTableViewCell.swift */; };
+		D5E4E8A41E98BA8000D36EB4 /* GalleryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E4E8A31E98BA8000D36EB4 /* GalleryTableViewCell.xib */; };
+		D5E4E8A61E98C49300D36EB4 /* NSTimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E4E8A51E98C49300D36EB4 /* NSTimeInterval.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,10 +149,13 @@
 		C1C0105A1E8B970A0031225C /* AppSkin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSkin.swift; sourceTree = "<group>"; };
 		C1C0105C1E8B9B100031225C /* FourChannelCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourChannelCameraViewController.swift; sourceTree = "<group>"; };
 		C1C0105E1E8B9B200031225C /* EightChannelCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EightChannelCameraViewController.swift; sourceTree = "<group>"; };
-		C1C010601E8B9B2E0031225C /* SixteenChannelCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SixteenChannelCameraViewController.swift; sourceTree = "<group>"; };
+		C1C010601E8B9B2E0031225C /* CameraListChannelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraListChannelViewController.swift; sourceTree = "<group>"; };
 		C1C010621E8B9B390031225C /* GalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		CFAEF948EBBA10F08758954C /* Pods-KidsChannel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KidsChannel.release.xcconfig"; path = "Pods/Target Support Files/Pods-KidsChannel/Pods-KidsChannel.release.xcconfig"; sourceTree = "<group>"; };
 		D175568B5267E129AC9C9C3C /* Pods-KidsChannelUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KidsChannelUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KidsChannelUITests/Pods-KidsChannelUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		D5E4E89F1E98B84C00D36EB4 /* GalleryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryTableViewCell.swift; sourceTree = "<group>"; };
+		D5E4E8A31E98BA8000D36EB4 /* GalleryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GalleryTableViewCell.xib; sourceTree = "<group>"; };
+		D5E4E8A51E98C49300D36EB4 /* NSTimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimeInterval.swift; sourceTree = "<group>"; };
 		FC576B43497CAFD96C7BB4AC /* Pods_KidsChannelUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KidsChannelUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -300,7 +307,7 @@
 				C1B46C121E922C3100FA0BA6 /* FourChannelContentViewController.swift */,
 				C1C0105E1E8B9B200031225C /* EightChannelCameraViewController.swift */,
 				C1B46C221E948B7800FA0BA6 /* EightChannelContentViewController.swift */,
-				C1C010601E8B9B2E0031225C /* SixteenChannelCameraViewController.swift */,
+				C1C010601E8B9B2E0031225C /* CameraListChannelViewController.swift */,
 				C1B46C241E94BFB100FA0BA6 /* FullCameraViewController.swift */,
 				C1C010621E8B9B390031225C /* GalleryViewController.swift */,
 			);
@@ -329,6 +336,7 @@
 				C160F03D1E8A063200789D5E /* UIView.swift */,
 				C160F03E1E8A063200789D5E /* UIViewController.swift */,
 				C1B6941C1E961EE400AF50B6 /* PHAsset.swift */,
+				D5E4E8A51E98C49300D36EB4 /* NSTimeInterval.swift */,
 			);
 			name = Extension;
 			path = KidsChannel/Extension;
@@ -344,6 +352,8 @@
 				C14E6B361E8E429B000488BB /* CameraListTableViewCell.xib */,
 				C1B46C0D1E92152E00FA0BA6 /* SkinSelectionTableViewCell.swift */,
 				C1B46C0E1E92152E00FA0BA6 /* SkinSelectionTableViewCell.xib */,
+				D5E4E89F1E98B84C00D36EB4 /* GalleryTableViewCell.swift */,
+				D5E4E8A31E98BA8000D36EB4 /* GalleryTableViewCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -448,7 +458,7 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 22X77ENQ2H;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					C160EFFC1E89EA3400789D5E = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -492,6 +502,7 @@
 				C160EFF71E89EA3400789D5E /* LaunchScreen.storyboard in Resources */,
 				C160EFF41E89EA3400789D5E /* Assets.xcassets in Resources */,
 				C160F0621E8A4FAE00789D5E /* ButtonTableViewCell.xib in Resources */,
+				D5E4E8A41E98BA8000D36EB4 /* GalleryTableViewCell.xib in Resources */,
 				C1B46C101E92152E00FA0BA6 /* SkinSelectionTableViewCell.xib in Resources */,
 				C160EFEF1E89EA3400789D5E /* Main.storyboard in Resources */,
 				C160F0561E8A21B900789D5E /* ImageHeaderView.xib in Resources */,
@@ -666,14 +677,16 @@
 				C14E6B371E8E429B000488BB /* CameraListTableViewCell.swift in Sources */,
 				C1B46C0F1E92152E00FA0BA6 /* SkinSelectionTableViewCell.swift in Sources */,
 				C1B46C1B1E9243AD00FA0BA6 /* CameraView.swift in Sources */,
+				D5E4E8A01E98B84C00D36EB4 /* GalleryTableViewCell.swift in Sources */,
 				C160F0431E8A063200789D5E /* UIImageView.swift in Sources */,
-				C1C010611E8B9B2E0031225C /* SixteenChannelCameraViewController.swift in Sources */,
+				C1C010611E8B9B2E0031225C /* CameraListChannelViewController.swift in Sources */,
 				C160F0541E8A21AE00789D5E /* ImageHeaderView.swift in Sources */,
 				C160F03F1E8A063200789D5E /* String.swift in Sources */,
 				C160F0401E8A063200789D5E /* UIApplication.swift in Sources */,
 				C160F0441E8A063200789D5E /* UITableViewExtension.swift in Sources */,
 				C160F0461E8A063200789D5E /* UIViewController.swift in Sources */,
 				C14E6B341E8E3056000488BB /* UserJoinViewController.swift in Sources */,
+				D5E4E8A61E98C49300D36EB4 /* NSTimeInterval.swift in Sources */,
 				C160F0331E8A046000789D5E /* UserMenuViewController.swift in Sources */,
 				C160F02D1E89FB9500789D5E /* NetworkManager.swift in Sources */,
 				C1B694191E95E24A00AF50B6 /* AlbumVideoModel.swift in Sources */,
@@ -696,6 +709,7 @@
 				C160F0611E8A4FAE00789D5E /* ButtonTableViewCell.swift in Sources */,
 				C1B46C1F1E924F9700FA0BA6 /* CameraManager.swift in Sources */,
 				C160F04A1E8A1FAF00789D5E /* UserInfoViewController.swift in Sources */,
+				D5E4E89E1E98B1E700D36EB4 /* PHAsset.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -852,7 +866,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 22X77ENQ2H;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -868,8 +882,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.inka.kidschannel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dc36f935-2473-4db8-aa89-cec838ffd58a";
-				PROVISIONING_PROFILE_SPECIFIER = "Sungju Profile";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "KidsChannel-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -882,8 +896,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 4EA7F6225J;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -899,8 +913,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.inka.kidschannel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bfb5d92e-1de8-4731-b3ab-6c9a35cb0267";
-				PROVISIONING_PROFILE_SPECIFIER = InHouse_sungju;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "KidsChannel-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

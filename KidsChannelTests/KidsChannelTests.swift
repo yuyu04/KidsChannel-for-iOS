@@ -22,7 +22,13 @@ class KidsChannelTests: XCTestCase {
     }
     
     func testAlbumVideoModel() {
-        let phassetList = AlbumVideoModel.listVideoPHAsset()
-        XCTAssert(phassetList.count > 0)
+        let list = AlbumVideoModel.listAlbumVideoModel()
+        XCTAssert(list.count > 0)
+        
+        for video in list {
+            AlbumVideoModel.getAVAsset(from: video.asset) { (avAsset, avAudioMix, dic) in
+                XCTAssert(list.count > 0)
+            }
+        }
     }
 }

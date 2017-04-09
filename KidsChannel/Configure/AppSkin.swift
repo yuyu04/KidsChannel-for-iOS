@@ -16,6 +16,7 @@ protocol AppSkin {
     func navigationBarColor() -> UIColor
     func userMenuFontColor() -> UIColor
     func cameraMenuFontColor() -> UIColor
+    func galleryVideoBasicIcon() -> UIImage
 }
 
 class firstSkin: AppSkin {
@@ -44,6 +45,10 @@ class firstSkin: AppSkin {
     }
     
     func notLoginImage() -> UIImage {
+        return UIImage(named: "")!
+    }
+    
+    func galleryVideoBasicIcon() -> UIImage {
         return UIImage(named: "")!
     }
 }

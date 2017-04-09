@@ -10,7 +10,7 @@ import Photos
 
 extension PHAsset {
     
-    var originalFilename: String? {
+    var originalFileName: String? {
         
         var fname:String?
         

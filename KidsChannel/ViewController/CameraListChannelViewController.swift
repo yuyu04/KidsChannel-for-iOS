@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SixteenChannelCameraViewController: UIViewController {
+class CameraListChannelViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

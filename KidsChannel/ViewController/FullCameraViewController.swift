@@ -9,11 +9,16 @@
 import UIKit
 import ReplayKit
 
+protocol FullCameraViewControllerDelegate {
+    func fullCameraViewControllerDidFinish(_ fullCameraViewController: FullCameraViewController)
+}
+
 class FullCameraViewController: UIViewController {
 
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var cameraUrl: URL?
     var cameraView: CameraView?
+    var delegate: FullCameraViewControllerDelegate?
     
     @IBOutlet weak var screenView: UIView!
     @IBOutlet weak var recordStartButton: UIButton!
@@ -93,9 +98,8 @@ class FullCameraViewController: UIViewController {
     
     @IBAction func close(_ sender: Any) {
         self.cameraView?.stopPlay()
-        self.dismiss(animated: true) { () in
-            self.appDelegate.shouldRotate = false
-        }
+        delegate?.fullCameraViewControllerDidFinish(self)
+
     }
 }
 

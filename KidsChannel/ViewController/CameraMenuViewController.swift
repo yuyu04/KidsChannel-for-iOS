@@ -28,7 +28,7 @@ class CameraMenuViewController: UIViewController {
     var mainViewController: UIViewController!
     var fourChViewController: UIViewController!
     var eightChViewController: UIViewController!
-    var sixteenChViewController: UIViewController!
+    var cameraListChViewController: UIViewController!
     var galleryViewController: UIViewController!
     
     required init?(coder aDecoder: NSCoder) {
@@ -48,8 +48,8 @@ class CameraMenuViewController: UIViewController {
         let eightChViewController = storyboard.instantiateViewController(withIdentifier: "EightChannelCameraViewController") as! EightChannelCameraViewController
         self.eightChViewController = UINavigationController(rootViewController: eightChViewController)
         
-        let sixteenChViewController = storyboard.instantiateViewController(withIdentifier: "SixteenChannelCameraViewController") as! SixteenChannelCameraViewController
-        self.sixteenChViewController = UINavigationController(rootViewController: sixteenChViewController)
+        let cameraListChViewController = storyboard.instantiateViewController(withIdentifier: "CameraListChannelViewController") as! CameraListChannelViewController
+        self.cameraListChViewController = UINavigationController(rootViewController: cameraListChViewController)
         
         let galleryViewController = storyboard.instantiateViewController(withIdentifier: "GalleryViewController") as! GalleryViewController
         self.galleryViewController = UINavigationController(rootViewController: galleryViewController)
@@ -72,7 +72,7 @@ extension CameraMenuViewController : RightMenuProtocol {
         case .eightChennel:
             self.slideMenuController()?.changeMainViewController(self.eightChViewController, close: true)
         case .eighteenChennel:
-            self.slideMenuController()?.changeMainViewController(self.sixteenChViewController, close: true)
+            self.slideMenuController()?.changeMainViewController(self.cameraListChViewController, close: true)
         case .gellery:
             self.slideMenuController()?.changeMainViewController(self.galleryViewController, close: true)
         default:
