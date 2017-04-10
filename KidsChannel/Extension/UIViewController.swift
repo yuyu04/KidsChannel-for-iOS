@@ -25,11 +25,14 @@ extension UIViewController {
     }
     
     func setBackgroundImage(isUserMenusView: Bool) {
+        let backgroundImage = UIImageView(frame: self.view.bounds)
         if isUserMenusView {
-            let backgroundImage = UIImageView(frame: self.view.bounds)
             backgroundImage.image = AppConfigure.sharedInstance.appSkin.userMenuViewsBackgroundImage()
-            self.view.insertSubview(backgroundImage, at: 0)
+        } else {
+            
         }
+        
+        self.view.insertSubview(backgroundImage, at: 0)
     }
     
     func removeNavigationBarItem() {

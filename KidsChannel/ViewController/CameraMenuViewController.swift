@@ -54,6 +54,7 @@ class CameraMenuViewController: UIViewController {
         let galleryViewController = storyboard.instantiateViewController(withIdentifier: "GalleryViewController") as! GalleryViewController
         self.galleryViewController = UINavigationController(rootViewController: galleryViewController)
         
+        self.tableView.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuViewBackgrounColor()
         self.tableView.registerCellNib(ButtonTableViewCell.self)
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
@@ -119,19 +120,20 @@ extension CameraMenuViewController : UITableViewDataSource {
             cell.preservesSuperviewLayoutMargins = false
             cell.separatorInset = UIEdgeInsets.zero
             cell.layoutMargins = UIEdgeInsets.zero
+            cell.backgroundColor = UIColor.clear
             
             var data: ButtonTableViewCellData?
             switch menu {
             case .close:
                 data = ButtonTableViewCellData(image: nil, text: menus[indexPath.row])
             case .fourChennel:
-                data = ButtonTableViewCellData(image: nil, text: menus[indexPath.row])
+                data = ButtonTableViewCellData(image: AppConfigure.sharedInstance.appSkin.fourCameraChannelIcon(), text: menus[indexPath.row])
             case .eightChennel:
-                data = ButtonTableViewCellData(image: nil, text: menus[indexPath.row])
+                data = ButtonTableViewCellData(image: AppConfigure.sharedInstance.appSkin.eightCameraChannelIcon(), text: menus[indexPath.row])
             case .cameraListChennel:
-                data = ButtonTableViewCellData(image: nil, text: menus[indexPath.row])
+                data = ButtonTableViewCellData(image: AppConfigure.sharedInstance.appSkin.listCameraChannelIcon(), text: menus[indexPath.row])
             case .gellery:
-                data = ButtonTableViewCellData(image: nil, text: menus[indexPath.row])
+                data = ButtonTableViewCellData(image: AppConfigure.sharedInstance.appSkin.galleryIcon(), text: menus[indexPath.row])
             }
             cell.setData(data!)
             return cell

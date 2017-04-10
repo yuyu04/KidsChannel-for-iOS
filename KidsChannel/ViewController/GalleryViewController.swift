@@ -22,6 +22,8 @@ class GalleryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.registerCellNib(GalleryTableViewCell.self)
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        
         PlaybackManager.sharedManager.delegate = self
         //self.tableView.contentInset = UIEdgeInsets.init(top: -36, left: 0, bottom: 0, right: 0)
         self.automaticallyAdjustsScrollViewInsets = false
@@ -101,6 +103,7 @@ extension GalleryViewController : UITableViewDataSource {
         if cell == nil {
             let iconImage = AppConfigure.sharedInstance.appSkin.galleryVideoBasicIcon()
             cell = self.tableView.dequeueReusableCell(withIdentifier: GalleryTableViewCell.identifier) as? GalleryTableViewCell
+            cell?.backgroundColor = UIColor.clear
             let data = GalleryTableViewCellData(image: iconImage, title: video.creationDate, duration: video.duration)
             AlbumVideoModel.getAVAsset(from: video.asset) { (avAsset, avAudioMix, dict) in
                 if self.cellArray.count < indexPath.row {

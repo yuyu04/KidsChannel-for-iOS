@@ -88,6 +88,13 @@ class FourChannelCameraViewController: UIViewController {
         
         return UINavigationController(rootViewController: dataViewController)
     }
+    
+    func setupPageControl() {
+        let appearance = UIPageControl.appearance()
+        appearance.pageIndicatorTintColor = UIColor.gray
+        appearance.currentPageIndicatorTintColor = UIColor.white
+        appearance.backgroundColor = AppConfigure.sharedInstance.appSkin.pageControllerBottomBackgroundColor()
+    }
 }
 
 extension FourChannelCameraViewController: UIPageViewControllerDataSource {
@@ -127,6 +134,7 @@ extension FourChannelCameraViewController: UIPageViewControllerDataSource {
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
+        self.setupPageControl()
         return pageContent.count
     }
     

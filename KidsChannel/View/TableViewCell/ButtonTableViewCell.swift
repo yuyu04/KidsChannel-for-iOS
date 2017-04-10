@@ -27,6 +27,7 @@ class ButtonTableViewCell: BaseTableViewCell {
         //super.awakeFromNib()
         // Initialization code
         cellTextLabel.textColor = AppConfigure.sharedInstance.appSkin.userMenuFontColor()
+        
         cellImageView.tintColor = AppConfigure.sharedInstance.appSkin.iconsNormalTintColor()
     }
     
@@ -37,8 +38,8 @@ class ButtonTableViewCell: BaseTableViewCell {
     override func setData(_ data: Any?) {
         if let data = data as? ButtonTableViewCellData {
             if data.image != nil {
-                self.cellImageView.image = data.image
-            }            
+                self.cellImageView.image = data.image?.withRenderingMode(.alwaysTemplate)
+            }
             self.cellTextLabel.text = data.text
         }
     }

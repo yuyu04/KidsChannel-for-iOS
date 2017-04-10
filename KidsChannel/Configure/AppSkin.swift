@@ -29,6 +29,12 @@ protocol AppSkin {
     func skinSelectIcon() -> UIImage
     func versionInfoIcon() -> UIImage
     
+    func fourCameraChannelIcon() -> UIImage
+    func eightCameraChannelIcon() -> UIImage
+    func listCameraChannelIcon() -> UIImage
+    func galleryIcon() -> UIImage
+    func pageControllerBottomBackgroundColor() -> UIColor
+    
     func cameraMenuFontColor() -> UIColor
     func galleryVideoBasicIcon() -> UIImage
 }
@@ -107,6 +113,26 @@ class firstSkin: AppSkin {
     
     func versionInfoIcon() -> UIImage {
         return UIImage(named: "ic_menu_04")!
+    }
+    
+    func fourCameraChannelIcon() -> UIImage {
+        return UIImage(named: "icn_1")!
+    }
+    
+    func eightCameraChannelIcon() -> UIImage {
+        return UIImage(named: "icn_2")!
+    }
+    
+    func listCameraChannelIcon() -> UIImage {
+        return UIImage(named: "icn_1")!
+    }
+    
+    func galleryIcon() -> UIImage {
+        return UIImage(named: "icn_1")!
+    }
+    
+    func pageControllerBottomBackgroundColor() -> UIColor {
+        return UIColor(hex: "262625")
     }
     
     func galleryVideoBasicIcon() -> UIImage {
