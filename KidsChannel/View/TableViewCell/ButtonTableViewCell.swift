@@ -10,11 +10,11 @@ import UIKit
 
 struct ButtonTableViewCellData {
     
-    init(imageName: String, text: String) {
-        self.imageName = imageName
+    init(image: UIImage?, text: String) {
+        self.image = image
         self.text = text
     }
-    var imageName: String
+    var image: UIImage?
     var text: String
 }
 
@@ -26,6 +26,8 @@ class ButtonTableViewCell: BaseTableViewCell {
     override func awakeFromNib() {
         //super.awakeFromNib()
         // Initialization code
+        cellTextLabel.textColor = AppConfigure.sharedInstance.appSkin.userMenuFontColor()
+        cellImageView.tintColor = AppConfigure.sharedInstance.appSkin.iconsNormalTintColor()
     }
     
     override class func height() -> CGFloat {
@@ -34,8 +36,8 @@ class ButtonTableViewCell: BaseTableViewCell {
 
     override func setData(_ data: Any?) {
         if let data = data as? ButtonTableViewCellData {
-            if data.imageName.length > 0 {
-                self.cellImageView.image = UIImage(named: data.imageName)
+            if data.image != nil {
+                self.cellImageView.image = data.image
             }            
             self.cellTextLabel.text = data.text
         }

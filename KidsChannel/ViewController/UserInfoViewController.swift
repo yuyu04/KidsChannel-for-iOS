@@ -18,6 +18,7 @@ class UserInfoViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.setBackgroundImage(isUserMenusView: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {

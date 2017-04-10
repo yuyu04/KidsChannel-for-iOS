@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVKit
+import AVFoundation
 
 class GalleryViewController: UIViewController {
 
@@ -14,15 +16,28 @@ class GalleryViewController: UIViewController {
     var videoModels = [AlbumVideoModel]()
     var cellArray = [GalleryTableViewCell]()
     
+    fileprivate var playerViewController: AVPlayerViewController?
+    var avPlayer: AVPlayer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.tableView.registerCellNib(GalleryTableViewCell.self)
+        PlaybackManager.sharedManager.delegate = self
+        //self.tableView.contentInset = UIEdgeInsets.init(top: -36, left: 0, bottom: 0, right: 0)
+        self.automaticallyAdjustsScrollViewInsets = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
+        
+        if playerViewController != nil {
+            // The view reappeared as a results of dismissing an AVPlayerViewController.
+            // Perform cleanup.
+            PlaybackManager.sharedManager.setContentForPlayback(nil)
+            playerViewController?.player = nil
+            playerViewController = nil
+        }
         
         videoModels = AlbumVideoModel.listAlbumVideoModel()
     }
@@ -39,7 +54,22 @@ extension GalleryViewController : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        var cell: GalleryTableViewCell?
+        if (cellArray.count > indexPath.row) {
+            cell = cellArray[indexPath.row]
+        }
+        
+        if cell != nil {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            guard let playerViewController = storyboard.instantiateViewController(withIdentifier: "AVPlayerViewController") as? AVPlayerViewController else {
+                return
+            }
+            self.playerViewController = playerViewController
+            
+            self.present(self.playerViewController!, animated: true) { () in
+                PlaybackManager.sharedManager.setContentForPlayback(cell!.avAsset)
+            }
+        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -50,7 +80,6 @@ extension GalleryViewController : UITableViewDelegate {
 }
 
 extension GalleryViewController : UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return videoModels.count
     }
@@ -65,13 +94,13 @@ extension GalleryViewController : UITableViewDataSource {
         })
         
         var cell: GalleryTableViewCell?
-        if (isExistCell != nil) {
+        if (isExistCell != nil && cellArray.count > indexPath.row) {
             cell = cellArray[indexPath.row]
         }
         
         if cell == nil {
             let iconImage = AppConfigure.sharedInstance.appSkin.galleryVideoBasicIcon()
-            cell = self.tableView.dequeueReusableCell(withIdentifier: GalleryTableViewCell.identifier) as! GalleryTableViewCell
+            cell = self.tableView.dequeueReusableCell(withIdentifier: GalleryTableViewCell.identifier) as? GalleryTableViewCell
             let data = GalleryTableViewCellData(image: iconImage, title: video.creationDate, duration: video.duration)
             AlbumVideoModel.getAVAsset(from: video.asset) { (avAsset, avAudioMix, dict) in
                 if self.cellArray.count < indexPath.row {
@@ -83,7 +112,10 @@ extension GalleryViewController : UITableViewDataSource {
                 }
                 
                 self.cellArray[indexPath.row].cellImageView.image = thumbNailImage
-                self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                self.cellArray[indexPath.row].avAsset = avAsset
+                DispatchQueue.main.async {
+                    self.tableView.reloadRows(at: [indexPath], with: .none)
+                }
             }
             cell!.setData(data)
             cellArray.append(cell!)
@@ -91,6 +123,40 @@ extension GalleryViewController : UITableViewDataSource {
         
         return cell!
     }
+}
+
+extension GalleryViewController: PlaybackDelegate {
+    func playbackManager(_ playbackManager: PlaybackManager, playerReadyToPlay player: AVPlayer) {
+        player.play()
+    }
     
+    func playbackManager(_ playbackManager: PlaybackManager, playerCurrentItemDidChange player: AVPlayer) {
+        guard let playerViewController = self.playerViewController , player.currentItem != nil else { return }
+        
+        playerViewController.player = player
+    }
     
+    func playbackManager(_ playbackManager: PlaybackManager, playerFail player: AVPlayer, content: AVAsset?, error: Error?) {
+        guard let playerViewController = self.playerViewController , player.currentItem != nil else { return }
+        
+        var message = ""
+        if error != nil {
+            print("Error: \(error)\n Could play the fps content")
+            
+            let nsErr: NSError = error as! NSError
+            if let underlyingError = nsErr.userInfo[NSUnderlyingErrorKey] as? NSError, underlyingError.domain == NSOSStatusErrorDomain {
+                switch underlyingError.code {
+                default:
+                    break
+                }
+            }
+        }
+        
+        let alert = UIAlertController(title: "Play Failed", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) { Void in
+            playerViewController.dismiss(animated: true, completion: nil)
+            }
+        )
+        playerViewController.present(alert, animated: true, completion: nil)
+    }
 }

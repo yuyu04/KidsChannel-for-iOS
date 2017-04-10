@@ -13,7 +13,7 @@ enum RightMenu: Int {
     case close = 0
     case fourChennel
     case eightChennel
-    case eighteenChennel
+    case cameraListChennel
     case gellery
 }
 
@@ -71,7 +71,7 @@ extension CameraMenuViewController : RightMenuProtocol {
             self.slideMenuController()?.changeMainViewController(self.fourChViewController, close: true)
         case .eightChennel:
             self.slideMenuController()?.changeMainViewController(self.eightChViewController, close: true)
-        case .eighteenChennel:
+        case .cameraListChennel:
             self.slideMenuController()?.changeMainViewController(self.cameraListChViewController, close: true)
         case .gellery:
             self.slideMenuController()?.changeMainViewController(self.galleryViewController, close: true)
@@ -87,7 +87,7 @@ extension CameraMenuViewController : UITableViewDelegate {
             switch menu {
             case .close:
                 return ButtonTableViewCell.height()+UIApplication.shared.statusBarFrame.height
-            case .fourChennel, .eightChennel, .eighteenChennel, .gellery:
+            case .fourChennel, .eightChennel, .cameraListChennel, .gellery:
                 return ButtonTableViewCell.height()
             }
         }
@@ -116,15 +116,24 @@ extension CameraMenuViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let menu = RightMenu(rawValue: indexPath.row) {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: ButtonTableViewCell.identifier) as! ButtonTableViewCell
-            let data = ButtonTableViewCellData(imageName: menus[indexPath.row], text: menus[indexPath.row])
             cell.preservesSuperviewLayoutMargins = false
             cell.separatorInset = UIEdgeInsets.zero
             cell.layoutMargins = UIEdgeInsets.zero
             
+            var data: ButtonTableViewCellData?
             switch menu {
-            case .close, .fourChennel, .eightChennel, .eighteenChennel, .gellery:
-                cell.setData(data)
+            case .close:
+                data = ButtonTableViewCellData(image: nil, text: menus[indexPath.row])
+            case .fourChennel:
+                data = ButtonTableViewCellData(image: nil, text: menus[indexPath.row])
+            case .eightChennel:
+                data = ButtonTableViewCellData(image: nil, text: menus[indexPath.row])
+            case .cameraListChennel:
+                data = ButtonTableViewCellData(image: nil, text: menus[indexPath.row])
+            case .gellery:
+                data = ButtonTableViewCellData(image: nil, text: menus[indexPath.row])
             }
+            cell.setData(data!)
             return cell
         }
         return UITableViewCell()

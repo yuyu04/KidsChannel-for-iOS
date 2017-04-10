@@ -28,8 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let nvc: UINavigationController = UINavigationController(rootViewController: mainViewController)
         
-        UINavigationBar.appearance().tintColor = UIColor(hex: "689F38")
-        
+        UINavigationBar.appearance().tintColor = AppConfigure.sharedInstance.appSkin.navigationIconColor()
+        UINavigationBar.appearance().barTintColor = AppConfigure.sharedInstance.appSkin.navigationBarColor()
+
         leftViewController.mainViewController = nvc
         rightViewController.mainViewController = nvc
         

@@ -20,6 +20,8 @@ class SkinSelectionViewController: UIViewController {
         self.tableView.registerCellNib(SkinSelectionTableViewCell.self)
         self.tableView.separatorColor = UIColor.clear
         self.tableView.tableFooterView = UIView()
+        
+        self.setBackgroundImage(isUserMenusView: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {

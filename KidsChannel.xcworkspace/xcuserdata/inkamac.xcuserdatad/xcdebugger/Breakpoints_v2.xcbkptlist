@@ -65,38 +65,6 @@
             endingLineNumber = "63"
             landmarkName = "testRequestCameraSearch()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "KidsChannelTests.KidsChannelNetworkTests.(testRequestCameraSearch () -&gt; ()).(closure #1)"
-                  moduleName = "KidsChannelTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/inkamac/Documents/SJProject/KidsChannel-for-iOS/KidsChannelTests/KidsChannelNetworkTests.swift"
-                  timestampString = "513154885.8374"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "63"
-                  endingLineNumber = "63"
-                  offsetFromSymbolStart = "20">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "KidsChannelTests.KidsChannelNetworkTests.(testRequestCameraSearch () -&gt; ()).(closure #1).(implicit closure #1)"
-                  moduleName = "KidsChannelTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/inkamac/Documents/SJProject/KidsChannel-for-iOS/KidsChannelTests/KidsChannelNetworkTests.swift"
-                  timestampString = "513154885.839492"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "63"
-                  endingLineNumber = "63"
-                  offsetFromSymbolStart = "20">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -105,46 +73,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KidsChannelTests/KidsChannelTests.swift"
-            timestampString = "513154669.176469"
+            filePath = "KidsChannel/ViewController/FullCameraViewController.swift"
+            timestampString = "513483258.35888"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "testAlbumVideoModel()"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "close(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "KidsChannelTests.KidsChannelTests.testAlbumVideoModel () -&gt; ()"
-                  moduleName = "KidsChannelTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/inkamac/Documents/SJProject/KidsChannel-for-iOS/KidsChannelTests/KidsChannelTests.swift"
-                  timestampString = "513154885.842283"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26"
-                  offsetFromSymbolStart = "24">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "KidsChannelTests.KidsChannelTests.(testAlbumVideoModel () -&gt; ()).(implicit closure #1)"
-                  moduleName = "KidsChannelTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/inkamac/Documents/SJProject/KidsChannel-for-iOS/KidsChannelTests/KidsChannelTests.swift"
-                  timestampString = "513154885.844386"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26"
-                  offsetFromSymbolStart = "20">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

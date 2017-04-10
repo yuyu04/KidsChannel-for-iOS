@@ -25,10 +25,16 @@ class KidsChannelTests: XCTestCase {
         let list = AlbumVideoModel.listAlbumVideoModel()
         XCTAssert(list.count > 0)
         
+        let asyncExpection = expectation(description: "getAVAsset")
         for video in list {
             AlbumVideoModel.getAVAsset(from: video.asset) { (avAsset, avAudioMix, dic) in
                 XCTAssert(list.count > 0)
+                asyncExpection.fulfill()
             }
+        }
+        
+        waitForExpectations(timeout: 5) { error in
+            
         }
     }
 }

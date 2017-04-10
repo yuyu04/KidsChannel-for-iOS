@@ -11,12 +11,25 @@ import UIKit
 extension UIViewController {
     
     func setNavigationBarItem() {
-        self.addLeftBarButtonWithImage(UIImage(named: "ic_menu_black_24dp")!)
-        self.addRightBarButtonWithImage(UIImage(named: "ic_notifications_black_24dp")!)
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 150, height: 20))
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = AppConfigure.sharedInstance.appSkin.navigationBarImage()
+        self.navigationItem.titleView = imageView
+        
+        self.addLeftBarButtonWithImage(AppConfigure.sharedInstance.appSkin.navigationLeftButtonImage())
+        self.addRightBarButtonWithImage(AppConfigure.sharedInstance.appSkin.navigationRightButtonImage())
         self.slideMenuController()?.removeLeftGestures()
         self.slideMenuController()?.removeRightGestures()
         self.slideMenuController()?.addLeftGestures()
         self.slideMenuController()?.addRightGestures()
+    }
+    
+    func setBackgroundImage(isUserMenusView: Bool) {
+        if isUserMenusView {
+            let backgroundImage = UIImageView(frame: self.view.bounds)
+            backgroundImage.image = AppConfigure.sharedInstance.appSkin.userMenuViewsBackgroundImage()
+            self.view.insertSubview(backgroundImage, at: 0)
+        }
     }
     
     func removeNavigationBarItem() {

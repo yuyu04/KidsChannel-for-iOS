@@ -15,7 +15,7 @@ class AlbumVideoModel {
     let asset: PHAsset
     init(creationDate: Date, asset: PHAsset) {
         let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "YYYY:MM ZZ"
+        dateformatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
         let dateString = dateformatter.string(from: creationDate)
         
         self.creationDate = dateString

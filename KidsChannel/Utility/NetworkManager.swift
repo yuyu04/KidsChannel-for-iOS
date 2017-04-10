@@ -44,7 +44,7 @@ class NetworkManager: NSObject {
     }
     
     static func requestData(url: String, parameter: String, method: String, completion: @escaping (_ responseJson: [String: Any]?) -> Void) {
-        var request = URLRequest(url: URL(string: url)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 5.0)
+        var request = URLRequest(url: URL(string: url)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10.0)
         request.httpMethod = method
         request.httpBody = parameter.data(using: .utf8)
         URLSession.shared.dataTask(with: request) { (data, response, error) in

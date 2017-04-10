@@ -23,6 +23,7 @@ protocol LeftMenuProtocol : class {
 }
 
 class UserMenuViewController: UIViewController {
+    @IBOutlet weak var memberView: UIView!
     @IBOutlet weak var tableView: UITableView!
     var menus = ["로그인", "회원정보", "카메라 정보", "스킨 선택", "버전 정보"]
     var mainViewController: UIViewController!
@@ -70,14 +71,20 @@ class UserMenuViewController: UIViewController {
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         self.imageHeaderView = ImageHeaderView.loadNib()
-        self.view.addSubview(self.imageHeaderView)
+        self.imageHeaderView.frame = self.memberView.bounds
+        self.memberView.addSubview(self.imageHeaderView)
+        
+        self.tableView.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuViewBackgrounColor()
+        self.view.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuViewBackgrounColor()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         if AppConfigure.sharedInstance.isLoginUser, let userId = AppConfigure.sharedInstance.userDefaults.string(forKey: "UserId") {
             imageHeaderView.userId.text = userId
+            imageHeaderView.profileImage.image = AppConfigure.sharedInstance.appSkin.loginImage()
         } else {
             imageHeaderView.userId.text = ""
+            imageHeaderView.profileImage.image = AppConfigure.sharedInstance.appSkin.notLoginImage()
         }
         
         self.tableView.reloadData()
@@ -149,14 +156,19 @@ extension UserMenuViewController : UITableViewDataSource {
             cell.preservesSuperviewLayoutMargins = false
             cell.separatorInset = UIEdgeInsets.zero
             cell.layoutMargins = UIEdgeInsets.zero
+            cell.backgroundColor = UIColor.clear
             
             switch menu {
             case .login where AppConfigure.sharedInstance.isLoginUser:
-                data = ButtonTableViewCellData(imageName: menus[indexPath.row], text: menus[indexPath.row+1])
+                data = ButtonTableViewCellData(image: AppConfigure.sharedInstance.appSkin.userInfoIcon(), text: menus[indexPath.row+1])
             case .login:
-                data = ButtonTableViewCellData(imageName: menus[indexPath.row], text: menus[indexPath.row])
-            case .cameraInfo, .skinSelection, .versionInfo:
-                data = ButtonTableViewCellData(imageName: menus[indexPath.row], text: menus[indexPath.row+1])
+                data = ButtonTableViewCellData(image: AppConfigure.sharedInstance.appSkin.userInfoIcon(), text: menus[indexPath.row])
+            case .cameraInfo:
+                data = ButtonTableViewCellData(image: AppConfigure.sharedInstance.appSkin.cameraInfoIcon(), text: menus[indexPath.row+1])
+            case .skinSelection:
+                data = ButtonTableViewCellData(image: AppConfigure.sharedInstance.appSkin.skinSelectIcon(), text: menus[indexPath.row+1])
+            case .versionInfo:
+                data = ButtonTableViewCellData(image: AppConfigure.sharedInstance.appSkin.versionInfoIcon(), text: menus[indexPath.row+1])
             default:
                 data = nil
             }

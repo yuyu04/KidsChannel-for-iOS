@@ -14,15 +14,15 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_menu_black_24dp" translatesAutoresizingMaskIntoConstraints="NO" id="7OG-y1-d8B">
-                    <rect key="frame" x="90" y="40" width="80" height="80"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_local" translatesAutoresizingMaskIntoConstraints="NO" id="7OG-y1-d8B">
+                    <rect key="frame" x="120" y="40" width="80" height="80"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="80" id="JN4-ro-CeU"/>
                         <constraint firstAttribute="width" constant="80" id="bkt-ej-Nhe"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8Z-WG-hUb">
-                    <rect key="frame" x="63" y="128" width="133" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8Z-WG-hUb">
+                    <rect key="frame" x="30" y="130" width="260" height="20"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -30,11 +30,12 @@
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
             <constraints>
-                <constraint firstItem="Z8Z-WG-hUb" firstAttribute="width" secondItem="7OG-y1-d8B" secondAttribute="width" id="66R-id-XPS"/>
-                <constraint firstItem="Z8Z-WG-hUb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="63" id="MSY-s5-WMt"/>
-                <constraint firstAttribute="bottom" secondItem="7OG-y1-d8B" secondAttribute="bottom" constant="40" id="UH0-a0-LBc"/>
-                <constraint firstItem="7OG-y1-d8B" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="90" id="dFA-bW-beD"/>
-                <constraint firstItem="Z8Z-WG-hUb" firstAttribute="top" secondItem="7OG-y1-d8B" secondAttribute="bottom" constant="8" id="k7l-e4-8l6"/>
+                <constraint firstAttribute="bottom" secondItem="Z8Z-WG-hUb" secondAttribute="bottom" constant="10" id="HjD-57-wzU"/>
+                <constraint firstItem="Z8Z-WG-hUb" firstAttribute="top" secondItem="7OG-y1-d8B" secondAttribute="bottom" constant="10" id="QIY-zp-wQf"/>
+                <constraint firstAttribute="trailing" secondItem="Z8Z-WG-hUb" secondAttribute="trailing" constant="30" id="ZQz-5U-Bqy"/>
+                <constraint firstItem="Z8Z-WG-hUb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="cqL-0X-CeD"/>
+                <constraint firstItem="7OG-y1-d8B" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ll5-1t-aKI"/>
+                <constraint firstItem="7OG-y1-d8B" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="qbs-W4-sJn"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
@@ -44,6 +45,6 @@
         </view>
     </objects>
     <resources>
-        <image name="ic_menu_black_24dp" width="24" height="24"/>
+        <image name="profile_local" width="335" height="335"/>
     </resources>
 </document>

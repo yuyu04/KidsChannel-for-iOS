@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 struct GalleryTableViewCellData {
     
@@ -25,6 +26,8 @@ class GalleryTableViewCell: BaseTableViewCell {
     @IBOutlet weak var cellImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
+    
+    var avAsset: AVAsset?
     
     override func awakeFromNib() {
         //super.awakeFromNib()

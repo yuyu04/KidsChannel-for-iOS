@@ -24,6 +24,8 @@ class VersionInfoViewController: UIViewController {
         }
         versionInfo.text = versionString
         environment.text = "지원환경 iOS 9.0 이상"
+        
+        self.setBackgroundImage(isUserMenusView: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,15 +41,4 @@ class VersionInfoViewController: UIViewController {
     @IBAction func confirm(_ sender: Any) {
         AppConfigure.sharedInstance.leftMenuDelegate?.changeViewController(LeftMenu.mainView)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

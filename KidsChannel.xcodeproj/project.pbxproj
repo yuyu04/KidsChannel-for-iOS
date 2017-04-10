@@ -57,6 +57,7 @@
 		C1B694191E95E24A00AF50B6 /* AlbumVideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B694181E95E24A00AF50B6 /* AlbumVideoModel.swift */; };
 		C1B6941B1E95FE2800AF50B6 /* KidsChannelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B6941A1E95FE2800AF50B6 /* KidsChannelTests.swift */; };
 		C1B6941D1E961EE400AF50B6 /* PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B6941C1E961EE400AF50B6 /* PHAsset.swift */; };
+		C1B694281E9B005E00AF50B6 /* PlaybackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B694271E9B005E00AF50B6 /* PlaybackManager.swift */; };
 		C1C0105B1E8B970A0031225C /* AppSkin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C0105A1E8B970A0031225C /* AppSkin.swift */; };
 		C1C0105D1E8B9B100031225C /* FourChannelCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C0105C1E8B9B100031225C /* FourChannelCameraViewController.swift */; };
 		C1C0105F1E8B9B210031225C /* EightChannelCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C0105E1E8B9B200031225C /* EightChannelCameraViewController.swift */; };
@@ -146,6 +147,7 @@
 		C1B694181E95E24A00AF50B6 /* AlbumVideoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumVideoModel.swift; sourceTree = "<group>"; };
 		C1B6941A1E95FE2800AF50B6 /* KidsChannelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KidsChannelTests.swift; sourceTree = "<group>"; };
 		C1B6941C1E961EE400AF50B6 /* PHAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PHAsset.swift; sourceTree = "<group>"; };
+		C1B694271E9B005E00AF50B6 /* PlaybackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackManager.swift; sourceTree = "<group>"; };
 		C1C0105A1E8B970A0031225C /* AppSkin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSkin.swift; sourceTree = "<group>"; };
 		C1C0105C1E8B9B100031225C /* FourChannelCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourChannelCameraViewController.swift; sourceTree = "<group>"; };
 		C1C0105E1E8B9B200031225C /* EightChannelCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EightChannelCameraViewController.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 		C160EFE81E89EA3400789D5E /* KidsChannel */ = {
 			isa = PBXGroup;
 			children = (
+				C1B694261E9B005E00AF50B6 /* Manager */,
 				C160F0281E89F27700789D5E /* Model */,
 				C160F0241E89F21000789D5E /* View */,
 				C160F0251E89F21000789D5E /* ViewController */,
@@ -365,6 +368,14 @@
 				C1C0105A1E8B970A0031225C /* AppSkin.swift */,
 			);
 			path = Configure;
+			sourceTree = "<group>";
+		};
+		C1B694261E9B005E00AF50B6 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				C1B694271E9B005E00AF50B6 /* PlaybackManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		F76E142491D3E381BE62ED6E /* Frameworks */ = {
@@ -689,6 +700,7 @@
 				D5E4E8A61E98C49300D36EB4 /* NSTimeInterval.swift in Sources */,
 				C160F0331E8A046000789D5E /* UserMenuViewController.swift in Sources */,
 				C160F02D1E89FB9500789D5E /* NetworkManager.swift in Sources */,
+				C1B694281E9B005E00AF50B6 /* PlaybackManager.swift in Sources */,
 				C1B694191E95E24A00AF50B6 /* AlbumVideoModel.swift in Sources */,
 				C160F04E1E8A1FE000789D5E /* SkinSelectionViewController.swift in Sources */,
 				C1C010631E8B9B390031225C /* GalleryViewController.swift in Sources */,

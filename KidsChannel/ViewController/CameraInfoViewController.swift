@@ -19,6 +19,7 @@ class CameraInfoViewController: UIViewController {
         self.tableView.registerCellNib(CameraListTableViewCell.self)
         self.tableView.separatorColor = UIColor.clear
         self.tableView.tableFooterView = UIView()
+        self.setBackgroundImage(isUserMenusView: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
