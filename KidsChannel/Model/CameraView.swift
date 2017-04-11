@@ -14,6 +14,7 @@ protocol CameraViewDelegate {
 }
 
 class CameraView: NSObject {
+    var camera: Camera!
     var cameraUrlPath: URL!
     var movieView: UIView!
     var mediaPlayer: VLCMediaPlayer? = VLCMediaPlayer(options: ["--avi-index=2"])
@@ -24,11 +25,12 @@ class CameraView: NSObject {
     var tag: Int = 0
     var loadingCount: Int = 0
     
-    init(cameraUrl: URL, view: UIView) {
+    init(cameraUrl: URL, camera: Camera, view: UIView) {
         super.init()
         
         isLoadingComplete = false
         self.cameraUrlPath = cameraUrl
+        self.camera = camera
         self.movieView = view
         
         //Add tap gesture to movieView for play/pause

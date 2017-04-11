@@ -16,9 +16,11 @@ protocol FullCameraViewControllerDelegate {
 class FullCameraViewController: UIViewController {
 
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var camera: Camera?
     var cameraUrl: URL?
     var cameraView: CameraView?
     var delegate: FullCameraViewControllerDelegate?
+    var recordStartTime: Date?
     
     @IBOutlet weak var screenView: UIView!
     @IBOutlet weak var recordStartButton: UIButton!
@@ -28,11 +30,12 @@ class FullCameraViewController: UIViewController {
         super.viewDidLoad()
         appDelegate.shouldRotate = true
         
-        guard let url = cameraUrl else {
+        guard let url = cameraUrl,
+            let camera = camera else {
             return
         }
         
-        cameraView = CameraView(cameraUrl: url, view: screenView)
+        cameraView = CameraView(cameraUrl: url, camera: camera, view: screenView)
         indicatorView.startAnimating()
         cameraView?.startPlay()
         cameraView?.delegate = self
@@ -68,6 +71,8 @@ class FullCameraViewController: UIViewController {
     }
     
     @IBAction func startRecordScreen(_ sender: UIButton) {
+        recordStartTime = Date()
+        
         let record = RPScreenRecorder.shared()
         
         if #available(iOS 10.0, *) {
@@ -97,6 +102,13 @@ class FullCameraViewController: UIViewController {
                     //self.cameraView?.startPlay()
                 }
             }
+        }
+        
+        guard let userId = AppConfigure.sharedInstance.userDefaults.string(forKey: "UserId"),
+            let cameraIdx = self.camera?.idx,
+            let recordStartTime = self.recordStartTime else { return }
+        NetworkManager.requestViewRecord(userId: userId, cameraIdx: cameraIdx, recordStartTime: recordStartTime, recordEndTime: Date()) { (message) in
+            
         }
     }
     

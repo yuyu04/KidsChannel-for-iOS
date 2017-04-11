@@ -27,7 +27,7 @@ class CameraManager: NSObject {
         }
     }
     
-    static func getStreamForPlay(cameraList: [Camera], completion: @escaping (_ streamList: [URL]) -> Void) {
+    static func getStreamForPlay(cameraList: [Camera], completion: @escaping (_ streamList: [(camera: Camera, url: URL)]) -> Void) {
         guard let userId = AppConfigure.sharedInstance.userDefaults.string(forKey: "UserId"),
             let password = AppConfigure.sharedInstance.userDefaults.string(forKey: "UserPassword") else {
                 print("userId and password not found")
@@ -37,7 +37,7 @@ class CameraManager: NSObject {
         let queue = DispatchQueue(label: "com.kidschannel.queue", qos: .userInteractive, attributes: .concurrent)
         let group = DispatchGroup()
         
-        var streamUrls = [URL]()
+        var streams = [(camera: Camera, url: URL)]()
         queue.async {
             DispatchQueue.concurrentPerform(iterations: cameraList.count) { index in
                 group.enter()
@@ -48,12 +48,12 @@ class CameraManager: NSObject {
                 let streamUrl = onvif?.getStreamUrl()
                 group.leave()
                 if streamUrl != nil {
-                    streamUrls.append(streamUrl!)
+                    streams.append((camera: camera, url: streamUrl!))
                 }
             }
             
             group.notify(queue: DispatchQueue.main) { Void in
-                completion(streamUrls)
+                completion(streams)
             }
         }
     }

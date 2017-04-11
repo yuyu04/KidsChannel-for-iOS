@@ -17,7 +17,8 @@ class FourChannelContentViewController: UIViewController {
     @IBOutlet var collectionOfIndicatorView: [UIActivityIndicatorView]!
     
     var pageIndex: Int!
-    var camerasList: [URL]?
+    var camerasList: [(camera:Camera, url:URL)]?
+    var cameraInfo: [Camera]?
     var cameraView = [CameraView]()
     
     override func viewDidLoad() {
@@ -29,7 +30,8 @@ class FourChannelContentViewController: UIViewController {
         }
         
         for i in 0 ..< list.count  {
-            let cv = CameraView(cameraUrl: list[i], view: collectionOfViews[i])
+            let cv = CameraView(cameraUrl: list[i].url, camera: list[i].camera, view: collectionOfViews[i])
+            
             cameraView.append(cv)
             cameraView[i].startPlay()
             cameraView[i].tag = i
@@ -75,6 +77,7 @@ extension FourChannelContentViewController: CameraViewDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let fullCameraViewController = storyboard.instantiateViewController(withIdentifier: "FullCameraViewController") as! FullCameraViewController
         fullCameraViewController.cameraUrl = cameraView.cameraUrlPath
+        fullCameraViewController.camera = cameraView.camera
         fullCameraViewController.delegate = self
         self.present(fullCameraViewController, animated: true) { () in
             
