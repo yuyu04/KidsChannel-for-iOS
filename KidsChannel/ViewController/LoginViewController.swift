@@ -37,8 +37,10 @@ class LoginViewController: UIViewController {
             let pw = password.text else {
             return
         }
-            
+        
+        self.showLoadingView()
         NetworkManager.requestLogin(fromUserId: id, password: pw) { (kindergardenName, serverMessage) in
+            self.dismissLoadingView()
             if kindergardenName.isEmpty {
                 AppConfigure.sharedInstance.userDefaults.set("", forKey: "UserId")
                 AppConfigure.sharedInstance.userDefaults.set("", forKey: "UserPassword")

@@ -10,13 +10,13 @@ import UIKit
 
 struct CameraListTableViewCellData {
     
-    init(imageName: String, cameraName: String, cameraUrl: String, cameraId: String) {
-        self.imageName = imageName
+    init(image: UIImage, cameraName: String, cameraUrl: String, cameraId: String) {
+        self.image = image
         self.cameraName = cameraName
         self.cameraUrl = cameraUrl
         self.cameraId = cameraId
     }
-    var imageName: String
+    var image: UIImage
     var cameraName: String
     var cameraUrl: String
     var cameraId: String
@@ -47,9 +47,7 @@ class CameraListTableViewCell: BaseTableViewCell {
     
     override func setData(_ data: Any?) {
         if let data = data as? CameraListTableViewCellData {
-            if data.imageName.length > 0 {
-                self.cellImageView.image = UIImage(named: data.imageName)
-            }
+            self.cellImageView.image = data.image
             self.cellCameraNameLabel.text = data.cameraName
             self.cellCameraUrlLabel.text = data.cameraUrl
             self.cellCameraIdLabel.text = data.cameraId

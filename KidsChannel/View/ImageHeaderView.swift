@@ -24,6 +24,7 @@ class ImageHeaderView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuViewBackgrounColor()
+        self.userId.textColor = AppConfigure.sharedInstance.appSkin.userMenuFontColor()
         self.profileImage.layoutIfNeeded()
         self.profileImage.layer.cornerRadius = self.profileImage.bounds.size.height / 2
         self.profileImage.clipsToBounds = true

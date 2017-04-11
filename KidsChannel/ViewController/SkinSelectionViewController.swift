@@ -36,6 +36,7 @@ class SkinSelectionViewController: UIViewController {
     
     @IBAction func changeSkin(_ sender: Any) {
         AppConfigure.sharedInstance.changeSkin(skinNumber: selectionSkin)
+        AppConfigure.sharedInstance.leftMenuDelegate?.changeViewController(LeftMenu.mainView)
     }
     
     @IBAction func cancel(_ sender: Any) {
@@ -50,6 +51,7 @@ extension SkinSelectionViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectionSkin = SkinNumber(rawValue: indexPath.section)
+        self.tableView.reloadData()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -83,7 +85,8 @@ extension SkinSelectionViewController : UITableViewDataSource {
         }
         
         let cell = self.tableView.dequeueReusableCell(withIdentifier: SkinSelectionTableViewCell.identifier) as! SkinSelectionTableViewCell
-        let data = SkinSelectionTableViewCellData(imageName: skinSelect.getSkinImageString(), text: "")
+        cell.backgroundColor = UIColor.clear
+        let data = SkinSelectionTableViewCellData(image: SkinNumber.getSkinImage(number: skinSelect, selectedNumber: selectionSkin), text: "")
         cell.setData(data)
         
         return cell

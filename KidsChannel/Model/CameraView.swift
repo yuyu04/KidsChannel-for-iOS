@@ -10,6 +10,7 @@ import UIKit
 
 protocol CameraViewDelegate {
     func cameraView(didTapFullScreenMode cameraView: CameraView)
+    func cameraView(didFinishLoading cameraView: CameraView)
 }
 
 class CameraView: NSObject {
@@ -20,6 +21,8 @@ class CameraView: NSObject {
     var isFullScreenMode = false
     var isLoadingComplete = false
     var delegate: CameraViewDelegate?
+    var tag: Int = 0
+    var loadingCount: Int = 0
     
     init(cameraUrl: URL, view: UIView) {
         super.init()
@@ -44,11 +47,14 @@ class CameraView: NSObject {
     
     func startPlay() {
         self.mediaPlayer?.play()
+        isLoadingComplete = false
+        loadingCount = 0
     }
     
     func stopPlay() {
         self.mediaPlayer?.stop()
         isLoadingComplete = false
+        loadingCount = 0
     }
     
     func isPlayerPlaying() -> Bool {
@@ -105,11 +111,15 @@ class CameraView: NSObject {
 extension CameraView: VLCMediaPlayerDelegate {
     
     func mediaPlayerStateChanged(_ aNotification: Notification!) {
-        //self.showActivityIndicatory()
     }
     
     func mediaPlayerTimeChanged(_ aNotification: Notification!) {
-        //self.closeActivityIndicatory()
+        if loadingCount >= 4 {
+            self.delegate?.cameraView(didFinishLoading: self)
+        } else {
+            loadingCount += 1
+        }
+        
         isLoadingComplete = true
     }
     

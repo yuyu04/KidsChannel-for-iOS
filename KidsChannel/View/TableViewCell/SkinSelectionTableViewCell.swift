@@ -10,11 +10,11 @@ import UIKit
 
 struct SkinSelectionTableViewCellData {
     
-    init(imageName: String, text: String) {
-        self.imageName = imageName
+    init(image: UIImage, text: String) {
+        self.image = image
         self.text = text
     }
-    var imageName: String
+    var image: UIImage
     var text: String
 }
 
@@ -28,14 +28,12 @@ class SkinSelectionTableViewCell: BaseTableViewCell {
     }
     
     override class func height() -> CGFloat {
-        return 44
+        return 68
     }
     
     override func setData(_ data: Any?) {
         if let data = data as? SkinSelectionTableViewCellData {
-            if data.imageName.length > 0 {
-                self.cellImageView.image = UIImage(named: data.imageName)
-            }
+            self.cellImageView.image = data.image
         }
     }
     

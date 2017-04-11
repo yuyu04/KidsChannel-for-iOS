@@ -26,6 +26,7 @@ protocol AppSkin {
     func iconsSelectTintColor() -> UIColor
     func userInfoIcon() -> UIImage
     func cameraInfoIcon() -> UIImage
+    func cameraInfoListIcon() -> UIImage
     func skinSelectIcon() -> UIImage
     func versionInfoIcon() -> UIImage
     
@@ -33,10 +34,13 @@ protocol AppSkin {
     func eightCameraChannelIcon() -> UIImage
     func listCameraChannelIcon() -> UIImage
     func galleryIcon() -> UIImage
-    func pageControllerBottomBackgroundColor() -> UIColor
+    func galleryVideoBasicIcon() -> UIImage
+    func galleryBackgroundColor() -> UIColor
+    func galleryFontColor() -> UIColor
+    func cameraChannelSmallViewImage() -> UIImage
+    func pageControllerViewBackgroundColor() -> UIColor
     
     func cameraMenuFontColor() -> UIColor
-    func galleryVideoBasicIcon() -> UIImage
 }
 
 class firstSkin: AppSkin {
@@ -44,7 +48,6 @@ class firstSkin: AppSkin {
     func userMenuViewBackgrounColor() -> UIColor {
         return UIColor(hex: "262625")
     }
-
     
     
     func navigationBarImage() -> UIImage {
@@ -107,6 +110,10 @@ class firstSkin: AppSkin {
         return UIImage(named: "ic_menu_02")!
     }
     
+    func cameraInfoListIcon() -> UIImage {
+        return UIImage(named: "ic_cctv")!
+    }
+    
     func skinSelectIcon() -> UIImage {
         return UIImage(named: "ic_menu_03")!
     }
@@ -124,18 +131,32 @@ class firstSkin: AppSkin {
     }
     
     func listCameraChannelIcon() -> UIImage {
-        return UIImage(named: "icn_1")!
+        return UIImage(named: "icn_3")!
     }
     
     func galleryIcon() -> UIImage {
-        return UIImage(named: "icn_1")!
-    }
-    
-    func pageControllerBottomBackgroundColor() -> UIColor {
-        return UIColor(hex: "262625")
+        return UIImage(named: "icn_4")!
     }
     
     func galleryVideoBasicIcon() -> UIImage {
-        return UIImage(named: "ic_menu_black_24dp")!
+        return UIImage(named: "ic_file_video")!
     }
+    
+    func galleryBackgroundColor() -> UIColor {
+        return UIColor(hex: "262625")
+    }
+    
+    func galleryFontColor() -> UIColor {
+        return UIColor(hex: "999999")
+    }
+    
+    func cameraChannelSmallViewImage() -> UIImage {
+        return UIImage(named: "camera_channel")!
+    }
+    
+    func pageControllerViewBackgroundColor() -> UIColor {
+        return UIColor(hex: "9CD4DB")
+    }
+    
+    
 }

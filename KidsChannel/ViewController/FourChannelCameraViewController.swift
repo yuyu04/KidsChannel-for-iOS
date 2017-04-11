@@ -19,6 +19,7 @@ class FourChannelCameraViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = AppConfigure.sharedInstance.appSkin.pageControllerViewBackgroundColor()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,6 +32,7 @@ class FourChannelCameraViewController: UIViewController {
     }
     
     func searchCameraStreamUrl() {
+        self.showLoadingView()
         CameraManager.searchForCameraList() { (cameraList) in
             self.cameras = cameraList
             CameraManager.getStreamForPlay(cameraList: cameraList) { (streamUrlList) in
@@ -48,12 +50,14 @@ class FourChannelCameraViewController: UIViewController {
                     list.removeAll()
                 }
                 self.settingViewControllers()
+                self.dismissLoadingView()
             }
         }
     }
     
     func settingViewControllers() {
         self.pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        self.pageController?.view.backgroundColor = AppConfigure.sharedInstance.appSkin.pageControllerViewBackgroundColor()
         self.pageController?.delegate = self
         self.pageController?.dataSource = self
         
@@ -93,7 +97,7 @@ class FourChannelCameraViewController: UIViewController {
         let appearance = UIPageControl.appearance()
         appearance.pageIndicatorTintColor = UIColor.gray
         appearance.currentPageIndicatorTintColor = UIColor.white
-        appearance.backgroundColor = AppConfigure.sharedInstance.appSkin.pageControllerBottomBackgroundColor()
+        appearance.backgroundColor = AppConfigure.sharedInstance.appSkin.pageControllerViewBackgroundColor()
     }
 }
 

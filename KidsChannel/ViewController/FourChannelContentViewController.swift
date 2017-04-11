@@ -13,8 +13,8 @@ class FourChannelContentViewController: UIViewController {
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
-    
     @IBOutlet var collectionOfViews: [UIView]!
+    @IBOutlet var collectionOfIndicatorView: [UIActivityIndicatorView]!
     
     var pageIndex: Int!
     var camerasList: [URL]?
@@ -22,6 +22,7 @@ class FourChannelContentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = AppConfigure.sharedInstance.appSkin.pageControllerViewBackgroundColor()
         
         guard let list = camerasList else {
             return
@@ -31,6 +32,7 @@ class FourChannelContentViewController: UIViewController {
             let cv = CameraView(cameraUrl: list[i], view: collectionOfViews[i])
             cameraView.append(cv)
             cameraView[i].startPlay()
+            cameraView[i].tag = i
             cameraView[i].delegate = self
         }
         
@@ -38,8 +40,11 @@ class FourChannelContentViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        for camera in self.cameraView  {
-            camera.startPlay()
+       
+        for i in 0 ..< self.cameraView.count  {
+            self.cameraView[i].startPlay()
+            self.collectionOfIndicatorView[i].isHidden = false
+            self.collectionOfIndicatorView[i].startAnimating()
         }
     }
     
@@ -75,13 +80,20 @@ extension FourChannelContentViewController: CameraViewDelegate {
             
         }
     }
+    
+    func cameraView(didFinishLoading cameraView: CameraView) {
+        let tag = cameraView.tag
+        if collectionOfIndicatorView.count >= tag {
+            collectionOfIndicatorView[tag].isHidden = true
+        }
+    }
 }
 
 extension FourChannelContentViewController: FullCameraViewControllerDelegate {
     func fullCameraViewControllerDidFinish(_ fullCameraViewController: FullCameraViewController) {
-        dismiss(animated: true) { () in
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.shouldRotate = false
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.shouldRotate = false
+        dismiss(animated: false) { () in
         }
     }
 }

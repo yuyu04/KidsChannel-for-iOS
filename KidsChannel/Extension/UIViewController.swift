@@ -52,5 +52,29 @@ extension UIViewController {
             alertController.addAction(cacelAction)
             self.present(alertController, animated: true, completion: nil)
         }
-    }    
+    }
+    
+    func showLoadingView() {
+        DispatchQueue.main.async {
+            let nib = UINib(nibName: "AlertLoadingView", bundle: nil)
+            let customAlert = nib.instantiate(withOwner: self, options: nil).first as! AlertLoadingView
+            
+            customAlert.tag = 12345
+            customAlert.title.text = "Loading"
+            customAlert.indicator.startAnimating()
+            
+            let screen = UIScreen.main.bounds
+            customAlert.frame = screen
+            
+            self.view.addSubview(customAlert) 
+        }
+    }
+    
+    func dismissLoadingView() {
+        DispatchQueue.main.async {
+            if let view = self.view.viewWithTag(12345) {
+                view.removeFromSuperview()
+            }
+        }
+    }
 }

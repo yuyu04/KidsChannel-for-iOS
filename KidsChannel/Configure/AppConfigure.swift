@@ -11,8 +11,6 @@ import UIKit
 enum SkinNumber : Int {
     case first = 0
     case second
-    case third
-    case fourth
     
     static let count: Int = {
         var max: Int = 0
@@ -20,9 +18,23 @@ enum SkinNumber : Int {
         return max
     }()
     
-    func getSkinImageString() -> String {
-        return ""
-    }
+    static func getSkinImage(number: SkinNumber, selectedNumber: SkinNumber) -> UIImage {
+        var image: UIImage!
+        switch number {
+        case .first:
+            if selectedNumber == .first {
+                image = UIImage(named: "skin_button_01_selected_pressed")!
+            } else {
+                image = UIImage(named: "skin_button_01_selected_normal")!
+            }
+        case .second:
+            if selectedNumber == .second {
+                image = UIImage(named: "skin_button_01_nonselected_pressed")!
+            } else {
+                image = UIImage(named: "skin_button_01_nonselected_normal")!
+            }
+        }
+        return image    }
 }
 
 class AppConfigure: NSObject {
@@ -53,10 +65,6 @@ class AppConfigure: NSObject {
         case .first:
             appSkin = firstSkin()
         case .second:
-            appSkin = firstSkin()
-        case .third:
-            appSkin = firstSkin()
-        case .fourth:
             appSkin = firstSkin()
         }
     }

@@ -17,6 +17,9 @@ class NetworkManager: NSObject {
     static let userJoinUrlPath = "http://emwkids.blaubit.co.kr/user/join"
     static let cameraSearchUrlPath = "http://emwkids.blaubit.co.kr/camera/search"
     
+    static let cameraWatchUrlPath = "http://emwkids.blaubit.co.kr/view/watch"
+    static let cameraRecordUrlPath = "http://emwkids.blaubit.co.kr/view/record"
+    
     static func createRequestParameter(parameter: [String : String]) -> String {
         var paramterString = ""
         for (key, value) in parameter {
@@ -219,10 +222,12 @@ class NetworkManager: NSObject {
         }
     }
     
-    /*static func requestViewWatch(userId: String, cameraIdx: String: String,
+    static func requestViewWatch(userId: String, cameraIdx: String, viewStartTime: Date, viewEndTime: Date,
                                 completion: @escaping (_ message: String) -> Void) {
-        let paramterString = self.createRequestParameter(parameter: ["user_id":userId, "user_pw":password.md5(), "kindergarten_name":kindergartenName])
-        self.requestData(url: userJoinUrlPath, parameter: paramterString, method: "POST") { (responseJson) in
+        let viewStartTimeString = ""
+        let viewEndTimeString = ""
+        let paramterString = self.createRequestParameter(parameter: ["user_id":userId, "camera_idx":cameraIdx, "view_start":viewStartTimeString, "view_end":viewEndTimeString, "view_type":"0"])
+        self.requestData(url: cameraWatchUrlPath, parameter: paramterString, method: "POST") { (responseJson) in
             if responseJson == nil {
                 completion("서버로부터 응답을 받을 수 없습니다")
                 return
@@ -234,11 +239,36 @@ class NetworkManager: NSObject {
             }
             
             if value {
-                completion("회원가입에 실패하였습니다")
+                completion("성공적으로 정보를 서버로 보냈습니다")
                 return
             }
             
             completion("")
         }
-    }*/
+    }
+    
+    static func requestViewRecord(userId: String, cameraIdx: String, recordStartTime: Date, recordEndTime: Date,
+                                 completion: @escaping (_ message: String) -> Void) {
+        let recordStartTimeString = ""
+        let recordEndTimeString = ""
+        let paramterString = self.createRequestParameter(parameter: ["user_id":userId, "camera_idx":cameraIdx, "view_start":recordStartTimeString, "view_end":recordEndTimeString, "view_type":"1"])
+        self.requestData(url: cameraRecordUrlPath, parameter: paramterString, method: "POST") { (responseJson) in
+            if responseJson == nil {
+                completion("서버로부터 응답을 받을 수 없습니다")
+                return
+            }
+            
+            guard let value: Bool = responseJson?["error"] as! Bool? else {
+                completion("")
+                return
+            }
+            
+            if value {
+                completion("성공적으로 정보를 서버로 보냈습니다")
+                return
+            }
+            
+            completion("")
+        }
+    }
 }

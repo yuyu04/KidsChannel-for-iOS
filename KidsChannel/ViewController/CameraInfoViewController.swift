@@ -32,7 +32,10 @@ class CameraInfoViewController: UIViewController {
                 return
         }
         
+        self.showLoadingView()
         NetworkManager.requestCameraSearch(userId: userId) { (cameraArray) in
+            self.dismissLoadingView()
+            
             guard let cameraList = cameraArray else {
                 return
             }
@@ -97,7 +100,7 @@ extension CameraInfoViewController : UITableViewDataSource {
         
         let cell = self.tableView.dequeueReusableCell(withIdentifier: CameraListTableViewCell.identifier) as! CameraListTableViewCell
         let cameraUrl = camera.ip + ":" + camera.port
-        let data = CameraListTableViewCellData(imageName: "", cameraName: camera.name, cameraUrl: cameraUrl, cameraId: camera.id)
+        let data = CameraListTableViewCellData(image: AppConfigure.sharedInstance.appSkin.cameraInfoListIcon(), cameraName: camera.name, cameraUrl: cameraUrl, cameraId: camera.id)
         cell.setData(data)
         
         return cell

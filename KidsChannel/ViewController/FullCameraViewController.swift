@@ -22,7 +22,7 @@ class FullCameraViewController: UIViewController {
     
     @IBOutlet weak var screenView: UIView!
     @IBOutlet weak var recordStartButton: UIButton!
-    @IBOutlet weak var recordStopButton: UIButton!
+    @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,9 @@ class FullCameraViewController: UIViewController {
         }
         
         cameraView = CameraView(cameraUrl: url, view: screenView)
+        indicatorView.startAnimating()
         cameraView?.startPlay()
+        cameraView?.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,7 +44,9 @@ class FullCameraViewController: UIViewController {
             return
         }
         
-        if isPlaying {
+        if isPlaying == false {
+            indicatorView.isHidden = false
+            indicatorView.startAnimating()
             cameraView?.startPlay()
         }
     }
@@ -59,7 +63,7 @@ class FullCameraViewController: UIViewController {
             print("start Recording")
             sender.removeTarget(self, action: #selector(startRecordScreen(_:)), for: .touchUpInside)
             sender.addTarget(self, action: #selector(stopRecordScreen(_:)), for: .touchUpInside)
-            sender.setTitle("Stop", for: .normal)
+            sender.setImage(UIImage(named: "ic_record_stop")!, for: .normal)
         }
     }
     
@@ -81,16 +85,16 @@ class FullCameraViewController: UIViewController {
         let recorder = RPScreenRecorder.shared()
         
         recorder.stopRecording() { (preview, error) in
-            self.cameraView?.stopPlay()
+            //self.cameraView?.stopPlay()
             
             sender.removeTarget(self, action: #selector(self.stopRecordScreen(_:)), for: .touchUpInside)
             sender.addTarget(self, action: #selector(self.startRecordScreen(_:)), for: .touchUpInside)
-            sender.setTitle("Record", for: .normal)
+            sender.setImage(UIImage(named: "ic_record_start")!, for: .normal)
             
             if let unwrappedPreview = preview {
                 unwrappedPreview.previewControllerDelegate = self
                 self.present(unwrappedPreview, animated: true) { () in
-                    self.cameraView?.startPlay()
+                    //self.cameraView?.startPlay()
                 }
             }
         }
@@ -106,5 +110,16 @@ class FullCameraViewController: UIViewController {
 extension FullCameraViewController: RPPreviewViewControllerDelegate {
     func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
         dismiss(animated: true)
+    }
+}
+
+extension FullCameraViewController: CameraViewDelegate {
+    func cameraView(didTapFullScreenMode cameraView: CameraView) {
+        return
+    }
+    
+    func cameraView(didFinishLoading cameraView: CameraView) {
+        self.indicatorView.stopAnimating()
+        self.indicatorView.isHidden = true        
     }
 }

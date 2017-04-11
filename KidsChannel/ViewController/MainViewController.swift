@@ -14,6 +14,28 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        if AppConfigure.sharedInstance.isLoginUser == false {
+            let userDefaults = AppConfigure.sharedInstance.userDefaults
+            guard let id = userDefaults.string(forKey: "UserId"),
+                let pw = userDefaults.string(forKey: "UserPassword") else {
+                    return
+            }
+            
+            self.showLoadingView()
+            NetworkManager.requestLogin(fromUserId: id, password: pw) { (kindergardenName, serverMessage) in
+                self.dismissLoadingView()
+                if kindergardenName.isEmpty {
+                    userDefaults.set("", forKey: "UserId")
+                    userDefaults.set("", forKey: "UserPassword")
+                    return
+                }
+                
+                AppConfigure.sharedInstance.isLoginUser = true
+                AppConfigure.sharedInstance.kindergartenName = kindergardenName
+                userDefaults.set(id, forKey: "UserId")
+                userDefaults.set(pw, forKey: "UserPassword")
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
