@@ -46,6 +46,9 @@ class AppConfigure: NSObject {
     var kindergartenName = ""
     weak var leftMenuDelegate: LeftMenuProtocol?
     
+    var cameras = [Camera]()
+    var cameraList = [CameraListModel]()
+    
     override init() {
         super.init()
         
@@ -66,6 +69,32 @@ class AppConfigure: NSObject {
             appSkin = firstSkin()
         case .second:
             appSkin = firstSkin()
+        }
+    }
+    
+    func searchCameraList(_ completion: ((Void) -> Void)?) {
+        CameraManager.searchForCameraList() { (cameraList) in
+            /*for camera in cameraList {
+                let cameraModel = CameraListModel(camera: camera, streamUrl: <#URL#>)
+                self.cameraList.append(cameraModel)
+            }*/
+            
+            completion?()
+            
+            /*let slice = self.cameraAllList.slice(from: self.searchCount)
+            CameraManager.getStreamForPlay(cameraList: slice) { (streamList) in
+                self.searchCount.start = streamList.count-1
+                for stream in streamList {
+                    let camera = CameraListModel(camera: stream.camera, streamUrl: stream.url)
+                    self.cameraList.append(camera)
+                    
+                    collectionView?.performBatchUpdates({ () -> Void in
+                        self.collectionView?.insertItems(at: indexPath)
+                    }, completion: { (finished) -> Void in
+                        handler()
+                    })
+                }
+            }*/
         }
     }
 }

@@ -4,6 +4,7 @@ PODS:
   - MobileVLCKit (2.2.2)
   - ReachabilitySwift (3)
   - SlideMenuControllerSwift (3.0.1)
+  - UIScrollView-InfiniteScroll (1.0.1)
 
 DEPENDENCIES:
   - CryptoSwift
@@ -11,6 +12,7 @@ DEPENDENCIES:
   - MobileVLCKit
   - ReachabilitySwift (~> 3)
   - SlideMenuControllerSwift
+  - UIScrollView-InfiniteScroll (~> 1.0.0)
 
 SPEC CHECKSUMS:
   CryptoSwift: f21ea03ed3a94e79d241648ce26652cd4810508a
@@ -18,7 +20,8 @@ SPEC CHECKSUMS:
   MobileVLCKit: 75c2c36b0e3478c3f18cac3a2e7fa127cda0ff92
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   SlideMenuControllerSwift: 9a163b16d54afab734add42858cba7ef7c307755
+  UIScrollView-InfiniteScroll: a90df4ba4a7ca1926128ade34a850ddbdf74c564
 
-PODFILE CHECKSUM: 8795c6e8dfafdffa710a72f0c92c48dd9df19cad
+PODFILE CHECKSUM: 9678b11904f1ce52daeaf0fd153ae8466c86860d
 
 COCOAPODS: 1.1.1

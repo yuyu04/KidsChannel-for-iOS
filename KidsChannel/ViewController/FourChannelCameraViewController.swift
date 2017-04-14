@@ -11,7 +11,9 @@ import UIKit
 class FourChannelCameraViewController: UIViewController {
 
     var pageController: UIPageViewController?
-    var pageContent = [[(camera: Camera, url: URL)]]()
+    var cameras = [Camera]()
+    var cameraList = [CameraListModel]()
+    var pageContent = [[CameraListModel]]()
     var listSectionCount = 4
     
     var testViewController: UIViewController!
@@ -25,23 +27,33 @@ class FourChannelCameraViewController: UIViewController {
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
         
-        if AppConfigure.sharedInstance.isLoginUser, pageContent.count < 1 {
+        self.cameras = AppConfigure.sharedInstance.cameras
+        self.cameraList = AppConfigure.sharedInstance.cameraList
+        
+        if self.cameras.count > 0 && self.cameras.count == self.cameraList.count {
+            return
+        }
+        
+        if AppConfigure.sharedInstance.isLoginUser {
             self.searchCameraStreamUrl()
         }
     }
     
-    func searchCameraStreamUrl() {
-        self.showLoadingView()
-        CameraManager.searchForCameraList() { (cameraList) in
-            CameraManager.getStreamForPlay(cameraList: cameraList) { (streamList) in
-                var list = [(camera: Camera, url: URL)]()
+    func streamForUrl(cameras: [Camera]) {
+        var list = [CameraListModel]()
+        if self.cameraList.count != self.cameras.count {
+            CameraManager.getStreamForPlay(cameraList: cameras) { (streamList) in
                 for stream in streamList {
-                    list.append(stream)
+                    let camera = CameraListModel(camera: stream.camera, streamUrl: stream.url)
+                    list.append(camera)
                     if list.count >= self.listSectionCount {
                         self.pageContent.append(list)
                         list.removeAll()
                     }
                 }
+                
+                self.cameraList.append(contentsOf: list)
+                AppConfigure.sharedInstance.cameraList = self.cameraList
                 
                 if list.count > 0 {
                     self.pageContent.append(list)
@@ -50,6 +62,35 @@ class FourChannelCameraViewController: UIViewController {
                 self.settingViewControllers()
                 self.dismissLoadingView()
             }
+        } else {
+            for stream in self.cameraList {
+                let camera = CameraListModel(camera: stream.camera, streamUrl: stream.streamUrl)
+                list.append(camera)
+                if list.count >= self.listSectionCount {
+                    self.pageContent.append(list)
+                    list.removeAll()
+                }
+            }
+            
+            if list.count > 0 {
+                self.pageContent.append(list)
+                list.removeAll()
+            }
+            self.settingViewControllers()
+            self.dismissLoadingView()
+        }
+    }
+    
+    func searchCameraStreamUrl() {
+        self.showLoadingView()
+        if self.cameras.count < 1 {
+            CameraManager.searchForCameraList() { (cameraList) in
+                self.cameras = cameraList
+                AppConfigure.sharedInstance.cameras = cameraList
+                self.streamForUrl(cameras: cameraList)
+            }
+        } else {
+            self.streamForUrl(cameras: self.cameras)
         }
     }
     

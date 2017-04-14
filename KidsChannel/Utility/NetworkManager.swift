@@ -46,6 +46,32 @@ class NetworkManager: NSObject {
         return jsonDictionary
     }
     
+    static func requestImage(url: String, completion: @escaping(_ image: UIImage?) -> Void) {
+        var request = URLRequest(url: URL(string: url)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10.0)
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let data = data, error == nil else {
+                print("Failed to request data from server. serviceManager = \(url), error = \(error)")
+                completion(nil)
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+                completion(nil)
+                return
+            }
+            
+            guard let responseImage = UIImage(data: data) else {
+                completion(nil)
+                return
+            }
+        
+            
+            completion(responseImage)
+            }.resume()
+    }
+    
     static func requestData(url: String, parameter: String, method: String, completion: @escaping (_ responseJson: [String: Any]?) -> Void) {
         var request = URLRequest(url: URL(string: url)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10.0)
         request.httpMethod = method
@@ -210,11 +236,12 @@ class NetworkManager: NSObject {
                     let cameraPort = json["camera_port"] as! String?,
                     let cameraId = json["camera_id"] as! String?,
                     let cameraPassword = json["camera_pw"] as! String?,
-                    let cameraNumber = json["camera_num"] as! String? else {
+                    let cameraNumber = json["camera_num"] as! String?,
+                    let cameraCaptureUrl = json["camera_capture_url"] as! String? else {
                         continue
                 }
                 
-                let camera = Camera(idx: cameraIdx, name: cameraName, ip: cameraIp, port: cameraPort, id: cameraId, password: cameraPassword, number: cameraNumber)
+                let camera = Camera(idx: cameraIdx, name: cameraName, ip: cameraIp, port: cameraPort, id: cameraId, password: cameraPassword, number: cameraNumber, cameraCaptureUrl: cameraCaptureUrl)
                 cameras.append(camera)
             }
             
@@ -222,53 +249,31 @@ class NetworkManager: NSObject {
         }
     }
     
-    static func requestViewWatch(userId: String, cameraIdx: String, viewStartTime: Date, viewEndTime: Date,
-                                completion: @escaping (_ message: String) -> Void) {
-        let viewStartTimeString = ""
-        let viewEndTimeString = ""
+    static func requestViewWatch(userId: String, cameraIdx: String, viewStartTime: Date, viewEndTime: Date) {
+        let viewStartTimeString = String(Int64(viewStartTime.timeIntervalSince1970*1000))
+        let viewEndTimeString = String(Int64(viewEndTime.timeIntervalSince1970*1000))
         let paramterString = self.createRequestParameter(parameter: ["user_id":userId, "camera_idx":cameraIdx, "view_start":viewStartTimeString, "view_end":viewEndTimeString, "view_type":"0"])
         self.requestData(url: cameraWatchUrlPath, parameter: paramterString, method: "POST") { (responseJson) in
             if responseJson == nil {
-                completion("서버로부터 응답을 받을 수 없습니다")
+                print("failed post record data. userId=\(userId), cameraIdx=\(cameraIdx), recordStartTime=\(viewStartTimeString), recordEndTime=\(viewEndTimeString)")
                 return
             }
             
-            guard let value: Bool = responseJson?["error"] as! Bool? else {
-                completion("")
-                return
-            }
-            
-            if value {
-                completion("성공적으로 정보를 서버로 보냈습니다")
-                return
-            }
-            
-            completion("")
+            print("post record data. responseData=\(String(describing: responseJson))")
         }
     }
     
-    static func requestViewRecord(userId: String, cameraIdx: String, recordStartTime: Date, recordEndTime: Date,
-                                 completion: @escaping (_ message: String) -> Void) {
-        let recordStartTimeString = ""
-        let recordEndTimeString = ""
+    static func requestViewRecord(userId: String, cameraIdx: String, recordStartTime: Date, recordEndTime: Date) {
+        let recordStartTimeString = String(Int64(recordStartTime.timeIntervalSince1970*1000))
+        let recordEndTimeString = String(Int64(recordEndTime.timeIntervalSince1970*1000))
         let paramterString = self.createRequestParameter(parameter: ["user_id":userId, "camera_idx":cameraIdx, "view_start":recordStartTimeString, "view_end":recordEndTimeString, "view_type":"1"])
         self.requestData(url: cameraRecordUrlPath, parameter: paramterString, method: "POST") { (responseJson) in
             if responseJson == nil {
-                completion("서버로부터 응답을 받을 수 없습니다")
+                print("failed post record data. userId=\(userId), cameraIdx=\(cameraIdx), recordStartTime=\(recordStartTimeString), recordEndTime=\(recordEndTimeString)")
                 return
             }
             
-            guard let value: Bool = responseJson?["error"] as! Bool? else {
-                completion("")
-                return
-            }
-            
-            if value {
-                completion("성공적으로 정보를 서버로 보냈습니다")
-                return
-            }
-            
-            completion("")
+            print("post record data. responseData=\(String(describing: responseJson))")
         }
     }
 }

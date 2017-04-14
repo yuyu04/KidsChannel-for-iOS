@@ -24,7 +24,7 @@ protocol RightMenuProtocol : class {
 class CameraMenuViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    var menus = ["", "4ch 카메라 뷰어", "8ch 카메라 뷰어", "18ch 카메라 뷰어", "갤러리 뷰어"]
+    var menus = ["", "4ch 카메라 뷰어", "8ch 카메라 뷰어", "리스트 카메라 뷰어", "갤러리 뷰어"]
     var mainViewController: UIViewController!
     var fourChViewController: UIViewController!
     var eightChViewController: UIViewController!
@@ -39,8 +39,8 @@ class CameraMenuViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        self.tableView.separatorColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
-        //self.tableView.backgroundColor = UIColor.clear
+        self.tableView.separatorColor = AppConfigure.sharedInstance.appSkin.tableSeparatorColor()
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let fourChViewController = storyboard.instantiateViewController(withIdentifier: "FourChannelCameraViewController") as! FourChannelCameraViewController
         self.fourChViewController = UINavigationController(rootViewController: fourChViewController)

@@ -17,7 +17,7 @@ class FourChannelContentViewController: UIViewController {
     @IBOutlet var collectionOfIndicatorView: [UIActivityIndicatorView]!
     
     var pageIndex: Int!
-    var camerasList: [(camera:Camera, url:URL)]?
+    var camerasList: [CameraListModel]?
     var cameraInfo: [Camera]?
     var cameraView = [CameraView]()
     
@@ -30,7 +30,7 @@ class FourChannelContentViewController: UIViewController {
         }
         
         for i in 0 ..< list.count  {
-            let cv = CameraView(cameraUrl: list[i].url, camera: list[i].camera, view: collectionOfViews[i])
+            let cv = CameraView(cameraUrl: list[i].streamUrl, camera: list[i].camera, view: collectionOfViews[i])
             
             cameraView.append(cv)
             cameraView[i].startPlay()
@@ -62,7 +62,7 @@ class FourChannelContentViewController: UIViewController {
     }
     
     func setupConstraint() {
-        let constraint = (self.view.frame.size.height-(self.view.frame.size.width-25))/2
+        let constraint = (self.view.frame.size.height-(self.view.frame.size.width+50))/2
         topConstraint.constant = constraint
         bottomConstraint.constant = constraint
     }

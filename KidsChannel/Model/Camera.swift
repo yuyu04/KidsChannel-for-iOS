@@ -16,6 +16,7 @@ struct Camera {
     let id : String
     let password : String
     let number : String
+    let cameraCaptureUrl : String
 }
 
 extension Camera: Equatable {}

@@ -4,3 +4,4 @@
 
 #import "MobileVLCKit/MobileVLCKit.h"
 #import "iOSOnvif/iOSOnvif.h"
+#import <UIScrollView_InfiniteScroll/UIScrollView+InfiniteScroll.h>

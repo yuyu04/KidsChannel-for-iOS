@@ -11,6 +11,8 @@ import UIKit
 protocol AppSkin {
     func userMenuViewBackgrounColor() -> UIColor
     
+    func tableSeparatorColor() -> UIColor
+    
     func loginImage() -> UIImage
     func notLoginImage() -> UIImage
     
@@ -46,7 +48,11 @@ protocol AppSkin {
 class firstSkin: AppSkin {
     
     func userMenuViewBackgrounColor() -> UIColor {
-        return UIColor(hex: "262625")
+        return UIColor(hex: "241F19")
+    }
+    
+    func tableSeparatorColor() -> UIColor {
+        return UIColor(hex: "443C30")
     }
     
     
@@ -59,7 +65,7 @@ class firstSkin: AppSkin {
     }
 
     func navigationBarColor() -> UIColor {
-        return UIColor(hex: "262625")
+        return UIColor(hex: "241F19")
     }
     
     func navigationLeftButtonImage() -> UIImage {
@@ -87,7 +93,7 @@ class firstSkin: AppSkin {
     }
     
     func iconsSelectTintColor() -> UIColor {
-        return UIColor(hex: "262625")
+        return UIColor(hex: "241F19")
     }
     
     func userMenuViewsBackgroundImage() -> UIImage {
@@ -143,7 +149,7 @@ class firstSkin: AppSkin {
     }
     
     func galleryBackgroundColor() -> UIColor {
-        return UIColor(hex: "262625")
+        return UIColor(hex: "241F19")
     }
     
     func galleryFontColor() -> UIColor {

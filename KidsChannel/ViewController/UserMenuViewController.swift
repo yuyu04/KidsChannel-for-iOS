@@ -44,7 +44,7 @@ class UserMenuViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        self.tableView.separatorColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
+        self.tableView.separatorColor = AppConfigure.sharedInstance.appSkin.tableSeparatorColor()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
@@ -83,7 +83,7 @@ class UserMenuViewController: UIViewController {
             imageHeaderView.userId.text = userId
             imageHeaderView.profileImage.image = AppConfigure.sharedInstance.appSkin.loginImage()
         } else {
-            imageHeaderView.userId.text = ""
+            imageHeaderView.userId.text = "로컬사용자"
             imageHeaderView.profileImage.image = AppConfigure.sharedInstance.appSkin.notLoginImage()
         }
         

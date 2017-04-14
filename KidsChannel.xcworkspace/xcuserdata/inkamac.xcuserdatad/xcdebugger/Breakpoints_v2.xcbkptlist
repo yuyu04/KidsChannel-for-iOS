@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KidsChannelTests/KidsChannelNetworkTests.swift"
-            timestampString = "512873144.116243"
+            filePath = "KidsChannel/Utility/NetworkManager.swift"
+            timestampString = "513753954.280002"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
-            landmarkName = "testRequestCameraSearch()"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
+            landmarkName = "requestViewWatch(userId:cameraIdx:viewStartTime:viewEndTime:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,13 +57,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KidsChannelTests/KidsChannelNetworkTests.swift"
-            timestampString = "512879368.683553"
+            filePath = "KidsChannel/Utility/NetworkManager.swift"
+            timestampString = "513753954.280002"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "testRequestCameraSearch()"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
+            landmarkName = "requestViewWatch(userId:cameraIdx:viewStartTime:viewEndTime:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KidsChannel/ViewController/CameraListChannelViewController.swift"
+            timestampString = "513854595.735636"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -68,4 +68,12 @@ class KidsChannelNetworkTests: XCTestCase {
             
         }
     }
+    
+    func testRequestViewWatch() {
+        let asyncExpection = expectation(description: "networkRunningFunction")
+        NetworkManager.requestViewWatch(userId: "tttt", cameraIdx: "56", viewStartTime: Date(), viewEndTime: Date())
+        waitForExpectations(timeout: 10) { error in
+            
+        }
+    }
 }

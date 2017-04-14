@@ -9,6 +9,7 @@ target 'KidsChannel' do
     pod 'ReachabilitySwift', '~> 3'
     pod 'CryptoSwift'
     pod 'IQKeyboardManagerSwift'
+    pod 'UIScrollView-InfiniteScroll', '~> 1.0.0'
 end
 
 target 'KidsChannelTests' do

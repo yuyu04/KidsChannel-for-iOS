@@ -21,6 +21,7 @@ class FullCameraViewController: UIViewController {
     var cameraView: CameraView?
     var delegate: FullCameraViewControllerDelegate?
     var recordStartTime: Date?
+    var viewStartTime: Date?
     
     @IBOutlet weak var screenView: UIView!
     @IBOutlet weak var recordStartButton: UIButton!
@@ -47,11 +48,19 @@ class FullCameraViewController: UIViewController {
             return
         }
         
+        viewStartTime = Date()
         if isPlaying == false {
             indicatorView.isHidden = false
             indicatorView.startAnimating()
             cameraView?.startPlay()
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        guard let userId = AppConfigure.sharedInstance.userDefaults.string(forKey: "UserId"),
+            let cameraIdx = self.camera?.idx,
+            let viewStartTime = self.viewStartTime else { return }
+        NetworkManager.requestViewWatch(userId: userId, cameraIdx: cameraIdx, viewStartTime: viewStartTime, viewEndTime: Date())
     }
 
     override func didReceiveMemoryWarning() {
@@ -107,9 +116,7 @@ class FullCameraViewController: UIViewController {
         guard let userId = AppConfigure.sharedInstance.userDefaults.string(forKey: "UserId"),
             let cameraIdx = self.camera?.idx,
             let recordStartTime = self.recordStartTime else { return }
-        NetworkManager.requestViewRecord(userId: userId, cameraIdx: cameraIdx, recordStartTime: recordStartTime, recordEndTime: Date()) { (message) in
-            
-        }
+        NetworkManager.requestViewRecord(userId: userId, cameraIdx: cameraIdx, recordStartTime: recordStartTime, recordEndTime: Date())
     }
     
     @IBAction func close(_ sender: Any) {

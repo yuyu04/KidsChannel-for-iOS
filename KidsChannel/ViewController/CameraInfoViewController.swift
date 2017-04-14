@@ -26,9 +26,11 @@ class CameraInfoViewController: UIViewController {
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
         
+        self.cameras = AppConfigure.sharedInstance.cameras
+        
         guard let userId = AppConfigure.sharedInstance.userDefaults.string(forKey: "UserId"),
             AppConfigure.sharedInstance.isLoginUser,
-            cameras.count == 0 else {
+            self.cameras.count == 0 else {
                 return
         }
         
@@ -41,6 +43,7 @@ class CameraInfoViewController: UIViewController {
             }
             
             self.cameras = cameraList
+            AppConfigure.sharedInstance.cameras = self.cameras
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
