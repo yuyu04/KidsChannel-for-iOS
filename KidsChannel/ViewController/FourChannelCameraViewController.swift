@@ -48,11 +48,11 @@ class FourChannelCameraViewController: UIViewController {
                     list.append(camera)
                     if list.count >= self.listSectionCount {
                         self.pageContent.append(list)
+                        self.cameraList.append(contentsOf: list)
                         list.removeAll()
                     }
                 }
                 
-                self.cameraList.append(contentsOf: list)
                 AppConfigure.sharedInstance.cameraList = self.cameraList
                 
                 if list.count > 0 {
