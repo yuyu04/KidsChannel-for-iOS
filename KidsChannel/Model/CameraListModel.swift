@@ -11,9 +11,9 @@ import UIKit
 
 class CameraListModel {
     let camera: Camera
-    var streamUrl: URL
+    var streamUrl: URL?
     
-    init(camera: Camera, streamUrl: URL) {
+    init(camera: Camera, streamUrl: URL?) {
         self.camera = camera
         self.streamUrl = streamUrl
         /*if let url = URL(string: camera.cameraCaptureUrl),

@@ -11,7 +11,7 @@ import UIKit
 extension UIViewController {
     
     func setNavigationBarItem() {
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 150, height: 20))
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 20))
         imageView.contentMode = .scaleAspectFit
         imageView.image = AppConfigure.sharedInstance.appSkin.navigationBarImage()
         self.navigationItem.titleView = imageView

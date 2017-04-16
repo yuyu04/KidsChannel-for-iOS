@@ -72,6 +72,7 @@
 		C1C0105F1E8B9B210031225C /* EightChannelCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C0105E1E8B9B200031225C /* EightChannelCameraViewController.swift */; };
 		C1C010611E8B9B2E0031225C /* CameraListChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C010601E8B9B2E0031225C /* CameraListChannelViewController.swift */; };
 		C1C010631E8B9B390031225C /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C010621E8B9B390031225C /* GalleryViewController.swift */; };
+		D520DC391EA367220043841C /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D520DC381EA367220043841C /* UIButton.swift */; };
 		D5E4E89E1E98B1E700D36EB4 /* PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B6941C1E961EE400AF50B6 /* PHAsset.swift */; };
 		D5E4E8A01E98B84C00D36EB4 /* GalleryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E4E89F1E98B84C00D36EB4 /* GalleryTableViewCell.swift */; };
 		D5E4E8A41E98BA8000D36EB4 /* GalleryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E4E8A31E98BA8000D36EB4 /* GalleryTableViewCell.xib */; };
@@ -173,6 +174,7 @@
 		C1C010621E8B9B390031225C /* GalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		CFAEF948EBBA10F08758954C /* Pods-KidsChannel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KidsChannel.release.xcconfig"; path = "Pods/Target Support Files/Pods-KidsChannel/Pods-KidsChannel.release.xcconfig"; sourceTree = "<group>"; };
 		D175568B5267E129AC9C9C3C /* Pods-KidsChannelUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KidsChannelUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KidsChannelUITests/Pods-KidsChannelUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		D520DC381EA367220043841C /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		D5E4E89F1E98B84C00D36EB4 /* GalleryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryTableViewCell.swift; sourceTree = "<group>"; };
 		D5E4E8A31E98BA8000D36EB4 /* GalleryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GalleryTableViewCell.xib; sourceTree = "<group>"; };
 		D5E4E8A51E98C49300D36EB4 /* TimeInterval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 				C1B1BEEC1E9DB76A00EFF166 /* Date.swift */,
 				C1B1BEF71E9EF87A00EFF166 /* Array.swift */,
 				C1B1BEFE1E9F14FB00EFF166 /* UILabel.swift */,
+				D520DC381EA367220043841C /* UIButton.swift */,
 			);
 			name = Extension;
 			path = KidsChannel/Extension;
@@ -733,6 +736,7 @@
 				C160F03F1E8A063200789D5E /* String.swift in Sources */,
 				C160F0401E8A063200789D5E /* UIApplication.swift in Sources */,
 				C160F0441E8A063200789D5E /* UITableViewExtension.swift in Sources */,
+				D520DC391EA367220043841C /* UIButton.swift in Sources */,
 				C1B1BEED1E9DB76A00EFF166 /* Date.swift in Sources */,
 				C160F0461E8A063200789D5E /* UIViewController.swift in Sources */,
 				C1B1BEFC1E9F009600EFF166 /* CameraCollectionViewCell.swift in Sources */,

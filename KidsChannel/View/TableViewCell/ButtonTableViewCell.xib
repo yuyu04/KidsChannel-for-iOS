@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,31 +15,29 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MPV-fS-KQO">
-                        <rect key="frame" x="49" y="12" width="243" height="20.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="48" y="12" width="254" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ssS-VY-lsO">
-                        <rect key="frame" x="10" y="10" width="24" height="24"/>
+                        <rect key="frame" x="18" y="11" width="20" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="24" id="6k7-Og-dZn"/>
-                            <constraint firstAttribute="height" constant="24" id="xKV-8i-2px"/>
+                            <constraint firstAttribute="height" constant="20" id="NMI-Pz-PaI"/>
+                            <constraint firstAttribute="width" constant="20" id="WdY-ja-ypI"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="MPV-fS-KQO" firstAttribute="leading" secondItem="ssS-VY-lsO" secondAttribute="trailing" constant="15" id="1do-fo-eZM"/>
-                    <constraint firstItem="ssS-VY-lsO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="5oY-YZ-eo1"/>
-                    <constraint firstItem="MPV-fS-KQO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="7WN-rK-qWe"/>
-                    <constraint firstItem="ssS-VY-lsO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="WPs-ha-l3v"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="MPV-fS-KQO" secondAttribute="bottom" constant="3" id="afT-Hf-aZG"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="MPV-fS-KQO" secondAttribute="trailing" constant="20" id="kxc-jc-uMF"/>
-                    <constraint firstItem="MPV-fS-KQO" firstAttribute="leading" secondItem="ssS-VY-lsO" secondAttribute="trailing" constant="15" id="tAU-h8-wyQ"/>
+                    <constraint firstItem="ssS-VY-lsO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="Jey-gR-IWx"/>
+                    <constraint firstItem="ssS-VY-lsO" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="L8H-FU-NpL"/>
+                    <constraint firstItem="MPV-fS-KQO" firstAttribute="leading" secondItem="ssS-VY-lsO" secondAttribute="trailing" constant="10" id="SvU-MJ-Dsa"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="MPV-fS-KQO" secondAttribute="trailing" constant="10" id="dLf-6C-MS5"/>
+                    <constraint firstItem="MPV-fS-KQO" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="jba-hz-s0I"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

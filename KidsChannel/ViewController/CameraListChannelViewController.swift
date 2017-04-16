@@ -12,17 +12,19 @@ class CameraListChannelViewController: UICollectionViewController {
     
     fileprivate let downloadQueue = DispatchQueue(label: "kidsChannel.downloadQueue", qos: DispatchQoS.background)
     
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     var isWaiting = false
     var cameraAllList = [Camera]()
     var cameraList = [CameraListModel]()
-    var searchCount: (start: Int, last: Int) = (start: 0, last: 8)
+    var searchCount: (start: Int, last: Int) = (start: 0, last: 20)
     var cellArray = [CameraCollectionViewCell]()
     fileprivate var cache = NSCache<NSURL, UIImage>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = AppConfigure.sharedInstance.appSkin.pageControllerViewBackgroundColor()
+        self.collectionView?.backgroundColor = AppConfigure.sharedInstance.appSkin.pageControllerViewBackgroundColor()
         
         let nib = UINib(nibName: CameraCollectionViewCell.identifier, bundle: nil)
         self.collectionView?.register(nib, forCellWithReuseIdentifier: CameraCollectionViewCell.identifier)
@@ -33,9 +35,21 @@ class CameraListChannelViewController: UICollectionViewController {
         
         // Set custom indicator margin
         collectionView?.infiniteScrollIndicatorMargin = 40
+        
+        collectionView?.setShouldShowInfiniteScrollHandler { _ -> Bool in
+            return self.searchCount.start < self.searchCount.last
+        }
 
         // load initial data
         collectionView?.beginInfiniteScroll(true)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let top = self.topLayoutGuide.length;
+        let bottom = self.bottomLayoutGuide.length;
+        let newInsets = UIEdgeInsetsMake(top, 0, bottom, 0);
+        self.collectionView?.contentInset = newInsets;
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,7 +63,7 @@ class CameraListChannelViewController: UICollectionViewController {
             return
         }
         
-        self.searchCount = (start: self.cameraList.count, last: self.cameraList.count + 8)
+        self.searchCount = (start: self.cameraList.count, last: self.cameraList.count + 20)
         
         // Add infinite scroll handler
         collectionView?.addInfiniteScroll { [weak self] (scrollView) -> Void in
@@ -87,7 +101,11 @@ class CameraListChannelViewController: UICollectionViewController {
             let (start, end) = (cameraCount, list.count + cameraCount)
             let indexPaths = (start..<end).map { return IndexPath(row: $0, section: 0) }
             
-            self.searchCount = (start: self.searchCount.last, last: self.searchCount.last+4)
+            self.searchCount = (start: self.searchCount.last, last: self.searchCount.last+20)
+            
+            if self.collectionView?.numberOfItems(inSection: 0) != cameraCount {
+                return
+            }
             
             self.cameraList.append(contentsOf: list)
             AppConfigure.sharedInstance.cameraList = self.cameraList
@@ -116,26 +134,8 @@ class CameraListChannelViewController: UICollectionViewController {
         }
     }
     
-    /*func loadMoreData() {
-        self.searchCount.last = self.searchCount.start + 2
-        let slice = self.cameraAllList.slice(from: self.searchCount)
-        if slice.count == 0 {
-            self.isWaiting = false
-            return
-        }
-        
-        CameraManager.getStreamForPlay(cameraList: slice) { (streamList) in
-            self.searchCount.start = streamList.count-1
-            for stream in streamList {
-                let camera = CameraListModel(camera: stream.camera, streamUrl: stream.url)
-                self.cameraList.append(camera)
-            }
-            self.isWaiting = false
-        }
-    }*/
     
     // MARK: - Private
-    
     fileprivate func downloadPhoto(_ url: URL, completion: @escaping (_ url: URL, _ image: UIImage) -> Void) {
         downloadQueue.async(execute: { () -> Void in
             if let image = self.cache.object(forKey: url as NSURL) {
@@ -170,7 +170,7 @@ extension CameraListChannelViewController: UICollectionViewDelegateFlowLayout {
         var itemWidth = collectionWidth / 2 - 1;
         
         if(UI_USER_INTERFACE_IDIOM() == .pad) {
-            itemWidth = collectionWidth / 4 - 1;
+            itemWidth = collectionWidth / 3 - 1;
         }
         
         return CGSize(width: itemWidth, height: itemWidth);
@@ -188,7 +188,14 @@ extension CameraListChannelViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - UICollectionViewDelegate
 extension CameraListChannelViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let fullCameraViewController = storyboard.instantiateViewController(withIdentifier: "FullCameraViewController") as! FullCameraViewController
+        fullCameraViewController.camera = cameraAllList[indexPath.row]
+        fullCameraViewController.delegate = self
+        appDelegate.shouldRotate = true
+        self.present(fullCameraViewController, animated: true) { () in
+            
+        }
     }
 }
 
@@ -220,5 +227,14 @@ extension CameraListChannelViewController {
         }
         
         return cell
+    }
+}
+
+extension CameraListChannelViewController: FullCameraViewControllerDelegate{
+    func fullCameraViewControllerDidFinish(_ fullCameraViewController: FullCameraViewController) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.shouldRotate = false
+        dismiss(animated: false) { () in
+        }
     }
 }

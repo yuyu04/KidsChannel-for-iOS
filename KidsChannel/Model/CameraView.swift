@@ -15,7 +15,7 @@ protocol CameraViewDelegate {
 
 class CameraView: NSObject {
     var camera: Camera!
-    var cameraUrlPath: URL!
+    var cameraUrlPath: URL?
     var movieView: UIView!
     var mediaPlayer: VLCMediaPlayer? = VLCMediaPlayer(options: ["--avi-index=2"])
     var container: UIView?
@@ -25,11 +25,14 @@ class CameraView: NSObject {
     var tag: Int = 0
     var loadingCount: Int = 0
     
-    init(cameraUrl: URL, camera: Camera, view: UIView) {
+    var configCameraList = AppConfigure.sharedInstance.cameraList
+    
+    let queue = DispatchQueue(label: "com.kidschannel.queue", qos: .userInteractive, attributes: .concurrent)
+    
+    init(camera: Camera, view: UIView) {
         super.init()
         
         isLoadingComplete = false
-        self.cameraUrlPath = cameraUrl
         self.camera = camera
         self.movieView = view
         
@@ -37,14 +40,59 @@ class CameraView: NSObject {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(CameraView.movieViewTapped(_:)))
         self.movieView.addGestureRecognizer(gesture)
         
+        if cameraUrlPath == nil {
+            self.setStreamUrl()
+        }
+        
         //self.movieView.frame = view.bounds
         //view.addSubview(self.movieView)
+    }
+    
+    func setStreamUrl() {
+        let index = configCameraList.index(where: {
+            $0.camera == camera
+        })
         
-        let media = VLCMedia(url: self.cameraUrlPath)
+        if index == nil || configCameraList[index!].streamUrl == nil {
+            self.getStreamUrl() { (url) in
+                let model = CameraListModel(camera: self.camera, streamUrl: url)
+                self.configCameraList.append(model)
+                self.setVLCPlayer(url: url)
+            }
+        } else {
+            self.setVLCPlayer(url: configCameraList[index!].streamUrl!)
+        }
+    }
+    
+    func getStreamUrl(completion: @escaping (_ url: URL) -> Void) {
+        guard let userId = AppConfigure.sharedInstance.userDefaults.string(forKey: "UserId"),
+            let password = AppConfigure.sharedInstance.userDefaults.string(forKey: "UserPassword") else {
+                print("userId and password not found")
+                return
+        }
+        
+        queue.async {
+            let cameraPath = "http://" + self.camera.ip + ":" + self.camera.port
+            let onvif = iOSOnvif(cameraPath: cameraPath, userId: userId, password: password)
+            
+            self.cameraUrlPath = onvif?.getStreamUrl()
+            if self.cameraUrlPath == nil {
+                return
+            }
+            DispatchQueue.main.async {
+                completion(self.cameraUrlPath!)
+            }
+        }
+    }
+    
+    func setVLCPlayer(url: URL) {
+        let media = VLCMedia(url: url)
         mediaPlayer?.media = media
         
         mediaPlayer?.delegate = self
         mediaPlayer?.drawable = self.movieView
+        self.startPlay()
+        print("mediaPlayer?.videoAspectRatio = \(String(describing: mediaPlayer?.videoAspectRatio))")
     }
     
     func startPlay() {

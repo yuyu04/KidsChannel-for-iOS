@@ -17,7 +17,6 @@ class FullCameraViewController: UIViewController {
 
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var camera: Camera?
-    var cameraUrl: URL?
     var cameraView: CameraView?
     var delegate: FullCameraViewControllerDelegate?
     var recordStartTime: Date?
@@ -31,12 +30,11 @@ class FullCameraViewController: UIViewController {
         super.viewDidLoad()
         appDelegate.shouldRotate = true
         
-        guard let url = cameraUrl,
-            let camera = camera else {
+        guard let camera = camera else {
             return
         }
         
-        cameraView = CameraView(cameraUrl: url, camera: camera, view: screenView)
+        cameraView = CameraView(camera: camera, view: screenView)
         indicatorView.startAnimating()
         cameraView?.startPlay()
         cameraView?.delegate = self

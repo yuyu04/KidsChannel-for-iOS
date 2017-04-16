@@ -11,13 +11,24 @@ import SlideMenuControllerSwift
 
 class LoginViewController: UIViewController {
     
-    @IBOutlet weak var loginImage: UIImageView!
     @IBOutlet weak var userId: UITextField!
     @IBOutlet weak var password: UITextField!
     
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var searchPasswordButton: UIButton!
+    @IBOutlet weak var joinButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        //str.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 12), range: NSMakeRange(0, 10))
+        //str.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 17), range: NSMakeRange(11, 11))
+        joinButton.separateJoinBtn(string: "계정이 없으신가요?\n회원가입")
+        joinButton.titleLabel?.lineBreakMode = .byWordWrapping
+        joinButton.setShadow()
+        loginButton.setRoundAndShadow()
+        searchPasswordButton.setRoundAndShadow()
+        
         // Do any additional setup after loading the view.
         self.setBackgroundImage(isUserMenusView: true)
     }
@@ -53,15 +64,17 @@ class LoginViewController: UIViewController {
             AppConfigure.sharedInstance.kindergartenName = kindergardenName
             AppConfigure.sharedInstance.userDefaults.set(id, forKey: "UserId")
             AppConfigure.sharedInstance.userDefaults.set(pw, forKey: "UserPassword")
-            self.cancel(self)
+            self.cancel()
         }
     }
     
     @IBAction func showUserJoinView(_ sender: Any) {
         AppConfigure.sharedInstance.leftMenuDelegate?.changeViewController(LeftMenu.joinView)
     }
+    @IBAction func searchPassword(_ sender: Any) {
+    }
     
-    @IBAction func cancel(_ sender: Any) {
+    func cancel() {
         DispatchQueue.main.async {
             AppConfigure.sharedInstance.leftMenuDelegate?.changeViewController(LeftMenu.mainView)
         }

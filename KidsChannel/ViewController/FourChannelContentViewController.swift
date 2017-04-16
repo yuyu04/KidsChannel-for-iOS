@@ -17,48 +17,45 @@ class FourChannelContentViewController: UIViewController {
     @IBOutlet var collectionOfIndicatorView: [UIActivityIndicatorView]!
     
     var pageIndex: Int!
-    var camerasList: [CameraListModel]?
-    var cameraInfo: [Camera]?
+    var camerasList = [CameraListModel]()
+    var cameraInfo: [Camera]!
     var cameraView = [CameraView]()
+    
+    let configureCameraList = AppConfigure.sharedInstance.cameraList
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = AppConfigure.sharedInstance.appSkin.pageControllerViewBackgroundColor()
         
-        guard let list = camerasList else {
-            return
-        }
-        
-        for i in 0 ..< list.count  {
-            let cv = CameraView(cameraUrl: list[i].streamUrl, camera: list[i].camera, view: collectionOfViews[i])
-            
-            cameraView.append(cv)
-            cameraView[i].startPlay()
-            cameraView[i].tag = i
-            cameraView[i].delegate = self
-        }
-        
         self.setupConstraint()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-       
-        for i in 0 ..< self.cameraView.count  {
-            self.cameraView[i].startPlay()
-            self.collectionOfIndicatorView[i].isHidden = false
-            self.collectionOfIndicatorView[i].startAnimating()
+        if collectionOfViews.count == camerasList.count {
+            return
         }
+        
+        self.setCameraView()
     }
     
-    /*override func viewWillDisappear(_ animated: Bool) {
-        for camera in self.cameraView  {
-            camera.stopPlay()
+    func setCameraView() {
+        for i in 0 ..< collectionOfViews.count {
+            let cv = CameraView(camera: cameraInfo[i], view: self.collectionOfViews[i])
+            
+            let index = self.cameraView.index{$0 === cv}
+            if index == nil {
+                self.cameraView.append(cv)
+                self.cameraView[i].tag = i
+                self.cameraView[i].delegate = self
+                
+                self.collectionOfIndicatorView[i].isHidden = false
+                self.collectionOfIndicatorView[i].startAnimating()
+            } else {
+                if self.cameraView[i].cameraUrlPath == nil {
+                    self.cameraView[i].setStreamUrl()
+                }
+            }
         }
-    }*/
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func setupConstraint() {
@@ -76,7 +73,6 @@ extension FourChannelContentViewController: CameraViewDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let fullCameraViewController = storyboard.instantiateViewController(withIdentifier: "FullCameraViewController") as! FullCameraViewController
-        fullCameraViewController.cameraUrl = cameraView.cameraUrlPath
         fullCameraViewController.camera = cameraView.camera
         fullCameraViewController.delegate = self
         self.present(fullCameraViewController, animated: true) { () in

@@ -76,4 +76,19 @@ class KidsChannelNetworkTests: XCTestCase {
             
         }
     }
+    
+    func testSearchCameraList() {
+        let asyncExpection = expectation(description: "networkRunningFunction")
+        CameraManager.searchForCameraList() { (cameraList) in
+            CameraManager.getStreamForPlay(cameraList: cameraList) { (streamList) in
+                XCTAssert(cameraList.count == streamList.count)
+                asyncExpection.fulfill()
+            }
+            
+        }
+        
+        waitForExpectations(timeout: 30) { error in
+            
+        }
+    }
 }

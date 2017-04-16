@@ -29,7 +29,7 @@ class EightChannelCameraViewController: FourChannelCameraViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let dataViewController = storyboard.instantiateViewController(withIdentifier: "EightChannelContentViewController") as! EightChannelContentViewController
         dataViewController.pageIndex = index
-        dataViewController.camerasList = pageContent[index]
+        dataViewController.cameraInfo = pageContent[index]
         
         return UINavigationController(rootViewController: dataViewController)
     }
