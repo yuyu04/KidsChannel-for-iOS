@@ -35,7 +35,25 @@ class CameraManager: NSObject {
             }
         
         let queue = DispatchQueue(label: "com.kidschannel.queue", qos: .userInteractive, attributes: .concurrent)
-        let group = DispatchGroup()
+        queue.async {
+            var streams = [(camera: Camera, url: URL?)]()
+            for camera in cameraList {
+                let cameraPath = "http://" + camera.ip + ":" + camera.port
+                let onvif = iOSOnvif(cameraPath: cameraPath, userId: userId, password: password)
+                
+                var streamUrl = onvif?.getStreamUrl()
+                if streamUrl == nil {
+                    streamUrl = onvif?.getStreamUrl()
+                }
+                
+                streams.append((camera: camera, url: streamUrl))
+            }
+            
+            DispatchQueue.main.async {
+                completion(streams)
+            }
+        }
+        /*let group = DispatchGroup()
         
         var streams = [(camera: Camera, url: URL?)]()
         queue.async {
@@ -50,14 +68,13 @@ class CameraManager: NSObject {
                 if streamUrl == nil {
                     streamUrl = onvif?.getStreamUrl()
                 }
-                
-                streams.append((camera: camera, url: streamUrl))
                 group.leave()
+                streams.append((camera: camera, url: streamUrl))
             }
             
             group.notify(queue: DispatchQueue.main) { Void in
                 completion(streams)
             }
-        }
+        }*/
     }
 }

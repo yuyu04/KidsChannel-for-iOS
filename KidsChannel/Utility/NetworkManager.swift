@@ -237,11 +237,12 @@ class NetworkManager: NSObject {
                     let cameraId = json["camera_id"] as! String?,
                     let cameraPassword = json["camera_pw"] as! String?,
                     let cameraNumber = json["camera_num"] as! String?,
-                    let cameraCaptureUrl = json["camera_capture_url"] as! String? else {
+                    let cameraCaptureUrl = json["camera_capture_url"] as! String?,
+                    let updateTime = json["updated_time"] as! String? else {
                         continue
                 }
                 
-                let camera = Camera(idx: cameraIdx, name: cameraName, ip: cameraIp, port: cameraPort, id: cameraId, password: cameraPassword, number: cameraNumber, cameraCaptureUrl: cameraCaptureUrl)
+                let camera = Camera(idx: cameraIdx, name: cameraName, ip: cameraIp, port: cameraPort, id: cameraId, password: cameraPassword, number: cameraNumber, updateTime: updateTime, cameraCaptureUrl: cameraCaptureUrl)
                 cameras.append(camera)
             }
             

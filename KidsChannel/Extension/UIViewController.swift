@@ -11,13 +11,30 @@ import UIKit
 extension UIViewController {
     
     func setNavigationBarItem() {
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 20))
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 18))
         imageView.contentMode = .scaleAspectFit
         imageView.image = AppConfigure.sharedInstance.appSkin.navigationBarImage()
         self.navigationItem.titleView = imageView
         
-        self.addLeftBarButtonWithImage(AppConfigure.sharedInstance.appSkin.navigationLeftButtonImage())
-        self.addRightBarButtonWithImage(AppConfigure.sharedInstance.appSkin.navigationRightButtonImage())
+        //self.addLeftBarButtonWithImage(AppConfigure.sharedInstance.appSkin.navigationLeftButtonImage())
+        //self.addRightBarButtonWithImage(AppConfigure.sharedInstance.appSkin.navigationRightButtonImage())
+        
+        let leftButton = UIButton(type: .custom)
+        leftButton.setImage(AppConfigure.sharedInstance.appSkin.navigationLeftButtonImage().withRenderingMode(.alwaysTemplate), for: .normal)
+        leftButton.tintColor = UIColor(hex: "42392d")
+        leftButton.addTarget(self, action: #selector(self.toggleLeft), for: .touchUpInside)
+        leftButton.frame = CGRect(x: 0.0, y: 0.0, width: 25, height: 25)
+        let leftBarButton = UIBarButtonItem(customView: leftButton)
+        navigationItem.leftBarButtonItem = leftBarButton
+        
+        let rightButton = UIButton(type: .custom)
+        rightButton.setImage(AppConfigure.sharedInstance.appSkin.navigationRightButtonImage().withRenderingMode(.alwaysTemplate), for: .normal)
+        rightButton.addTarget(self, action: #selector(self.toggleRight), for: .touchUpInside)
+        rightButton.tintColor = UIColor(hex: "42392d")
+        rightButton.frame = CGRect(x: 0.0, y: 0.0, width: 25, height: 25)
+        let rightBarButton = UIBarButtonItem(customView: rightButton)
+        navigationItem.rightBarButtonItem = rightBarButton
+        
         self.slideMenuController()?.removeLeftGestures()
         self.slideMenuController()?.removeRightGestures()
         self.slideMenuController()?.addLeftGestures()

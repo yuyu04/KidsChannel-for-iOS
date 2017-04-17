@@ -31,8 +31,12 @@ class CameraListTableViewCell: BaseTableViewCell {
     
     override func awakeFromNib() {
         // Initialization code
-        self.contentView.layer.cornerRadius = 2.0
-        self.contentView.layer.masksToBounds = true
+        self.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 3.0)
+        self.layer.shadowOpacity = 1.0
+        self.layer.shadowRadius = 0.0
+        self.layer.masksToBounds = true
+        self.layer.cornerRadius = 5
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

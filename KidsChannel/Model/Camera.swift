@@ -16,6 +16,7 @@ struct Camera {
     let id : String
     let password : String
     let number : String
+    let updateTime : String
     let cameraCaptureUrl : String
 }
 

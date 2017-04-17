@@ -10,6 +10,8 @@ import UIKit
 
 class CameraInfoViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var confirmButton: UIButton!
+    
     var cameras = [Camera]()
 
     override func viewDidLoad() {
@@ -20,6 +22,8 @@ class CameraInfoViewController: UIViewController {
         self.tableView.separatorColor = UIColor.clear
         self.tableView.tableFooterView = UIView()
         self.setBackgroundImage(isUserMenusView: true)
+        
+        confirmButton.setRoundAndShadow()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,10 +92,10 @@ extension CameraInfoViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 20
+        return 10
     }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView(frame:CGRect (x: 0, y: 0, width: tableView.frame.size.width, height: 20) ) as UIView
+        let view = UIView(frame:CGRect (x: 0, y: 0, width: tableView.frame.size.width, height: 10) ) as UIView
         view.backgroundColor = UIColor.clear
         return view
     }

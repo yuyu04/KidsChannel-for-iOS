@@ -87,6 +87,9 @@ class CameraView: NSObject {
     
     func setVLCPlayer(url: URL) {
         let media = VLCMedia(url: url)
+        let aspactRatio = "1:" + String(describing: self.movieView.bounds.height / self.movieView.bounds.width)
+        let ratio = aspactRatio.cString(using: .utf8)
+        mediaPlayer?.videoAspectRatio = UnsafeMutablePointer<Int8>(mutating: ratio)
         mediaPlayer?.media = media
         
         mediaPlayer?.delegate = self

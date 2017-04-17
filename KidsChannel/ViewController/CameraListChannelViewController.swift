@@ -46,15 +46,24 @@ class CameraListChannelViewController: UICollectionViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        guard let collectionViewInset = self.collectionView?.contentInset else {
+            return
+        }
+    
         let top = self.topLayoutGuide.length;
-        let bottom = self.bottomLayoutGuide.length;
-        let newInsets = UIEdgeInsetsMake(top, 0, bottom, 0);
+        //let bottom = self.bottomLayoutGuide.length;
+        let newInsets = UIEdgeInsetsMake(top+10, 10, collectionViewInset.bottom, 10);
         self.collectionView?.contentInset = newInsets;
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
+        
+        if AppConfigure.sharedInstance.isLoginUser == false {
+            return
+        }
         
         self.cameraAllList = AppConfigure.sharedInstance.cameras
         self.cameraList = AppConfigure.sharedInstance.cameraList
@@ -67,10 +76,8 @@ class CameraListChannelViewController: UICollectionViewController {
         
         // Add infinite scroll handler
         collectionView?.addInfiniteScroll { [weak self] (scrollView) -> Void in
-            if AppConfigure.sharedInstance.isLoginUser {
-                self?.searchCameraStream() {
-                    scrollView.finishInfiniteScroll()
-                }
+            self?.searchCameraStream() {
+                scrollView.finishInfiniteScroll()
             }
         }
     }
@@ -101,7 +108,8 @@ class CameraListChannelViewController: UICollectionViewController {
             let (start, end) = (cameraCount, list.count + cameraCount)
             let indexPaths = (start..<end).map { return IndexPath(row: $0, section: 0) }
             
-            self.searchCount = (start: self.searchCount.last, last: self.searchCount.last+20)
+            let lastCount = (self.searchCount.last+20) > cameras.count ? cameras.count:self.searchCount.last+20
+            self.searchCount = (start: self.searchCount.last, last: lastCount)
             
             if self.collectionView?.numberOfItems(inSection: 0) != cameraCount {
                 return
@@ -167,21 +175,21 @@ class CameraListChannelViewController: UICollectionViewController {
 extension CameraListChannelViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let collectionWidth = collectionView.bounds.width;
-        var itemWidth = collectionWidth / 2 - 1;
+        var itemWidth = collectionWidth / 2 - 15;
         
         if(UI_USER_INTERFACE_IDIOM() == .pad) {
-            itemWidth = collectionWidth / 3 - 1;
+            itemWidth = collectionWidth / 3 - 15;
         }
         
-        return CGSize(width: itemWidth, height: itemWidth);
+        return CGSize(width: itemWidth, height: itemWidth-10);
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
+        return 5
     }
 }
 
@@ -217,7 +225,7 @@ extension CameraListChannelViewController {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CameraCollectionViewCell.identifier, for: indexPath) as! CameraCollectionViewCell
         cell.backgroundColor = UIColor.clear
-        let data = CameraCollectionViewCellData(image: image, cameraName: camera.camera.name, time: "", cameraIdx: camera.camera.idx)
+        let data = CameraCollectionViewCellData(image: image, cameraName: camera.camera.name, time: camera.camera.updateTime, cameraIdx: camera.camera.idx)
         cell.setData(data)
         
         if image == nil && imageUrl != nil {

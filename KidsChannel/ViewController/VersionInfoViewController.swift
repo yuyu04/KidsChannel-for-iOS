@@ -13,6 +13,8 @@ class VersionInfoViewController: UIViewController {
     @IBOutlet weak var versionInfo: UILabel!
     @IBOutlet weak var environment: UILabel!
     
+    @IBOutlet weak var confirmButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,6 +28,8 @@ class VersionInfoViewController: UIViewController {
         environment.text = "지원환경 iOS 9.0 이상"
         
         self.setBackgroundImage(isUserMenusView: true)
+        
+        confirmButton.setRoundAndShadow()
     }
     
     override func viewWillAppear(_ animated: Bool) {

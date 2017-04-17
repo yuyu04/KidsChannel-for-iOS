@@ -28,10 +28,6 @@ class FourChannelCameraViewController: UIViewController {
         
         self.cameras = AppConfigure.sharedInstance.cameras
         
-        if self.cameras.count > 0 {
-            return
-        }
-        
         if AppConfigure.sharedInstance.isLoginUser {
             self.searchCameraStreamUrl()
         }
@@ -53,23 +49,26 @@ class FourChannelCameraViewController: UIViewController {
             }
         } else {
             self.streamForUrl(cameras: self.cameras)
+            self.settingViewControllers()
         }
     }
     
     func settingViewControllers() {
-        self.pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-        self.pageController?.view.backgroundColor = AppConfigure.sharedInstance.appSkin.pageControllerViewBackgroundColor()
-        self.pageController?.delegate = self
-        self.pageController?.dataSource = self
-        
-        guard let startingViewController: UIViewController = self.viewControllerAtIndex(index: 0) else {
-            return
+        if pageController == nil {
+            self.pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+            self.pageController?.view.backgroundColor = AppConfigure.sharedInstance.appSkin.pageControllerViewBackgroundColor()
+            self.pageController?.delegate = self
+            self.pageController?.dataSource = self
+            
+            guard let startingViewController: UIViewController = self.viewControllerAtIndex(index: 0) else {
+                return
+            }
+            
+            let viewControllers = [startingViewController]
+            self.pageController!.setViewControllers(viewControllers as [UIViewController], direction: .forward, animated: false, completion: nil)
+            self.addChildViewController(self.pageController!)
+            self.view.addSubview(self.pageController!.view)
         }
-        
-        let viewControllers = [startingViewController]
-        self.pageController!.setViewControllers(viewControllers as [UIViewController], direction: .forward, animated: false, completion: nil)
-        self.addChildViewController(self.pageController!)
-        self.view.addSubview(self.pageController!.view)
         
         //let pageViewRect = self.view.bounds
         self.pageController!.view.frame = CGRect(x: 0, y: 20, width: self.view.frame.size.width, height: self.view.frame.size.height-20)

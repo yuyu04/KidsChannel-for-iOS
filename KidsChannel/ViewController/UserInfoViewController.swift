@@ -14,10 +14,28 @@ class UserInfoViewController: UIViewController {
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var passwordConfirm: UITextField!
     @IBOutlet weak var kindergartenName: UITextField!
+    
+    @IBOutlet weak var idLabel: UILabel!
+    @IBOutlet weak var passwordLabel: UILabel!
+    @IBOutlet weak var passwordConfirmLabel: UILabel!
+    @IBOutlet weak var kindergartenNameLabel: UILabel!
+    
+    @IBOutlet weak var changeButton: UIButton!
+    @IBOutlet weak var logoutButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        idLabel.setRoundAndShadow()
+        passwordLabel.setRoundAndShadow()
+        passwordConfirmLabel.setRoundAndShadow()
+        kindergartenNameLabel.setRoundAndShadow()
+        
+        changeButton.setRoundAndShadow()
+        logoutButton.setRoundAndShadow()
+        cancelButton.setRoundAndShadow()
+        
         self.setBackgroundImage(isUserMenusView: true)
     }
     

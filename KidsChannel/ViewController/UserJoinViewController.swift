@@ -12,13 +12,17 @@ class UserJoinViewController: UIViewController {
 
     @IBOutlet weak var userId: UITextField!
     @IBOutlet weak var password: UITextField!
-    @IBOutlet weak var passwordConfirm: UITextField!
     @IBOutlet weak var kindergartenName: UITextField!
+    
+    @IBOutlet weak var joinButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        joinButton.setRoundAndShadow()
+        cancelButton.setRoundAndShadow()
+        
         self.setBackgroundImage(isUserMenusView: true)
     }
 
@@ -35,12 +39,6 @@ class UserJoinViewController: UIViewController {
         guard let password = self.password.text else {
             self.showAlertView(message: "비밀번호를 입력해 주세요")
             return
-        }
-        
-        guard let _ = self.passwordConfirm.text,
-            password == self.passwordConfirm.text else {
-                self.showAlertView(message: "비밀번호가 일치하지 않습니다")
-                return
         }
         
         guard let kindergartenName = self.kindergartenName.text else {

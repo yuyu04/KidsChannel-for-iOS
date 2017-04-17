@@ -11,6 +11,9 @@ import UIKit
 class SkinSelectionViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var changeButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    
     var selectionSkin: SkinNumber!
     
     override func viewDidLoad() {
@@ -22,6 +25,9 @@ class SkinSelectionViewController: UIViewController {
         self.tableView.tableFooterView = UIView()
         
         self.setBackgroundImage(isUserMenusView: true)
+        
+        changeButton.setRoundAndShadow()
+        cancelButton.setRoundAndShadow()
     }
     
     override func viewWillAppear(_ animated: Bool) {
