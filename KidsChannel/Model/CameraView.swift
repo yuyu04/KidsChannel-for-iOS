@@ -87,7 +87,11 @@ class CameraView: NSObject {
     
     func setVLCPlayer(url: URL) {
         let media = VLCMedia(url: url)
-        let aspactRatio = "1:" + String(describing: self.movieView.bounds.height / self.movieView.bounds.width)
+        
+        let gcdValue = gcd(Int(self.movieView.bounds.width), Int(self.movieView.bounds.height))
+        let width = String(describing: Int(self.movieView.bounds.width)/gcdValue)
+        let height = String(describing: Int(self.movieView.bounds.height)/gcdValue)
+        let aspactRatio = "\(width):\(height)"
         let ratio = aspactRatio.cString(using: .utf8)
         mediaPlayer?.videoAspectRatio = UnsafeMutablePointer<Int8>(mutating: ratio)
         mediaPlayer?.media = media
@@ -167,13 +171,28 @@ extension CameraView: VLCMediaPlayerDelegate {
     }
     
     func mediaPlayerTimeChanged(_ aNotification: Notification!) {
-        if loadingCount >= 4 {
+        if loadingCount == 2 {
             self.delegate?.cameraView(didFinishLoading: self)
-        } else {
+        } else if loadingCount < 3 {
             loadingCount += 1
         }
         
         isLoadingComplete = true
     }
     
+}
+
+extension CameraView {
+    // GCD of two numbers:
+    func gcd(_ num1: Int, _ num2: Int) -> Int {
+        if num2 == 0 {
+            return num1
+        }else {
+            return gcd(num2, num1 % num2)
+        }
+    }
+    
+    func lcm(_ m: Int, _ n: Int) -> Int {
+        return m*n / gcd(m, n)
+    }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -83,15 +83,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="skin_main_01" translatesAutoresizingMaskIntoConstraints="NO" id="D6Y-hb-tHh">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jtE-qB-yid">
+                                <rect key="frame" x="-0.5" y="-0.5" width="375" height="667"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="skin_main_01" translatesAutoresizingMaskIntoConstraints="NO" id="D6Y-hb-tHh">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="D6Y-hb-tHh" secondAttribute="bottom" id="LXo-da-wpn"/>
+                            <constraint firstItem="jtE-qB-yid" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="V5U-2k-mJz"/>
+                            <constraint firstItem="jtE-qB-yid" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dza-2x-8OQ"/>
                             <constraint firstAttribute="trailing" secondItem="D6Y-hb-tHh" secondAttribute="trailing" id="h1r-iB-x3T"/>
                             <constraint firstItem="D6Y-hb-tHh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="oNr-PR-IwQ"/>
+                            <constraint firstItem="jtE-qB-yid" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="qtl-nB-Xmr"/>
+                            <constraint firstItem="jtE-qB-yid" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="sov-8e-Rv7"/>
                             <constraint firstItem="D6Y-hb-tHh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="uAg-5N-syv"/>
                         </constraints>
                     </view>

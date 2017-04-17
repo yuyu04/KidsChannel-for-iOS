@@ -15,14 +15,22 @@ class CameraListChannelViewController: UICollectionViewController {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     var isWaiting = false
-    var cameraAllList = [Camera]()
-    var cameraList = [CameraListModel]()
+    var cameraList = [Camera]()
+    var item = [Camera]()
     var searchCount: (start: Int, last: Int) = (start: 0, last: 20)
     var cellArray = [CameraCollectionViewCell]()
+    var initializeViewCount: Int = 8
+    var moreListCount: Int = 2
+    
     fileprivate var cache = NSCache<NSURL, UIImage>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if(UI_USER_INTERFACE_IDIOM() == .pad) {
+            self.initializeViewCount = 15
+            self.moreListCount = 3
+        }
         
         self.collectionView?.backgroundColor = AppConfigure.sharedInstance.appSkin.pageControllerViewBackgroundColor()
         
@@ -67,14 +75,9 @@ class CameraListChannelViewController: UICollectionViewController {
         // load initial data
         collectionView?.beginInfiniteScroll(true)
         
-        self.cameraAllList = AppConfigure.sharedInstance.cameras
-        self.cameraList = AppConfigure.sharedInstance.cameraList
+        self.cameraList = AppConfigure.sharedInstance.cameras
         
-        if self.cameraAllList.count > 0 && self.cameraAllList.count == self.cameraList.count {
-            return
-        }
-        
-        self.searchCount = (start: self.cameraList.count, last: self.cameraList.count + 20)
+        self.searchCount = (start: 0, last: self.initializeViewCount)
         
         // Add infinite scroll handler
         collectionView?.addInfiniteScroll { [weak self] (scrollView) -> Void in
@@ -98,47 +101,42 @@ class CameraListChannelViewController: UICollectionViewController {
             return
         }
         
-        CameraManager.getStreamForPlay(cameraList: slice) { (streamList) in
-            var list = [CameraListModel]()
-            for stream in streamList {
-                let camera = CameraListModel(camera: stream.camera, streamUrl: stream.url)
-                list.append(camera)
-            }
-            
-            // create new index paths
-            let cameraCount = self.cameraList.count
-            let (start, end) = (cameraCount, list.count + cameraCount)
-            let indexPaths = (start..<end).map { return IndexPath(row: $0, section: 0) }
-            
-            let lastCount = (self.searchCount.last+20) > cameras.count ? cameras.count:self.searchCount.last+20
-            self.searchCount = (start: self.searchCount.last, last: lastCount)
-            
-            if self.collectionView?.numberOfItems(inSection: 0) != cameraCount {
-                return
-            }
-            
-            self.cameraList.append(contentsOf: list)
-            AppConfigure.sharedInstance.cameraList = self.cameraList
-            
-            self.collectionView?.performBatchUpdates({ () -> Void in
-                self.collectionView?.insertItems(at: indexPaths)
-            }, completion: { (finished) -> Void in
-                completion?()
-            })
+        // create new index paths
+        let cameraCount = item.count
+        let (start, end) = (cameraCount, slice.count + cameraCount)
+        let indexPaths = (start..<end).map { return IndexPath(row: $0, section: 0) }
+        
+        let lastCount = (self.searchCount.last+self.moreListCount) > cameras.count ? cameras.count:self.searchCount.last+self.moreListCount
+        self.searchCount = (start: self.searchCount.last, last: lastCount)
+        
+        if self.collectionView?.numberOfItems(inSection: 0) != cameraCount {
+            return
         }
+        
+        self.item.append(contentsOf: slice)
+        
+        self.collectionView?.performBatchUpdates({ () -> Void in
+            self.collectionView?.insertItems(at: indexPaths)
+        }, completion: { (finished) -> Void in
+            completion?()
+        })
+        
+        /*CameraManager.getStreamForPlay(cameraList: slice) { (streamList) in
+            
+        }*/
     }
     
     func searchCameraStream(_ handler: ((Void) -> Void)?) {
-        if self.cameraAllList.count < 1 {
+        if self.cameraList.count < 1 {
             CameraManager.searchForCameraList() { (cameraList) in
-                self.cameraAllList = cameraList
+                self.cameraList = cameraList
                 AppConfigure.sharedInstance.cameras = cameraList
                 self.streamForUrl(cameras: cameraList) { () in
                     handler?()
                 }
             }
         } else {
-            self.streamForUrl(cameras: self.cameraAllList) { () in
+            self.streamForUrl(cameras: self.cameraList) { () in
                 handler?()
             }
         }
@@ -200,7 +198,7 @@ extension CameraListChannelViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let fullCameraViewController = storyboard.instantiateViewController(withIdentifier: "FullCameraViewController") as! FullCameraViewController
-        fullCameraViewController.camera = cameraAllList[indexPath.row]
+        fullCameraViewController.camera = cameraList[indexPath.row]
         fullCameraViewController.delegate = self
         appDelegate.shouldRotate = true
         self.present(fullCameraViewController, animated: true) { () in
@@ -212,22 +210,21 @@ extension CameraListChannelViewController {
 // MARK: - UICollectionViewDataSource
 extension CameraListChannelViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cameraList.count
+        return item.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let camera = cameraList[indexPath.row]
-        let imageUrl: URL? = URL(string: camera.camera.cameraCaptureUrl)
+        let camera = item[indexPath.row]
+        let imageUrl: URL? = URL(string: camera.cameraCaptureUrl)
         var image: UIImage?
         
         if imageUrl != nil {
             image = cache.object(forKey: imageUrl! as NSURL)
         }
         
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CameraCollectionViewCell.identifier, for: indexPath) as! CameraCollectionViewCell
         cell.backgroundColor = UIColor.clear
-        let data = CameraCollectionViewCellData(image: image, cameraName: camera.camera.name, time: camera.camera.updateTime, cameraIdx: camera.camera.idx)
+        let data = CameraCollectionViewCellData(image: image, cameraName: camera.name, time: camera.updateTime, cameraIdx: camera.idx)
         cell.setData(data)
         
         if image == nil && imageUrl != nil {

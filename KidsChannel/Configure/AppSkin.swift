@@ -9,6 +9,9 @@
 import UIKit
 
 protocol AppSkin {
+    func mainBackgroundPatternColor() -> UIColor
+    func mainBackgroundImage() -> UIImage
+    
     func userMenuViewBackgrounColor() -> UIColor
     
     func tableSeparatorColor() -> UIColor
@@ -31,6 +34,9 @@ protocol AppSkin {
     func cameraInfoListIcon() -> UIImage
     func skinSelectIcon() -> UIImage
     func versionInfoIcon() -> UIImage
+    func userMenuButtonColor1() -> UIColor
+    func userMenuButtonColor2() -> UIColor
+    func userMenuButtonColor3() -> UIColor
     
     func fourCameraChannelIcon() -> UIImage
     func eightCameraChannelIcon() -> UIImage
@@ -46,6 +52,14 @@ protocol AppSkin {
 }
 
 class firstSkin: AppSkin {
+    
+    func mainBackgroundPatternColor() -> UIColor {
+        return UIColor(patternImage: UIImage(named: "skin_main_01")!)
+    }
+    
+    func mainBackgroundImage() -> UIImage {
+        return UIImage(named: "skin_main_01")!
+    }
     
     func userMenuViewBackgrounColor() -> UIColor {
         return UIColor(hex: "241F19")
@@ -65,7 +79,7 @@ class firstSkin: AppSkin {
     }
 
     func navigationBarColor() -> UIColor {
-        return UIColor(hex: "241F19")
+        return UIColor(hex: "171210")
     }
     
     func navigationLeftButtonImage() -> UIImage {
@@ -126,6 +140,18 @@ class firstSkin: AppSkin {
     
     func versionInfoIcon() -> UIImage {
         return UIImage(named: "ic_menu_04")!
+    }
+    
+    func userMenuButtonColor1() -> UIColor {
+        return UIColor(hex: "00C2C3")
+    }
+    
+    func userMenuButtonColor2() -> UIColor {
+        return UIColor(hex: "0993C5")
+    }
+    
+    func userMenuButtonColor3() -> UIColor {
+        return UIColor(hex: "535352")
     }
     
     func fourCameraChannelIcon() -> UIImage {

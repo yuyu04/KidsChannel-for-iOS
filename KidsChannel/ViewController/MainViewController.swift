@@ -11,9 +11,12 @@ import SlideMenuControllerSwift
 
 class MainViewController: UIViewController {
     
+    @IBOutlet weak var backgroundImage: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
         if AppConfigure.sharedInstance.isLoginUser == false {
             let userDefaults = AppConfigure.sharedInstance.userDefaults
             guard let id = userDefaults.string(forKey: "UserId"),
@@ -23,7 +26,6 @@ class MainViewController: UIViewController {
             
             self.showLoadingView()
             NetworkManager.requestLogin(fromUserId: id, password: pw) { (kindergardenName, serverMessage) in
-                self.dismissLoadingView()
                 if kindergardenName.isEmpty {
                     userDefaults.set("", forKey: "UserId")
                     userDefaults.set("", forKey: "UserPassword")
@@ -34,6 +36,16 @@ class MainViewController: UIViewController {
                 AppConfigure.sharedInstance.kindergartenName = kindergardenName
                 userDefaults.set(id, forKey: "UserId")
                 userDefaults.set(pw, forKey: "UserPassword")
+                
+                NetworkManager.requestCameraSearch(userId: id) { (cameras) in
+                    self.dismissLoadingView()
+                    
+                    guard let cameraList = cameras else {
+                        return
+                    }
+                    
+                    AppConfigure.sharedInstance.cameras = cameraList
+                }
             }
         }
     }

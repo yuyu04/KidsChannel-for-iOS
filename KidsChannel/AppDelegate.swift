@@ -30,7 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UINavigationBar.appearance().tintColor = AppConfigure.sharedInstance.appSkin.navigationIconColor()
         UINavigationBar.appearance().barTintColor = AppConfigure.sharedInstance.appSkin.navigationBarColor()
-
+        UINavigationBar.appearance().backgroundColor = AppConfigure.sharedInstance.appSkin.navigationBarColor()
+        
         leftViewController.mainViewController = nvc
         rightViewController.mainViewController = nvc
         
