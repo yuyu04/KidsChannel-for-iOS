@@ -55,6 +55,8 @@ class LoginViewController: UIViewController {
             if kindergardenName.isEmpty {
                 AppConfigure.sharedInstance.userDefaults.set("", forKey: "UserId")
                 AppConfigure.sharedInstance.userDefaults.set("", forKey: "UserPassword")
+                AppConfigure.sharedInstance.cameras.removeAll()
+                AppConfigure.sharedInstance.cameraList.removeAll()
                 self.showAlertView(message: serverMessage)
                 return
             }

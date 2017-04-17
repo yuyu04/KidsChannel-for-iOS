@@ -37,11 +37,10 @@ class CameraListChannelViewController: UICollectionViewController {
         collectionView?.infiniteScrollIndicatorMargin = 40
         
         collectionView?.setShouldShowInfiniteScrollHandler { _ -> Bool in
-            return self.searchCount.start < self.searchCount.last
+            return self.searchCount.start < self.searchCount.last || AppConfigure.sharedInstance.isLoginUser
         }
 
-        // load initial data
-        collectionView?.beginInfiniteScroll(true)
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -64,6 +63,9 @@ class CameraListChannelViewController: UICollectionViewController {
         if AppConfigure.sharedInstance.isLoginUser == false {
             return
         }
+        
+        // load initial data
+        collectionView?.beginInfiniteScroll(true)
         
         self.cameraAllList = AppConfigure.sharedInstance.cameras
         self.cameraList = AppConfigure.sharedInstance.cameraList
