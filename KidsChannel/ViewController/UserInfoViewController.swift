@@ -36,7 +36,7 @@ class UserInfoViewController: UIViewController {
         logoutButton.setRoundAndShadow()
         cancelButton.setRoundAndShadow()
         
-        self.setBackgroundImage(isUserMenusView: true)
+        self.setBackgroundPatternImage(isMainView: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {

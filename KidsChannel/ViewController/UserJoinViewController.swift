@@ -23,7 +23,8 @@ class UserJoinViewController: UIViewController {
         joinButton.setRoundAndShadow()
         cancelButton.setRoundAndShadow()
         
-        self.setBackgroundImage(isUserMenusView: true)
+        //self.setBackgroundImage(isUserMenusView: true)
+        self.setBackgroundPatternImage(isMainView: false)
     }
 
     override func didReceiveMemoryWarning() {

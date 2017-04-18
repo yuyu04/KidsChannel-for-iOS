@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AppSkin {
-    func mainBackgroundPatternColor() -> UIColor
+    func mainBackgroundPatternImage() -> UIImage
     func mainBackgroundImage() -> UIImage
     
     func userMenuViewBackgrounColor() -> UIColor
@@ -27,6 +27,7 @@ protocol AppSkin {
     
     func userMenuFontColor() -> UIColor
     func userMenuViewsBackgroundImage() -> UIImage
+    func userMenuViewsPatternImage() -> UIImage
     func iconsNormalTintColor() -> UIColor
     func iconsSelectTintColor() -> UIColor
     func userInfoIcon() -> UIImage
@@ -53,8 +54,8 @@ protocol AppSkin {
 
 class firstSkin: AppSkin {
     
-    func mainBackgroundPatternColor() -> UIColor {
-        return UIColor(patternImage: UIImage(named: "skin_main_01")!)
+    func mainBackgroundPatternImage() -> UIImage {
+        return UIImage(named: "skin_bg_01")!
     }
     
     func mainBackgroundImage() -> UIImage {
@@ -79,7 +80,7 @@ class firstSkin: AppSkin {
     }
 
     func navigationBarColor() -> UIColor {
-        return UIColor(hex: "171210")
+        return UIColor(hex: "241F19")
     }
     
     func navigationLeftButtonImage() -> UIImage {
@@ -112,6 +113,10 @@ class firstSkin: AppSkin {
     
     func userMenuViewsBackgroundImage() -> UIImage {
         return UIImage(named: "skin_fragment_01")!
+    }
+    
+    func userMenuViewsPatternImage() -> UIImage {
+        return UIImage(named: "skin_fragment_bg_01")!
     }
     
     func cameraMenuFontColor() -> UIColor {

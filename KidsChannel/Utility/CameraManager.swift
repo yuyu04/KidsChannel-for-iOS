@@ -38,10 +38,21 @@ class CameraManager: NSObject {
         queue.async {
             var streams = [(camera: Camera, url: URL?)]()
             for camera in cameraList {
+                let index = AppConfigure.sharedInstance.cameraList.index(where: {
+                    $0.camera == camera
+                })
+                
+                var streamUrl: URL?
+                if index != nil {
+                    streamUrl = AppConfigure.sharedInstance.cameraList[index!].streamUrl
+                    streams.append((camera: camera, url: streamUrl))
+                    continue
+                }
+                
                 let cameraPath = "http://" + camera.ip + ":" + camera.port
                 let onvif = iOSOnvif(cameraPath: cameraPath, userId: userId, password: password)
                 
-                var streamUrl = onvif?.getStreamUrl()
+                streamUrl = onvif?.getStreamUrl()
                 if streamUrl == nil {
                     streamUrl = onvif?.getStreamUrl()
                 }

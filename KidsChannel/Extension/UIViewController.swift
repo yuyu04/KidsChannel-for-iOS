@@ -11,6 +11,8 @@ import UIKit
 extension UIViewController {
     
     func setNavigationBarItem() {
+        self.navigationController?.navigationBar.isTranslucent = false
+        
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 18))
         imageView.contentMode = .scaleAspectFit
         imageView.image = AppConfigure.sharedInstance.appSkin.navigationBarImage()
@@ -52,6 +54,39 @@ extension UIViewController {
         self.view.insertSubview(backgroundImage, at: 0)
     }
     
+    func setBackgroundPatternImage(isMainView: Bool) {
+        let backgroundImage = UIImageView(frame: self.view.bounds)
+        let patternImage = UIImageView(frame: self.view.bounds)
+        backgroundImage.translatesAutoresizingMaskIntoConstraints = false
+        patternImage.translatesAutoresizingMaskIntoConstraints = false
+        
+        backgroundImage.contentMode = .scaleAspectFit
+        patternImage.contentMode = .scaleToFill
+        self.view.insertSubview(patternImage, at: 0)
+        patternImage.addSubview(backgroundImage)
+        
+        let leadingConstraint = NSLayoutConstraint(item: patternImage, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 0)
+        let trailingConstraint = NSLayoutConstraint(item: patternImage, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1, constant: 0)
+        let topConstraint = NSLayoutConstraint(item: patternImage, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 0)
+        let bottomConstraint = NSLayoutConstraint(item: patternImage, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: 0)
+        
+        let leadingConstraint2 = NSLayoutConstraint(item: backgroundImage, attribute: .leading, relatedBy: .equal, toItem: patternImage, attribute: .leading, multiplier: 1, constant: 0)
+        let trailingConstraint2 = NSLayoutConstraint(item: backgroundImage, attribute: .trailing, relatedBy: .equal, toItem: patternImage, attribute: .trailing, multiplier: 1, constant: 0)
+        let topConstraint2 = NSLayoutConstraint(item: backgroundImage, attribute: .top, relatedBy: .equal, toItem: patternImage, attribute: .top, multiplier: 1, constant: 0)
+        let bottomConstraint2 = NSLayoutConstraint(item: backgroundImage, attribute: .bottom, relatedBy: .equal, toItem: patternImage, attribute: .bottom, multiplier: 1, constant: 0)
+        
+        self.view.addConstraints([leadingConstraint, trailingConstraint, topConstraint, bottomConstraint])
+        patternImage.addConstraints([leadingConstraint2, trailingConstraint2, topConstraint2, bottomConstraint2])
+
+        if isMainView {
+            backgroundImage.image = AppConfigure.sharedInstance.appSkin.mainBackgroundImage()
+            patternImage.image = AppConfigure.sharedInstance.appSkin.mainBackgroundPatternImage()
+        } else {
+            backgroundImage.image = AppConfigure.sharedInstance.appSkin.userMenuViewsBackgroundImage()
+            patternImage.image = AppConfigure.sharedInstance.appSkin.mainBackgroundPatternImage()
+        }
+    }
+    
     func removeNavigationBarItem() {
         self.navigationItem.leftBarButtonItem = nil
         self.navigationItem.rightBarButtonItem = nil
@@ -80,10 +115,10 @@ extension UIViewController {
             customAlert.title.text = "Loading"
             customAlert.indicator.startAnimating()
             
-            let screen = UIScreen.main.bounds
+            let screen = self.view.bounds
             customAlert.frame = screen
             
-            self.view.addSubview(customAlert) 
+            self.view.addSubview(customAlert)
         }
     }
     

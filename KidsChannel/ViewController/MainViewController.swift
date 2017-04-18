@@ -15,12 +15,15 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        self.setBackgroundPatternImage(isMainView: true)
         
         if AppConfigure.sharedInstance.isLoginUser == false {
             let userDefaults = AppConfigure.sharedInstance.userDefaults
             guard let id = userDefaults.string(forKey: "UserId"),
-                let pw = userDefaults.string(forKey: "UserPassword") else {
+                id.length > 0,
+                let pw = userDefaults.string(forKey: "UserPassword"),
+                pw.length > 0 else {
                     return
             }
             
@@ -29,6 +32,7 @@ class MainViewController: UIViewController {
                 if kindergardenName.isEmpty {
                     userDefaults.set("", forKey: "UserId")
                     userDefaults.set("", forKey: "UserPassword")
+                    self.dismissLoadingView()
                     return
                 }
                 

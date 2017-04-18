@@ -24,7 +24,7 @@ class SkinSelectionViewController: UIViewController {
         self.tableView.separatorColor = UIColor.clear
         self.tableView.tableFooterView = UIView()
         
-        self.setBackgroundImage(isUserMenusView: true)
+        self.setBackgroundPatternImage(isMainView: false)
         
         changeButton.setRoundAndShadow()
         cancelButton.setRoundAndShadow()

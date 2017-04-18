@@ -29,8 +29,7 @@ class LoginViewController: UIViewController {
         loginButton.setRoundAndShadow()
         searchPasswordButton.setRoundAndShadow()
         
-        // Do any additional setup after loading the view.
-        self.setBackgroundImage(isUserMenusView: true)
+        self.setBackgroundPatternImage(isMainView: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -56,6 +56,7 @@ class FourChannelCameraViewController: UIViewController {
     func settingViewControllers() {
         if pageController == nil {
             self.pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+            self.pageController?.setNavigationBarItem()
             self.pageController?.view.backgroundColor = AppConfigure.sharedInstance.appSkin.pageControllerViewBackgroundColor()
             self.pageController?.delegate = self
             self.pageController?.dataSource = self
@@ -71,7 +72,7 @@ class FourChannelCameraViewController: UIViewController {
         }
         
         //let pageViewRect = self.view.bounds
-        self.pageController!.view.frame = CGRect(x: 0, y: 20, width: self.view.frame.size.width, height: self.view.frame.size.height-20)
+        self.pageController!.view.frame = self.view.bounds
         self.pageController!.didMove(toParentViewController: self)
     }
 

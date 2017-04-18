@@ -21,11 +21,10 @@ class FourChannelContentViewController: UIViewController {
     var cameraInfo: [Camera]!
     var cameraView = [CameraView]()
     
-    let configureCameraList = AppConfigure.sharedInstance.cameraList
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = AppConfigure.sharedInstance.appSkin.pageControllerViewBackgroundColor()
+        self.navigationController?.navigationBar.isHidden = true
         
         self.setupConstraint()
     }
@@ -35,24 +34,41 @@ class FourChannelContentViewController: UIViewController {
             return
         }
         
+        for indicator in collectionOfIndicatorView {
+            indicator.isHidden = true
+        }
+        
         self.setCameraView()
     }
     
     func setCameraView() {
-        for i in 0 ..< collectionOfViews.count {
-            let cv = CameraView(camera: cameraInfo[i], view: self.collectionOfViews[i])
-            
-            let index = self.cameraView.index{$0 === cv}
-            if index == nil {
-                self.cameraView.append(cv)
-                self.cameraView[i].tag = i
-                self.cameraView[i].delegate = self
+        self.showLoadingView()
+        CameraManager.getStreamForPlay(cameraList: cameraInfo) { (streamList) in
+            self.dismissLoadingView()
+            for i in 0 ..< streamList.count {
+                var index = AppConfigure.sharedInstance.cameraList.index(where: {
+                    $0.camera == streamList[i].camera
+                })
                 
-                self.collectionOfIndicatorView[i].isHidden = false
-                self.collectionOfIndicatorView[i].startAnimating()
-            } else {
-                if self.cameraView[i].cameraUrlPath == nil {
-                    self.cameraView[i].setStreamUrl()
+                if index == nil {
+                    let model = CameraListModel(camera: streamList[i].camera, streamUrl: streamList[i].url)
+                    AppConfigure.sharedInstance.cameraList.append(model)
+                }
+                
+                let cv = CameraView(camera: streamList[i].camera, view: self.collectionOfViews[i])
+                
+                index = self.cameraView.index{$0 === cv}
+                if index == nil {
+                    self.cameraView.append(cv)
+                    self.cameraView[i].tag = i
+                    self.cameraView[i].delegate = self
+
+                    self.collectionOfIndicatorView[i].isHidden = false
+                    self.collectionOfIndicatorView[i].startAnimating()
+                } else {
+                    if self.cameraView[i].cameraUrlPath == nil {
+                        self.cameraView[i].setStreamUrl()
+                    }
                 }
             }
         }

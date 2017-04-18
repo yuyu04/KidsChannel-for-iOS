@@ -27,7 +27,7 @@ class VersionInfoViewController: UIViewController {
         versionInfo.text = versionString
         environment.text = "지원환경 iOS 9.0 이상"
         
-        self.setBackgroundImage(isUserMenusView: true)
+        self.setBackgroundPatternImage(isMainView: false)
         
         confirmButton.setRoundAndShadow()
     }

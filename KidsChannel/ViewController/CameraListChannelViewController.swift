@@ -45,10 +45,8 @@ class CameraListChannelViewController: UICollectionViewController {
         collectionView?.infiniteScrollIndicatorMargin = 40
         
         collectionView?.setShouldShowInfiniteScrollHandler { _ -> Bool in
-            return self.searchCount.start < self.searchCount.last || AppConfigure.sharedInstance.isLoginUser
+            return self.searchCount.start < self.searchCount.last && AppConfigure.sharedInstance.isLoginUser
         }
-
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -77,7 +75,7 @@ class CameraListChannelViewController: UICollectionViewController {
         
         self.cameraList = AppConfigure.sharedInstance.cameras
         
-        self.searchCount = (start: 0, last: self.initializeViewCount)
+        self.searchCount = (start: self.item.count, last: self.item.count+self.initializeViewCount)
         
         // Add infinite scroll handler
         collectionView?.addInfiniteScroll { [weak self] (scrollView) -> Void in
@@ -93,7 +91,7 @@ class CameraListChannelViewController: UICollectionViewController {
     }
 
     func streamForUrl(cameras: [Camera], _ completion: ((Void) -> Void)?) {
-        if self.searchCount.start == self.searchCount.last {
+        if self.searchCount.start >= self.searchCount.last {
             completion?()
         }
         

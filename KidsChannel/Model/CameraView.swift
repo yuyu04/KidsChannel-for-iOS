@@ -25,8 +25,6 @@ class CameraView: NSObject {
     var tag: Int = 0
     var loadingCount: Int = 0
     
-    var configCameraList = AppConfigure.sharedInstance.cameraList
-    
     let queue = DispatchQueue(label: "com.kidschannel.queue", qos: .userInteractive, attributes: .concurrent)
     
     init(camera: Camera, view: UIView) {
@@ -49,18 +47,18 @@ class CameraView: NSObject {
     }
     
     func setStreamUrl() {
-        let index = configCameraList.index(where: {
+        let index = AppConfigure.sharedInstance.cameraList.index(where: {
             $0.camera == camera
         })
         
-        if index == nil || configCameraList[index!].streamUrl == nil {
+        if index == nil || AppConfigure.sharedInstance.cameraList[index!].streamUrl == nil {
             self.getStreamUrl() { (url) in
                 let model = CameraListModel(camera: self.camera, streamUrl: url)
-                self.configCameraList.append(model)
+                AppConfigure.sharedInstance.cameraList.append(model)
                 self.setVLCPlayer(url: url)
             }
         } else {
-            self.setVLCPlayer(url: configCameraList[index!].streamUrl!)
+            self.setVLCPlayer(url: AppConfigure.sharedInstance.cameraList[index!].streamUrl!)
         }
     }
     
@@ -72,13 +70,16 @@ class CameraView: NSObject {
         }
         
         queue.async {
-            let cameraPath = "http://" + self.camera.ip + ":" + self.camera.port
-            let onvif = iOSOnvif(cameraPath: cameraPath, userId: userId, password: password)
-            
-            self.cameraUrlPath = onvif?.getStreamUrl()
-            if self.cameraUrlPath == nil {
-                return
+            while true {
+                let cameraPath = "http://" + self.camera.ip + ":" + self.camera.port
+                let onvif = iOSOnvif(cameraPath: cameraPath, userId: userId, password: password)
+                
+                self.cameraUrlPath = onvif?.getStreamUrl()
+                if self.cameraUrlPath != nil {
+                    break
+                }
             }
+            
             DispatchQueue.main.async {
                 completion(self.cameraUrlPath!)
             }
