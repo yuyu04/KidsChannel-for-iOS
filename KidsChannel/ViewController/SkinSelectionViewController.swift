@@ -28,6 +28,9 @@ class SkinSelectionViewController: UIViewController {
         
         changeButton.setRoundAndShadow()
         cancelButton.setRoundAndShadow()
+        
+        changeButton.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuButtonColor1()
+        cancelButton.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuButtonColor3()
     }
     
     override func viewWillAppear(_ animated: Bool) {

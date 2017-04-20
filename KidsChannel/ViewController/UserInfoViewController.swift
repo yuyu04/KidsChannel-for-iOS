@@ -36,6 +36,10 @@ class UserInfoViewController: UIViewController {
         logoutButton.setRoundAndShadow()
         cancelButton.setRoundAndShadow()
         
+        logoutButton.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuButtonColor1()
+        logoutButton.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuButtonColor2()
+        cancelButton.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuButtonColor3()
+        
         self.setBackgroundPatternImage(isMainView: false)
     }
     

@@ -24,6 +24,7 @@ class CameraInfoViewController: UIViewController {
         self.setBackgroundPatternImage(isMainView: false)
         
         confirmButton.setRoundAndShadow()
+        confirmButton.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuButtonColor1()
     }
     
     override func viewWillAppear(_ animated: Bool) {

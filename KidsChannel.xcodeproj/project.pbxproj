@@ -10,6 +10,7 @@
 		1369C7087E87C587A0D8C139 /* Pods_KidsChannelUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC576B43497CAFD96C7BB4AC /* Pods_KidsChannelUITests.framework */; };
 		6F477271097C8991114200F7 /* Pods_KidsChannelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55BF184C3DB49F2136193FC7 /* Pods_KidsChannelTests.framework */; };
 		9858A1E147647366CCE5DA8C /* Pods_KidsChannel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 993E0FB5A13274AA35AFDFF3 /* Pods_KidsChannel.framework */; };
+		C135293B1EA6EECA00B05680 /* OrientationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C135293A1EA6EECA00B05680 /* OrientationManager.swift */; };
 		C14E6B341E8E3056000488BB /* UserJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14E6B331E8E3056000488BB /* UserJoinViewController.swift */; };
 		C14E6B371E8E429B000488BB /* CameraListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14E6B351E8E429B000488BB /* CameraListTableViewCell.swift */; };
 		C14E6B381E8E429B000488BB /* CameraListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C14E6B361E8E429B000488BB /* CameraListTableViewCell.xib */; };
@@ -103,6 +104,7 @@
 		78553202E7D025B6BD79A8AE /* Pods-KidsChannel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KidsChannel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KidsChannel/Pods-KidsChannel.debug.xcconfig"; sourceTree = "<group>"; };
 		8D325D97329D6FA7127B44B1 /* Pods-KidsChannelTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KidsChannelTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KidsChannelTests/Pods-KidsChannelTests.release.xcconfig"; sourceTree = "<group>"; };
 		993E0FB5A13274AA35AFDFF3 /* Pods_KidsChannel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KidsChannel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C135293A1EA6EECA00B05680 /* OrientationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrientationManager.swift; sourceTree = "<group>"; };
 		C14E6B331E8E3056000488BB /* UserJoinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserJoinViewController.swift; sourceTree = "<group>"; };
 		C14E6B351E8E429B000488BB /* CameraListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraListTableViewCell.swift; sourceTree = "<group>"; };
 		C14E6B361E8E429B000488BB /* CameraListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraListTableViewCell.xib; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 				C160F0291E89F2AD00789D5E /* KidsChannelException.swift */,
 				C160F02C1E89FB9500789D5E /* NetworkManager.swift */,
 				C1B46C1E1E924F9700FA0BA6 /* CameraManager.swift */,
+				C135293A1EA6EECA00B05680 /* OrientationManager.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -725,6 +728,7 @@
 				C160F0451E8A063200789D5E /* UIView.swift in Sources */,
 				C1C0105F1E8B9B210031225C /* EightChannelCameraViewController.swift in Sources */,
 				C160F02A1E89F2AD00789D5E /* KidsChannelException.swift in Sources */,
+				C135293B1EA6EECA00B05680 /* OrientationManager.swift in Sources */,
 				C160F0411E8A063200789D5E /* UIColor.swift in Sources */,
 				C14E6B371E8E429B000488BB /* CameraListTableViewCell.swift in Sources */,
 				C1B46C0F1E92152E00FA0BA6 /* SkinSelectionTableViewCell.swift in Sources */,

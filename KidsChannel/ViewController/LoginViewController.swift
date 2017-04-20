@@ -21,8 +21,10 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //str.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 12), range: NSMakeRange(0, 10))
-        //str.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 17), range: NSMakeRange(11, 11))
+        loginButton.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuButtonColor1()
+        searchPasswordButton.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuButtonColor2()
+        joinButton.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuButtonColor3()
+        
         joinButton.separateJoinBtn(string: "계정이 없으신가요?\n회원가입")
         joinButton.titleLabel?.lineBreakMode = .byWordWrapping
         joinButton.setShadow()

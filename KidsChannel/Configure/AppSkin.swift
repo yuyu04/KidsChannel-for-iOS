@@ -70,7 +70,6 @@ class firstSkin: AppSkin {
         return UIColor(hex: "443C30")
     }
     
-    
     func navigationBarImage() -> UIImage {
         return UIImage(named: "title")!
     }

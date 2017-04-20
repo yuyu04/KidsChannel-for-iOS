@@ -15,8 +15,8 @@ import IQKeyboardManagerSwift
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var shouldRotate = false
-
+    
+    var orientationLock = UIInterfaceOrientationMask.portrait
     fileprivate func createMenuView() {
         
         // create viewController code...
@@ -78,12 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-        if shouldRotate {
-            return .landscape
-        }
-        else {
-            return .portrait
-        }
+        return orientationLock
     }
 }
 

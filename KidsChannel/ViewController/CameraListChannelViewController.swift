@@ -47,17 +47,12 @@ class CameraListChannelViewController: UICollectionViewController {
         collectionView?.setShouldShowInfiniteScrollHandler { _ -> Bool in
             return self.searchCount.start < self.searchCount.last && AppConfigure.sharedInstance.isLoginUser
         }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
         
         guard let collectionViewInset = self.collectionView?.contentInset else {
             return
         }
-    
+        
         let top = self.topLayoutGuide.length;
-        //let bottom = self.bottomLayoutGuide.length;
         let newInsets = UIEdgeInsetsMake(top+10, 10, collectionViewInset.bottom, 10);
         self.collectionView?.contentInset = newInsets;
     }
@@ -198,7 +193,7 @@ extension CameraListChannelViewController {
         let fullCameraViewController = storyboard.instantiateViewController(withIdentifier: "FullCameraViewController") as! FullCameraViewController
         fullCameraViewController.camera = cameraList[indexPath.row]
         fullCameraViewController.delegate = self
-        appDelegate.shouldRotate = true
+        OrientationManager.lockOrientation(.landscapeRight, andRotateTo: .landscapeRight)
         self.present(fullCameraViewController, animated: true) { () in
             
         }
@@ -237,8 +232,7 @@ extension CameraListChannelViewController {
 
 extension CameraListChannelViewController: FullCameraViewControllerDelegate{
     func fullCameraViewControllerDidFinish(_ fullCameraViewController: FullCameraViewController) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.shouldRotate = false
+        OrientationManager.lockOrientation(.portrait, andRotateTo: .portrait)
         dismiss(animated: false) { () in
         }
     }

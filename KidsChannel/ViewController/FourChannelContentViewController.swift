@@ -91,6 +91,7 @@ extension FourChannelContentViewController: CameraViewDelegate {
         let fullCameraViewController = storyboard.instantiateViewController(withIdentifier: "FullCameraViewController") as! FullCameraViewController
         fullCameraViewController.camera = cameraView.camera
         fullCameraViewController.delegate = self
+        OrientationManager.lockOrientation(.landscapeRight, andRotateTo: .landscapeRight)
         self.present(fullCameraViewController, animated: true) { () in
             
         }
@@ -106,8 +107,7 @@ extension FourChannelContentViewController: CameraViewDelegate {
 
 extension FourChannelContentViewController: FullCameraViewControllerDelegate {
     func fullCameraViewControllerDidFinish(_ fullCameraViewController: FullCameraViewController) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.shouldRotate = false
+        OrientationManager.lockOrientation(.portrait, andRotateTo: .portrait)
         dismiss(animated: false) { () in
         }
     }

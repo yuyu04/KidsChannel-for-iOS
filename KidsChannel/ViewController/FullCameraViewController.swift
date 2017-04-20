@@ -15,7 +15,6 @@ protocol FullCameraViewControllerDelegate {
 
 class FullCameraViewController: UIViewController {
 
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var camera: Camera?
     var cameraView: CameraView?
     var delegate: FullCameraViewControllerDelegate?
@@ -28,7 +27,6 @@ class FullCameraViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        appDelegate.shouldRotate = true
         
         guard let camera = camera else {
             return
@@ -41,7 +39,6 @@ class FullCameraViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        appDelegate.shouldRotate = true
         guard let isPlaying = cameraView?.isPlayerPlaying() else {
             return
         }
@@ -54,7 +51,13 @@ class FullCameraViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
         guard let userId = AppConfigure.sharedInstance.userDefaults.string(forKey: "UserId"),
             let cameraIdx = self.camera?.idx,
             let viewStartTime = self.viewStartTime else { return }
@@ -97,7 +100,6 @@ class FullCameraViewController: UIViewController {
         let recorder = RPScreenRecorder.shared()
         
         recorder.stopRecording() { (preview, error) in
-            //self.cameraView?.stopPlay()
             
             sender.removeTarget(self, action: #selector(self.stopRecordScreen(_:)), for: .touchUpInside)
             sender.addTarget(self, action: #selector(self.startRecordScreen(_:)), for: .touchUpInside)
@@ -105,8 +107,14 @@ class FullCameraViewController: UIViewController {
             
             if let unwrappedPreview = preview {
                 unwrappedPreview.previewControllerDelegate = self
-                self.present(unwrappedPreview, animated: true) { () in
-                    //self.cameraView?.startPlay()
+                
+                if unwrappedPreview.responds(to: #selector(getter: UIViewController.popoverPresentationController)) {
+                    unwrappedPreview.popoverPresentationController?.sourceView = self.view
+                    self.present(unwrappedPreview, animated: true) { () in
+                    }
+                } else {
+                    self.present(unwrappedPreview, animated: true) { () in
+                    }
                 }
             }
         }
