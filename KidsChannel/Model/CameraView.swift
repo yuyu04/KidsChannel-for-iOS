@@ -32,11 +32,8 @@ class CameraView: NSObject {
         
         isLoadingComplete = false
         self.camera = camera
-        self.movieView = view
         
-        //Add tap gesture to movieView for play/pause
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(CameraView.movieViewTapped(_:)))
-        self.movieView.addGestureRecognizer(gesture)
+        self.setVideoView(view: view)
         
         if cameraUrlPath == nil {
             self.setStreamUrl()
@@ -44,6 +41,14 @@ class CameraView: NSObject {
         
         //self.movieView.frame = view.bounds
         //view.addSubview(self.movieView)
+    }
+    
+    func setVideoView(view: UIView) {
+        self.movieView = view
+        loadingCount = 0
+        //Add tap gesture to movieView for play/pause
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(CameraView.movieViewTapped(_:)))
+        self.movieView.addGestureRecognizer(gesture)
     }
     
     func setStreamUrl() {
@@ -94,7 +99,8 @@ class CameraView: NSObject {
         let height = String(describing: Int(self.movieView.bounds.height)/gcdValue)
         let aspactRatio = "\(width):\(height)"
         let ratio = aspactRatio.cString(using: .utf8)
-        mediaPlayer?.videoAspectRatio = UnsafeMutablePointer<Int8>(mutating: ratio)
+        let unsafePointer = UnsafeMutablePointer<Int8>(mutating: ratio)
+        mediaPlayer?.videoAspectRatio = unsafePointer
         mediaPlayer?.media = media
         
         mediaPlayer?.delegate = self
@@ -104,15 +110,15 @@ class CameraView: NSObject {
     }
     
     func startPlay() {
+        loadingCount = 0
         self.mediaPlayer?.play()
         isLoadingComplete = false
-        loadingCount = 0
     }
     
     func stopPlay() {
+        loadingCount = 0
         self.mediaPlayer?.stop()
         isLoadingComplete = false
-        loadingCount = 0
     }
     
     func isPlayerPlaying() -> Bool {

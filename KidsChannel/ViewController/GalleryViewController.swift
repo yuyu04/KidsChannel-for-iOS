@@ -9,6 +9,7 @@
 import UIKit
 import AVKit
 import AVFoundation
+import Photos
 
 class GalleryViewController: UIViewController {
 
@@ -21,6 +22,9 @@ class GalleryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.separatorColor = AppConfigure.sharedInstance.appSkin.tableSeparatorColor()
+        
         self.tableView.registerCellNib(GalleryTableViewCell.self)
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         
@@ -42,7 +46,33 @@ class GalleryViewController: UIViewController {
             playerViewController = nil
         }
         
-        videoModels = AlbumVideoModel.listAlbumVideoModel()
+        self.checkForPhotoLibraryAccess {
+            self.videoModels = AlbumVideoModel.listAlbumVideoModel()
+            self.tableView.reloadData()
+        }
+    }
+    
+    func checkForPhotoLibraryAccess(andThen f:(()->())? = nil) {
+        let status = PHPhotoLibrary.authorizationStatus()
+        switch status {
+        case .authorized:
+            f?()
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization() { status in
+                if status == .authorized {
+                    DispatchQueue.main.async {
+                        f?()
+                    }
+                }
+            }
+        case .restricted:
+            // do nothing
+            break
+        case .denied:
+            // do nothing, or beg the user to authorize us in Settings
+            self.showAlertView(title: "알림", message: "단말기 설정에 가서 사진에 대한 접근 허용을 해주셔야 합니다")
+            break
+        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -18,7 +18,6 @@ class CameraListChannelViewController: UICollectionViewController {
     var cameraList = [Camera]()
     var item = [Camera]()
     var searchCount: (start: Int, last: Int) = (start: 0, last: 20)
-    var cellArray = [CameraCollectionViewCell]()
     var initializeViewCount: Int = 8
     var moreListCount: Int = 2
     
@@ -193,7 +192,8 @@ extension CameraListChannelViewController {
         let fullCameraViewController = storyboard.instantiateViewController(withIdentifier: "FullCameraViewController") as! FullCameraViewController
         fullCameraViewController.camera = cameraList[indexPath.row]
         fullCameraViewController.delegate = self
-        OrientationManager.lockOrientation(.landscapeRight, andRotateTo: .landscapeRight)
+        //OrientationManager.lockOrientation(.landscapeRight, andRotateTo: .landscapeRight)
+        OrientationManager.lockOrientation(.landscapeRight)
         self.present(fullCameraViewController, animated: true) { () in
             
         }

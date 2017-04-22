@@ -69,22 +69,4 @@ class AlbumVideoModel {
         
         return nil
     }
-    
-    /*static func listAlbumVideos() {
-        var videoModelList = [AlbumVideoModel]()
-        
-        userVideo.enumerateObjects({ (object, count, stop) in
-            let options = PHImageRequestOptions()
-            options.isSynchronous = true
-            PHImageManager.default().requestAVAsset(forVideo: object, options: .none) { (avAsset, avAudioMix, dict) in
-                guard let asset = avAsset else {
-                    return
-                }
-                let video = AlbumVideoModel(asset: asset, dic: dict)
-                videoModelList.append(video)
-            }
-        })
-        
-        return videoModelList
-    }*/
 }

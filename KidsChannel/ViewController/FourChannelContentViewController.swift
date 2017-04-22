@@ -55,21 +55,24 @@ class FourChannelContentViewController: UIViewController {
                     AppConfigure.sharedInstance.cameraList.append(model)
                 }
                 
-                let cv = CameraView(camera: streamList[i].camera, view: self.collectionOfViews[i])
+                index = self.cameraView.index(where: { $0.camera == streamList[i].camera })
                 
-                index = self.cameraView.index{$0 === cv}
                 if index == nil {
+                    let cv = CameraView(camera: streamList[i].camera, view: self.collectionOfViews[i])
                     self.cameraView.append(cv)
                     self.cameraView[i].tag = i
                     self.cameraView[i].delegate = self
-
-                    self.collectionOfIndicatorView[i].isHidden = false
-                    self.collectionOfIndicatorView[i].startAnimating()
+                    self.cameraView[i].cameraUrlPath = streamList[i].url
                 } else {
-                    if self.cameraView[i].cameraUrlPath == nil {
-                        self.cameraView[i].setStreamUrl()
-                    }
+                    /*if self.cameraView[index!].cameraUrlPath == nil {
+                        self.cameraView[index!].setStreamUrl()
+                    }*/
+                    self.cameraView[index!].setVideoView(view: self.collectionOfViews[index!])
+                    self.cameraView[index!].setStreamUrl()
                 }
+                
+                self.collectionOfIndicatorView[i].isHidden = false
+                self.collectionOfIndicatorView[i].startAnimating()
             }
         }
     }
@@ -91,7 +94,7 @@ extension FourChannelContentViewController: CameraViewDelegate {
         let fullCameraViewController = storyboard.instantiateViewController(withIdentifier: "FullCameraViewController") as! FullCameraViewController
         fullCameraViewController.camera = cameraView.camera
         fullCameraViewController.delegate = self
-        OrientationManager.lockOrientation(.landscapeRight, andRotateTo: .landscapeRight)
+        OrientationManager.lockOrientation(.landscapeRight)
         self.present(fullCameraViewController, animated: true) { () in
             
         }

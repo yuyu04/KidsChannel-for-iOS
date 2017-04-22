@@ -94,6 +94,18 @@ extension UIViewController {
         self.slideMenuController()?.removeRightGestures()
     }
     
+    func showAlertView(title: String, message: String) {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: title,
+                                                    message: message,
+                                                    preferredStyle: UIAlertControllerStyle.alert)
+            let cacelAction = UIAlertAction(title: "확인", style: UIAlertActionStyle.cancel, handler: nil)
+            
+            alertController.addAction(cacelAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
     func showAlertView(message: String) {
         DispatchQueue.main.async {
             let alertController = UIAlertController(title: "",

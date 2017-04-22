@@ -10,16 +10,18 @@ import UIKit
 
 struct CameraListTableViewCellData {
     
-    init(image: UIImage, cameraName: String, cameraUrl: String, cameraId: String) {
+    init(image: UIImage, cameraName: String, cameraUrl: String, cameraId: String, cameraIdx: String) {
         self.image = image
         self.cameraName = cameraName
         self.cameraUrl = cameraUrl
         self.cameraId = cameraId
+        self.cameraIdx = cameraIdx
     }
     var image: UIImage
     var cameraName: String
     var cameraUrl: String
     var cameraId: String
+    var cameraIdx: String
 }
 
 class CameraListTableViewCell: BaseTableViewCell {
@@ -28,6 +30,8 @@ class CameraListTableViewCell: BaseTableViewCell {
     @IBOutlet weak var cellCameraNameLabel: UILabel!
     @IBOutlet weak var cellCameraUrlLabel: UILabel!
     @IBOutlet weak var cellCameraIdLabel: UILabel!
+    
+    var cameraIdx: String!
     
     override func awakeFromNib() {
         // Initialization code
@@ -55,6 +59,7 @@ class CameraListTableViewCell: BaseTableViewCell {
             self.cellCameraNameLabel.text = data.cameraName
             self.cellCameraUrlLabel.text = data.cameraUrl
             self.cellCameraIdLabel.text = data.cameraId
+            self.cameraIdx = data.cameraIdx
         }
     }
 }

@@ -26,6 +26,8 @@ class VersionInfoViewController: UIViewController {
         }
         versionInfo.text = versionString
         environment.text = "지원환경 iOS 9.0 이상"
+        versionInfo.setRoundAndShadow()
+        environment.setRoundAndShadow()
         
         self.setBackgroundPatternImage(isMainView: false)
         

@@ -28,23 +28,35 @@ class FullCameraViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //cameraView = CameraView(camera: camera, view: screenView)
+        //indicatorView.startAnimating()
+        //cameraView?.startPlay()
+        //cameraView?.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
         guard let camera = camera else {
             return
         }
         
-        cameraView = CameraView(camera: camera, view: screenView)
-        indicatorView.startAnimating()
-        cameraView?.startPlay()
-        cameraView?.delegate = self
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
+        if cameraView == nil {
+            cameraView = CameraView(camera: camera, view: screenView)
+            cameraView?.delegate = self
+        }
+        
         guard let isPlaying = cameraView?.isPlayerPlaying() else {
             return
         }
         
         viewStartTime = Date()
         if isPlaying == false {
+            cameraView?.setVideoView(view: screenView)
             indicatorView.isHidden = false
             indicatorView.startAnimating()
             cameraView?.startPlay()

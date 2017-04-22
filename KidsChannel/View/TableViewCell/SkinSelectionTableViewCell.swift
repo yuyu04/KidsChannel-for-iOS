@@ -28,7 +28,11 @@ class SkinSelectionTableViewCell: BaseTableViewCell {
     }
     
     override class func height() -> CGFloat {
-        return 68
+        if(UI_USER_INTERFACE_IDIOM() == .pad) {
+            return 90
+        } else {
+            return 64
+        }
     }
     
     override func setData(_ data: Any?) {

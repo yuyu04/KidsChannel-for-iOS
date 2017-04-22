@@ -102,13 +102,11 @@ extension CameraInfoViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let camera: Camera = cameras[indexPath.section] else {
-            return UITableViewCell()
-        }
+        let camera: Camera = cameras[indexPath.section]
         
         let cell = self.tableView.dequeueReusableCell(withIdentifier: CameraListTableViewCell.identifier) as! CameraListTableViewCell
         let cameraUrl = camera.ip + ":" + camera.port
-        let data = CameraListTableViewCellData(image: AppConfigure.sharedInstance.appSkin.cameraInfoListIcon(), cameraName: camera.name, cameraUrl: cameraUrl, cameraId: camera.id)
+        let data = CameraListTableViewCellData(image: AppConfigure.sharedInstance.appSkin.cameraInfoListIcon(), cameraName: camera.name, cameraUrl: cameraUrl, cameraId: camera.id, cameraIdx: camera.idx)
         cell.setData(data)
         
         return cell
