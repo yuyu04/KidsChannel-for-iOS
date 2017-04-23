@@ -41,6 +41,12 @@ class FourChannelContentViewController: UIViewController {
         self.setCameraView()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        for camera in self.cameraView  {
+            camera.stopPlay()
+        }
+    }
+    
     func setCameraView() {
         self.showLoadingView()
         CameraManager.getStreamForPlay(cameraList: cameraInfo) { (streamList) in
@@ -63,16 +69,20 @@ class FourChannelContentViewController: UIViewController {
                     self.cameraView[i].tag = i
                     self.cameraView[i].delegate = self
                     self.cameraView[i].cameraUrlPath = streamList[i].url
+                    self.collectionOfIndicatorView[i].isHidden = false
+                    self.collectionOfIndicatorView[i].startAnimating()
                 } else {
                     /*if self.cameraView[index!].cameraUrlPath == nil {
                         self.cameraView[index!].setStreamUrl()
                     }*/
-                    self.cameraView[index!].setVideoView(view: self.collectionOfViews[index!])
-                    self.cameraView[index!].setStreamUrl()
+                    if self.cameraView[index!].isPlayerPlaying() == false {
+                        self.cameraView[index!].setVideoView(view: self.collectionOfViews[index!])
+                        self.cameraView[index!].setStreamUrl()
+                        self.cameraView[index!].delegate = self
+                        self.collectionOfIndicatorView[i].isHidden = false
+                        self.collectionOfIndicatorView[i].startAnimating()
+                    }
                 }
-                
-                self.collectionOfIndicatorView[i].isHidden = false
-                self.collectionOfIndicatorView[i].startAnimating()
             }
         }
     }
