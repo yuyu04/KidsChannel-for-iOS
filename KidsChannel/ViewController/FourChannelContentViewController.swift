@@ -20,6 +20,8 @@ class FourChannelContentViewController: UIViewController {
     var camerasList = [CameraListModel]()
     var cameraInfo: [Camera]!
     var cameraView = [CameraView]()
+    var dispatchQueue: DispatchQueue?
+    var dispatchWorkItem: DispatchWorkItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,12 +40,33 @@ class FourChannelContentViewController: UIViewController {
             indicator.isHidden = true
         }
         
-        self.setCameraView()
+        self.setCameraViewsBackgroundImage()
+        
+        self.dispatchQueue = DispatchQueue.global(qos: .background)
+        self.dispatchWorkItem = DispatchWorkItem {
+            self.setCameraView()
+        }
+        
+        if self.dispatchWorkItem != nil {
+            self.dispatchQueue?.asyncAfter(deadline: .now() + .seconds(3), execute: self.dispatchWorkItem!)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        
+        if self.dispatchWorkItem != nil {
+            self.dispatchWorkItem?.cancel()
+        }
+        
         for camera in self.cameraView  {
             camera.stopPlay()
+        }
+    }
+    
+    func setCameraViewsBackgroundImage() {
+        for i in 0 ..< cameraInfo.count {
+            let filePath = cameraInfo[i].cameraCaptureUrl
+            collectionOfViews[i].setBackgrounImage(url: filePath)
         }
     }
     

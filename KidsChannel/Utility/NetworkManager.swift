@@ -72,6 +72,25 @@ class NetworkManager: NSObject {
             }.resume()
     }
     
+    static func requestImageData(url: String, completion: @escaping(_ data: Data?) -> Void) {
+        let request = URLRequest(url: URL(string: url)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10.0)
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let data = data, error == nil else {
+                print("Failed to request data from server. serviceManager = \(url)")
+                completion(nil)
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                completion(nil)
+                return
+            }
+            
+            completion(data)
+            }.resume()
+    }
+    
     static func requestData(url: String, parameter: String, method: String, completion: @escaping (_ responseJson: [String: Any]?) -> Void) {
         var request = URLRequest(url: URL(string: url)!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10.0)
         request.httpMethod = method
