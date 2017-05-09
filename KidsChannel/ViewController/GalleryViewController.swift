@@ -46,16 +46,38 @@ class GalleryViewController: UIViewController {
             playerViewController = nil
         }
         
-        self.checkForPhotoLibraryAccess {
-            self.videoModels = AlbumVideoModel.listAlbumVideoModel()
-            self.tableView.reloadData()
+        let isConfirmAlbum = AppConfigure.sharedInstance.userDefaults.bool(forKey: "ConfirmAlbum")
+        if isConfirmAlbum == false {
+            self.showAlertView {
+                self.checkForPhotoLibraryAccess {
+                    self.videoModels = AlbumVideoModel.listAlbumVideoModel()
+                    self.tableView.reloadData()
+                }
+            }
+        } else {
+            self.checkForPhotoLibraryAccess {
+                self.videoModels = AlbumVideoModel.listAlbumVideoModel()
+                self.tableView.reloadData()
+            }
         }
+    }
+    
+    func showAlertView(completion: ((Void) -> Void)?) {
+        let alertController = UIAlertController(title: "고지",
+                                                message: "갤러리 뷰어는 해당 단말기의 앨범에서 녹화된 영상을 가져오게 됩니다. 따라서 녹화된 영상을 보려면 단말기 사진에 대한 접근 허용을 하락해 주셔야 합니다.",
+                                                preferredStyle: UIAlertControllerStyle.alert)
+        let cacelAction = UIAlertAction(title: "확인", style: UIAlertActionStyle.cancel) { (result) in
+            completion?()
+        }
+        alertController.addAction(cacelAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func checkForPhotoLibraryAccess(andThen f:(()->())? = nil) {
         let status = PHPhotoLibrary.authorizationStatus()
         switch status {
         case .authorized:
+            AppConfigure.sharedInstance.userDefaults.set(true, forKey: "ConfirmAlbum")
             f?()
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization() { status in
@@ -70,6 +92,7 @@ class GalleryViewController: UIViewController {
             break
         case .denied:
             // do nothing, or beg the user to authorize us in Settings
+            AppConfigure.sharedInstance.userDefaults.set(false, forKey: "ConfirmAlbum")
             self.showAlertView(title: "알림", message: "단말기 설정에 가서 사진에 대한 접근 허용을 해주셔야 합니다")
             break
         }
