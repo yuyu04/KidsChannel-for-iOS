@@ -29,8 +29,6 @@ class VersionInfoViewController: UIViewController {
         versionInfo.setRoundAndShadow()
         environment.setRoundAndShadow()
         
-        self.setBackgroundPatternImage(isMainView: false)
-        
         confirmButton.setRoundAndShadow()
         confirmButton.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuButtonColor1()
     }
@@ -38,6 +36,7 @@ class VersionInfoViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
+        self.setBackgroundPatternImage(isMainView: false)
     }
 
     override func didReceiveMemoryWarning() {

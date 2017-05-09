@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol ChannelContentViewControllerDelegate {
+    func contentView(willStartLoading contentView: UIViewController)
+    func contentView(didFinishLoading contentView: UIViewController)
+}
+
 class FourChannelContentViewController: UIViewController {
 
     @IBOutlet weak var topConstraint: NSLayoutConstraint!

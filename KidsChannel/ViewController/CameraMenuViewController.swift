@@ -130,8 +130,10 @@ extension CameraMenuViewController : UITableViewDataSource {
                 data = ButtonTableViewCellData(image: AppConfigure.sharedInstance.appSkin.fourCameraChannelIcon(), text: menus[indexPath.row])
             case .eightChennel:
                 data = ButtonTableViewCellData(image: nil, text: menus[indexPath.row])
+                cell.backgroundColor = AppConfigure.sharedInstance.appSkin.otherChannelBackgroundColor()
             case .cameraListChennel:
                 data = ButtonTableViewCellData(image: nil, text: menus[indexPath.row])
+                cell.backgroundColor = AppConfigure.sharedInstance.appSkin.otherChannelBackgroundColor()
             case .gellery:
                 data = ButtonTableViewCellData(image: AppConfigure.sharedInstance.appSkin.galleryIcon(), text: menus[indexPath.row])
             }

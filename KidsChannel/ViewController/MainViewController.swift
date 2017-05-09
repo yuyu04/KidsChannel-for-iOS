@@ -15,8 +15,6 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.setBackgroundPatternImage(isMainView: true)
         
         if AppConfigure.sharedInstance.isLoginUser == false {
             let userDefaults = AppConfigure.sharedInstance.userDefaults
@@ -57,6 +55,7 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
+        self.setBackgroundPatternImage(isMainView: true)
     }
 
     override func didReceiveMemoryWarning() {

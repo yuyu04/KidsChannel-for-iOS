@@ -11,6 +11,8 @@ import UIKit
 enum SkinNumber : Int {
     case first = 0
     case second
+    case third
+    case forth
     
     static let count: Int = {
         var max: Int = 0
@@ -20,21 +22,61 @@ enum SkinNumber : Int {
     
     static func getSkinImage(number: SkinNumber, selectedNumber: SkinNumber) -> UIImage {
         var image: UIImage!
+        let currentSkinNumber = AppConfigure.sharedInstance.skinNumber
+        
         switch number {
+        case .first where currentSkinNumber == number:
+            if selectedNumber == .first {
+                image = UIImage(named: "skin01_banner_selected_pressed")!
+            } else {
+                image = UIImage(named: "skin01_banner_selected_normal")!
+            }
         case .first:
             if selectedNumber == .first {
-                image = UIImage(named: "skin_button_01_selected_pressed")!
+                image = UIImage(named: "skin01_banner_nonselected_pressed")!
             } else {
-                image = UIImage(named: "skin_button_01_selected_normal")!
+                image = UIImage(named: "skin01_banner_nonselected_normal")!
+            }
+        case .second where currentSkinNumber == number:
+            if selectedNumber == .second {
+                image = UIImage(named: "skin02_banner_selected_pressed")!
+            } else {
+                image = UIImage(named: "skin02_banner_selected_normal")!
             }
         case .second:
             if selectedNumber == .second {
-                image = UIImage(named: "skin_button_01_nonselected_pressed")!
+                image = UIImage(named: "skin02_banner_nonselected_pressed")!
             } else {
-                image = UIImage(named: "skin_button_01_nonselected_normal")!
+                image = UIImage(named: "skin02_banner_nonselected_normal")!
+            }
+        case .third where currentSkinNumber == number:
+            if selectedNumber == .third {
+                image = UIImage(named: "skin03_banner_selected_pressed")!
+            } else {
+                image = UIImage(named: "skin03_banner_selected_normal")!
+            }
+        case .third:
+            if selectedNumber == .third {
+                image = UIImage(named: "skin03_banner_nonselected_pressed")!
+            } else {
+                image = UIImage(named: "skin03_banner_nonselected_normal")!
+            }
+        case .forth where currentSkinNumber == number:
+            if selectedNumber == .forth {
+                image = UIImage(named: "skin04_banner_selected_pressed")!
+            } else {
+                image = UIImage(named: "skin04_banner_selected_normal")!
+            }
+        case .forth:
+            if selectedNumber == .forth {
+                image = UIImage(named: "skin04_banner_nonselected_pressed")!
+            } else {
+                image = UIImage(named: "skin04_banner_nonselected_normal")!
             }
         }
-        return image    }
+        
+        return image
+    }
 }
 
 class AppConfigure: NSObject {
@@ -42,6 +84,7 @@ class AppConfigure: NSObject {
     
     let userDefaults = UserDefaults.standard
     var isLoginUser = false
+    var skinNumber: SkinNumber!
     var appSkin: AppSkin!
     var kindergartenName = ""
     weak var leftMenuDelegate: LeftMenuProtocol?
@@ -64,11 +107,18 @@ class AppConfigure: NSObject {
     }
     
     func changeSkin(skinNumber: SkinNumber) {
+        self.skinNumber = skinNumber
+        self.userDefaults.set(skinNumber.rawValue, forKey: "AppSkin")
+        
         switch skinNumber {
         case .first:
             appSkin = firstSkin()
         case .second:
-            appSkin = firstSkin()
+            appSkin = secondSkin()
+        case .third:
+            appSkin = thirdSkin()
+        case .forth:
+            appSkin = forthSkin()
         }
     }
     

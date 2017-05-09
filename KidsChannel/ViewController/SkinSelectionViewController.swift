@@ -24,8 +24,6 @@ class SkinSelectionViewController: UIViewController {
         self.tableView.separatorColor = UIColor.clear
         self.tableView.tableFooterView = UIView()
         
-        self.setBackgroundPatternImage(isMainView: false)
-        
         changeButton.setRoundAndShadow()
         cancelButton.setRoundAndShadow()
         
@@ -36,6 +34,8 @@ class SkinSelectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
+        self.tableView.reloadData()
+        self.setBackgroundPatternImage(isMainView: false)
     }
 
     override func didReceiveMemoryWarning() {

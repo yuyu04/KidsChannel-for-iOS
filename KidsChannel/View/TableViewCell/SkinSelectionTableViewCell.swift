@@ -29,7 +29,7 @@ class SkinSelectionTableViewCell: BaseTableViewCell {
     
     override class func height() -> CGFloat {
         if(UI_USER_INTERFACE_IDIOM() == .pad) {
-            return 90
+            return 120
         } else {
             return 64
         }

@@ -11,19 +11,19 @@ import UIKit
 extension UIViewController {
     
     func setNavigationBarItem() {
-        self.navigationController?.navigationBar.isTranslucent = false
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().barTintColor = AppConfigure.sharedInstance.appSkin.navigationBarColor()
         
+        self.navigationController?.navigationBar.isTranslucent = false
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 120, height: 18))
         imageView.contentMode = .scaleAspectFit
         imageView.image = AppConfigure.sharedInstance.appSkin.navigationBarImage()
         self.navigationItem.titleView = imageView
         
-        //self.addLeftBarButtonWithImage(AppConfigure.sharedInstance.appSkin.navigationLeftButtonImage())
-        //self.addRightBarButtonWithImage(AppConfigure.sharedInstance.appSkin.navigationRightButtonImage())
-        
         let leftButton = UIButton(type: .custom)
         leftButton.setImage(AppConfigure.sharedInstance.appSkin.navigationLeftButtonImage().withRenderingMode(.alwaysTemplate), for: .normal)
-        leftButton.tintColor = UIColor(hex: "42392d")
+        leftButton.tintColor = AppConfigure.sharedInstance.appSkin.navigationIconColor()
+        
         leftButton.addTarget(self, action: #selector(self.toggleLeft), for: .touchUpInside)
         leftButton.frame = CGRect(x: 0.0, y: 0.0, width: 25, height: 25)
         let leftBarButton = UIBarButtonItem(customView: leftButton)
@@ -32,7 +32,7 @@ extension UIViewController {
         let rightButton = UIButton(type: .custom)
         rightButton.setImage(AppConfigure.sharedInstance.appSkin.navigationRightButtonImage().withRenderingMode(.alwaysTemplate), for: .normal)
         rightButton.addTarget(self, action: #selector(self.toggleRight), for: .touchUpInside)
-        rightButton.tintColor = UIColor(hex: "42392d")
+        rightButton.tintColor = AppConfigure.sharedInstance.appSkin.navigationIconColor()
         rightButton.frame = CGRect(x: 0.0, y: 0.0, width: 25, height: 25)
         let rightBarButton = UIBarButtonItem(customView: rightButton)
         navigationItem.rightBarButtonItem = rightBarButton
@@ -54,9 +54,28 @@ extension UIViewController {
         self.view.insertSubview(backgroundImage, at: 0)
     }
     
+    func skinChangeBackgroundPatternImage(isMainView: Bool) {
+        for subView in self.view.subviews {
+            if subView.tag == 1000 {
+                guard let backgroundImageView = subView as? UIImageView,
+                    let patternImageView = subView.subviews[0] as? UIImageView else {
+                    return
+                }
+                backgroundImageView.image = AppConfigure.sharedInstance.appSkin.mainBackgroundImage()
+                patternImageView.image = AppConfigure.sharedInstance.appSkin.mainBackgroundPatternImage()
+            }
+        }
+    }
+    
     func setBackgroundPatternImage(isMainView: Bool) {
+        for subView in self.view.subviews {
+            if subView.tag == 1000 {
+                subView.removeFromSuperview()
+            }
+        }
         let backgroundImage = UIImageView(frame: self.view.bounds)
         let patternImage = UIImageView(frame: self.view.bounds)
+        patternImage.tag = 1000
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
         patternImage.translatesAutoresizingMaskIntoConstraints = false
         

@@ -39,8 +39,6 @@ class UserInfoViewController: UIViewController {
         logoutButton.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuButtonColor1()
         logoutButton.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuButtonColor2()
         cancelButton.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuButtonColor3()
-        
-        self.setBackgroundPatternImage(isMainView: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,6 +46,7 @@ class UserInfoViewController: UIViewController {
         self.setNavigationBarItem()
         userId.text = AppConfigure.sharedInstance.userDefaults.string(forKey: "UserId")
         kindergartenName.text = AppConfigure.sharedInstance.kindergartenName
+        self.setBackgroundPatternImage(isMainView: false)
     }
 
     override func didReceiveMemoryWarning() {

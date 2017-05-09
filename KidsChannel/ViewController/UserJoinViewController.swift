@@ -24,8 +24,9 @@ class UserJoinViewController: UIViewController {
         cancelButton.setRoundAndShadow()
         joinButton.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuButtonColor1()
         cancelButton.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuButtonColor3()
-        
-        //self.setBackgroundImage(isUserMenusView: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         self.setBackgroundPatternImage(isMainView: false)
     }
 

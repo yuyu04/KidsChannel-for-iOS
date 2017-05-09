@@ -14,6 +14,7 @@ class FourChannelCameraViewController: UIViewController {
     var cameras = [Camera]()
     var pageContent = [[Camera]]()
     var listSectionCount = 4
+    var isLoadingFinish = false
     
     var testViewController: UIViewController!
     
@@ -119,7 +120,6 @@ extension FourChannelCameraViewController: UIPageViewControllerDataSource {
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        //var index = self.indexOfViewController(viewController: viewController as! FourChannelContentViewController)
         let navigationController = viewController as! UINavigationController
         let controller = navigationController.viewControllers.first as! FourChannelContentViewController
         

@@ -30,13 +30,12 @@ class LoginViewController: UIViewController {
         joinButton.setShadow()
         loginButton.setRoundAndShadow()
         searchPasswordButton.setRoundAndShadow()
-        
-        self.setBackgroundPatternImage(isMainView: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setNavigationBarItem()
+        self.setBackgroundPatternImage(isMainView: false)
     }
 
     override func didReceiveMemoryWarning() {

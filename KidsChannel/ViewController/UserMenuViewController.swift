@@ -43,9 +43,6 @@ class UserMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        self.tableView.separatorColor = AppConfigure.sharedInstance.appSkin.tableSeparatorColor()
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         self.loginViewController = UINavigationController(rootViewController: loginViewController)
@@ -73,12 +70,17 @@ class UserMenuViewController: UIViewController {
         self.imageHeaderView = ImageHeaderView.loadNib()
         self.imageHeaderView.frame = self.memberView.bounds
         self.memberView.addSubview(self.imageHeaderView)
-        
-        self.tableView.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuViewBackgrounColor()
-        self.view.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuViewBackgrounColor()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.tableView.separatorColor = AppConfigure.sharedInstance.appSkin.tableSeparatorColor()
+        
+        self.tableView.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuViewBackgrounColor()
+        self.view.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuViewBackgrounColor()
+        
+        imageHeaderView.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuViewBackgrounColor()
+        imageHeaderView.userId.textColor = AppConfigure.sharedInstance.appSkin.userIdFontColor()
+        
         if AppConfigure.sharedInstance.isLoginUser, let userId = AppConfigure.sharedInstance.userDefaults.string(forKey: "UserId") {
             imageHeaderView.userId.text = userId
             imageHeaderView.profileImage.image = AppConfigure.sharedInstance.appSkin.loginImage()
