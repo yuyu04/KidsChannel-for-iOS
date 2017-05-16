@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -216,7 +216,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Njo-db-Uge" secondAttribute="trailing" constant="60" id="3LX-9Z-Ps2"/>
                             <constraint firstAttribute="trailingMargin" secondItem="CaV-lu-CYz" secondAttribute="trailing" constant="50" id="5XE-ID-PCi"/>
                             <constraint firstItem="Ka6-ap-F7o" firstAttribute="top" secondItem="sCC-UN-NSp" secondAttribute="bottom" constant="43" id="7B1-W0-eoz"/>
-                            <constraint firstItem="jb5-c3-aFJ" firstAttribute="height" secondItem="kSY-jB-7D8" secondAttribute="height" multiplier="0.06" id="HTx-MK-Zcj"/>
+                            <constraint firstItem="jb5-c3-aFJ" firstAttribute="height" relation="greaterThanOrEqual" secondItem="kSY-jB-7D8" secondAttribute="height" multiplier="0.06" id="HTx-MK-Zcj"/>
                             <constraint firstItem="Ka6-ap-F7o" firstAttribute="leading" secondItem="kSY-jB-7D8" secondAttribute="leadingMargin" constant="23" id="O5M-B1-LKr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FDp-Z6-SYY" secondAttribute="trailing" constant="34" id="Pbf-az-YZT"/>
                             <constraint firstItem="Njo-db-Uge" firstAttribute="top" secondItem="FDp-Z6-SYY" secondAttribute="bottom" constant="35" id="Tnm-Ft-y3y"/>
@@ -288,10 +288,10 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TVY-vD-XWB">
-                                <rect key="frame" x="76" y="346.5" width="223" height="78"/>
+                                <rect key="frame" x="76" y="346.5" width="223" height="83"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="moC-09-Qng">
-                                        <rect key="frame" x="0.0" y="0.0" width="223" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="223" height="43"/>
                                         <color key="backgroundColor" red="0.0" green="0.76078431369999999" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="회원가입">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -302,7 +302,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ll-WB-AVq">
-                                        <rect key="frame" x="0.0" y="50" width="223" height="28"/>
+                                        <rect key="frame" x="0.0" y="53" width="223" height="30"/>
                                         <color key="backgroundColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="취소">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -322,7 +322,7 @@
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="TVY-vD-XWB" secondAttribute="trailing" constant="60" id="5Db-r8-6hX"/>
                             <constraint firstItem="TVY-vD-XWB" firstAttribute="leading" secondItem="MfR-Sv-VmK" secondAttribute="leadingMargin" constant="60" id="9lJ-K6-Mq7"/>
-                            <constraint firstItem="moC-09-Qng" firstAttribute="height" secondItem="MfR-Sv-VmK" secondAttribute="height" multiplier="0.06" id="9w6-QD-BJP"/>
+                            <constraint firstItem="moC-09-Qng" firstAttribute="height" relation="greaterThanOrEqual" secondItem="MfR-Sv-VmK" secondAttribute="height" multiplier="0.06" id="9w6-QD-BJP"/>
                             <constraint firstItem="Lpo-fG-17M" firstAttribute="top" secondItem="fSz-jl-la4" secondAttribute="bottom" constant="43" id="EKB-hw-CLE"/>
                             <constraint firstItem="4SL-wf-Bsg" firstAttribute="top" secondItem="Lpo-fG-17M" secondAttribute="bottom" constant="33" id="LCJ-h2-E4U"/>
                             <constraint firstItem="TVY-vD-XWB" firstAttribute="top" secondItem="fZb-ep-AgM" secondAttribute="bottom" constant="15" id="PRj-kB-nuM"/>
@@ -444,10 +444,10 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="2Om-c7-kFx">
-                                <rect key="frame" x="76" y="341" width="223" height="128.5"/>
+                                <rect key="frame" x="76" y="341" width="223" height="136"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iSC-HU-eO6">
-                                        <rect key="frame" x="0.0" y="0.0" width="223" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="223" height="43"/>
                                         <color key="backgroundColor" red="0.0" green="0.76078431369999999" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="회원정보 수정">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -458,7 +458,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F9o-p4-R3N">
-                                        <rect key="frame" x="0.0" y="50" width="223" height="40.5"/>
+                                        <rect key="frame" x="0.0" y="53" width="223" height="43"/>
                                         <color key="backgroundColor" red="0.035294117649999998" green="0.57647058819999997" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="로그아웃">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -468,7 +468,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jqY-F0-Nhj">
-                                        <rect key="frame" x="0.0" y="100.5" width="223" height="28"/>
+                                        <rect key="frame" x="0.0" y="106" width="223" height="30"/>
                                         <color key="backgroundColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="취소">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -497,11 +497,11 @@
                             <constraint firstAttribute="trailingMargin" secondItem="bDq-QU-b4d" secondAttribute="trailing" constant="35" id="VJm-O7-xf7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="2Om-c7-kFx" secondAttribute="trailing" constant="60" id="YuJ-9a-QAM"/>
                             <constraint firstItem="2Om-c7-kFx" firstAttribute="top" secondItem="TwS-ev-gXd" secondAttribute="bottom" constant="10" id="a9N-6m-lWn"/>
-                            <constraint firstItem="iSC-HU-eO6" firstAttribute="height" secondItem="EW1-f5-m7K" secondAttribute="height" multiplier="0.06" id="diX-4r-d01"/>
+                            <constraint firstItem="iSC-HU-eO6" firstAttribute="height" relation="greaterThanOrEqual" secondItem="EW1-f5-m7K" secondAttribute="height" multiplier="0.06" id="diX-4r-d01"/>
                             <constraint firstItem="TwS-ev-gXd" firstAttribute="leading" secondItem="EW1-f5-m7K" secondAttribute="leadingMargin" constant="25" id="fJr-LJ-h46"/>
                             <constraint firstAttribute="trailingMargin" secondItem="IGv-AG-6fx" secondAttribute="trailing" constant="25" id="fpr-iU-JEx"/>
                             <constraint firstItem="8uA-hG-aNe" firstAttribute="leading" secondItem="EW1-f5-m7K" secondAttribute="leadingMargin" constant="23" id="jO6-TW-wbT"/>
-                            <constraint firstItem="wOF-ch-RhU" firstAttribute="height" secondItem="EW1-f5-m7K" secondAttribute="height" multiplier="0.045" id="oRC-7x-7Cj"/>
+                            <constraint firstItem="wOF-ch-RhU" firstAttribute="height" relation="greaterThanOrEqual" secondItem="EW1-f5-m7K" secondAttribute="height" multiplier="0.045" id="oRC-7x-7Cj"/>
                             <constraint firstItem="8uA-hG-aNe" firstAttribute="top" secondItem="PkH-I3-pzh" secondAttribute="bottom" constant="43" id="pQI-0K-Z3F"/>
                             <constraint firstItem="2Om-c7-kFx" firstAttribute="leading" secondItem="EW1-f5-m7K" secondAttribute="leadingMargin" constant="60" id="tX0-5R-66R"/>
                             <constraint firstItem="IGv-AG-6fx" firstAttribute="top" secondItem="bDq-QU-b4d" secondAttribute="bottom" constant="20" id="z4p-yT-Rv5"/>
@@ -569,7 +569,7 @@
                             <constraint firstItem="37L-Za-8e7" firstAttribute="leading" secondItem="uSo-Pd-kum" secondAttribute="leadingMargin" constant="60" id="2Qc-zY-beu"/>
                             <constraint firstItem="hsm-6L-udH" firstAttribute="leading" secondItem="uSo-Pd-kum" secondAttribute="leadingMargin" constant="15" id="BZ0-yE-H48"/>
                             <constraint firstItem="37L-Za-8e7" firstAttribute="top" secondItem="hsm-6L-udH" secondAttribute="bottom" constant="22" id="Dtu-yj-feV"/>
-                            <constraint firstItem="37L-Za-8e7" firstAttribute="height" secondItem="uSo-Pd-kum" secondAttribute="height" multiplier="0.06" id="Ha5-xG-3jL"/>
+                            <constraint firstItem="37L-Za-8e7" firstAttribute="height" relation="greaterThanOrEqual" secondItem="uSo-Pd-kum" secondAttribute="height" multiplier="0.06" id="Ha5-xG-3jL"/>
                             <constraint firstItem="hsm-6L-udH" firstAttribute="top" secondItem="i6u-Rh-cqQ" secondAttribute="bottom" constant="20" id="J1O-vA-F2x"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hsm-6L-udH" secondAttribute="trailing" constant="15" id="KrB-pk-1iT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="37L-Za-8e7" secondAttribute="trailing" constant="60" id="Nau-Wk-ElC"/>
@@ -664,7 +664,7 @@
                             <constraint firstItem="L5a-tG-plC" firstAttribute="top" secondItem="OKq-7j-pVa" secondAttribute="bottom" constant="43" id="Mcw-Os-uNq"/>
                             <constraint firstItem="WQc-Wa-Deu" firstAttribute="leading" secondItem="k0Y-xc-eKC" secondAttribute="leadingMargin" constant="25" id="NCa-Jo-5Av"/>
                             <constraint firstAttribute="trailingMargin" secondItem="T4d-R8-Kvx" secondAttribute="trailing" constant="60" id="Y2h-IQ-Otj"/>
-                            <constraint firstItem="fig-De-F3L" firstAttribute="height" secondItem="k0Y-xc-eKC" secondAttribute="height" multiplier="0.06" id="cLI-JW-uzA"/>
+                            <constraint firstItem="fig-De-F3L" firstAttribute="height" relation="greaterThanOrEqual" secondItem="k0Y-xc-eKC" secondAttribute="height" multiplier="0.06" id="cLI-JW-uzA"/>
                             <constraint firstItem="WQc-Wa-Deu" firstAttribute="top" secondItem="Rkz-VK-vUv" secondAttribute="bottom" constant="20" id="lAM-Nb-nNj"/>
                             <constraint firstItem="T4d-R8-Kvx" firstAttribute="top" secondItem="WQc-Wa-Deu" secondAttribute="bottom" constant="10" id="mij-rs-qkU"/>
                             <constraint firstItem="y2e-Rk-bbx" firstAttribute="top" secondItem="T4d-R8-Kvx" secondAttribute="bottom" constant="45" id="sPT-nL-iyB"/>
@@ -758,7 +758,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="GQ5-7o-Cid" secondAttribute="trailing" constant="60" id="fWI-7d-JJX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Ls0-0K-fmk" secondAttribute="trailing" constant="25" id="hys-aC-6fh"/>
                             <constraint firstItem="Ls0-0K-fmk" firstAttribute="top" secondItem="7yd-PT-ogF" secondAttribute="bottom" constant="33" id="v7h-9N-AeA"/>
-                            <constraint firstItem="GQ5-7o-Cid" firstAttribute="height" secondItem="ZUG-Bq-t2R" secondAttribute="height" multiplier="0.06" id="z4L-LN-dyS"/>
+                            <constraint firstItem="GQ5-7o-Cid" firstAttribute="height" relation="greaterThanOrEqual" secondItem="ZUG-Bq-t2R" secondAttribute="height" multiplier="0.06" id="z4L-LN-dyS"/>
                         </constraints>
                     </view>
                     <connections>

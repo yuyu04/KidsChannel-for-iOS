@@ -18,6 +18,7 @@ struct Camera {
     let number : String
     let updateTime : String
     let cameraCaptureUrl : String
+    let cameraRtspUrl : String
 }
 
 extension Camera: Equatable {}

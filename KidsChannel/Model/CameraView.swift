@@ -57,11 +57,17 @@ class CameraView: NSObject {
         })
         
         if index == nil || AppConfigure.sharedInstance.cameraList[index!].streamUrl == nil {
-            self.getStreamUrl() { (url) in
-                let model = CameraListModel(camera: self.camera, streamUrl: url)
+            if camera.cameraRtspUrl.length > 0, let rtspUrl = URL(string: camera.cameraRtspUrl) {
+                let model = CameraListModel(camera: self.camera, streamUrl: rtspUrl)
                 AppConfigure.sharedInstance.cameraList.append(model)
-                self.setVLCPlayer(url: url)
-            }
+                self.setVLCPlayer(url: rtspUrl)
+            } else {
+                self.getStreamUrl() { (url) in
+                    let model = CameraListModel(camera: self.camera, streamUrl: url)
+                    AppConfigure.sharedInstance.cameraList.append(model)
+                    self.setVLCPlayer(url: url)
+                }
+            }            
         } else {
             self.setVLCPlayer(url: AppConfigure.sharedInstance.cameraList[index!].streamUrl!)
         }

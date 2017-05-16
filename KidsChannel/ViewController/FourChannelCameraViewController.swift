@@ -20,11 +20,12 @@ class FourChannelCameraViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = AppConfigure.sharedInstance.appSkin.pageControllerViewBackgroundColor()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.view.backgroundColor = AppConfigure.sharedInstance.appSkin.pageControllerViewBackgroundColor()
+        self.setupPageControl()
         self.setNavigationBarItem()
         
         self.cameras = AppConfigure.sharedInstance.cameras
@@ -97,8 +98,8 @@ class FourChannelCameraViewController: UIViewController {
     
     func setupPageControl() {
         let appearance = UIPageControl.appearance()
-        appearance.pageIndicatorTintColor = UIColor.gray
-        appearance.currentPageIndicatorTintColor = UIColor.white
+        appearance.pageIndicatorTintColor = AppConfigure.sharedInstance.appSkin.userMenuButtonColor2()
+        appearance.currentPageIndicatorTintColor = AppConfigure.sharedInstance.appSkin.userMenuButtonColor1()
         appearance.backgroundColor = AppConfigure.sharedInstance.appSkin.pageControllerViewBackgroundColor()
     }
 }

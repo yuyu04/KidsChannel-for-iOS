@@ -22,20 +22,20 @@ class GalleryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.tableView.separatorColor = AppConfigure.sharedInstance.appSkin.tableSeparatorColor()
-        
+
         self.tableView.registerCellNib(GalleryTableViewCell.self)
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         PlaybackManager.sharedManager.delegate = self
         //self.tableView.contentInset = UIEdgeInsets.init(top: -36, left: 0, bottom: 0, right: 0)
         self.automaticallyAdjustsScrollViewInsets = false
-        self.view.backgroundColor = AppConfigure.sharedInstance.appSkin.galleryBackgroundColor()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.tableView.separatorColor = AppConfigure.sharedInstance.appSkin.tableSeparatorColor()
+        self.view.backgroundColor = AppConfigure.sharedInstance.appSkin.galleryBackgroundColor()
+        
         self.setNavigationBarItem()
         
         if playerViewController != nil {

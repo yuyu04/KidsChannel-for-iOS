@@ -49,12 +49,16 @@ class CameraManager: NSObject {
                     continue
                 }
                 
-                let cameraPath = "http://" + camera.ip + ":" + camera.port
-                let onvif = iOSOnvif(cameraPath: cameraPath, userId: userId, password: password)
-                
-                streamUrl = onvif?.getStreamUrl()
-                if streamUrl == nil {
+                if camera.cameraRtspUrl.length > 0 {
+                    streamUrl = URL(string: camera.cameraRtspUrl)
+                } else {
+                    let cameraPath = "http://" + camera.ip + ":" + camera.port
+                    let onvif = iOSOnvif(cameraPath: cameraPath, userId: userId, password: password)
+                    
                     streamUrl = onvif?.getStreamUrl()
+                    if streamUrl == nil {
+                        streamUrl = onvif?.getStreamUrl()
+                    }
                 }
                 
                 streams.append((camera: camera, url: streamUrl))
@@ -64,28 +68,5 @@ class CameraManager: NSObject {
                 completion(streams)
             }
         }
-        /*let group = DispatchGroup()
-        
-        var streams = [(camera: Camera, url: URL?)]()
-        queue.async {
-            DispatchQueue.concurrentPerform(iterations: cameraList.count) { index in
-                group.enter()
-                let camera = cameraList[index]
-                
-                let cameraPath = "http://" + camera.ip + ":" + camera.port
-                let onvif = iOSOnvif(cameraPath: cameraPath, userId: userId, password: password)
-                
-                var streamUrl = onvif?.getStreamUrl()
-                if streamUrl == nil {
-                    streamUrl = onvif?.getStreamUrl()
-                }
-                group.leave()
-                streams.append((camera: camera, url: streamUrl))
-            }
-            
-            group.notify(queue: DispatchQueue.main) { Void in
-                completion(streams)
-            }
-        }*/
     }
 }

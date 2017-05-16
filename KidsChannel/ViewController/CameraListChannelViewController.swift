@@ -30,9 +30,7 @@ class CameraListChannelViewController: UICollectionViewController {
             self.initializeViewCount = 15
             self.moreListCount = 3
         }
-        
-        self.collectionView?.backgroundColor = AppConfigure.sharedInstance.appSkin.pageControllerViewBackgroundColor()
-        
+
         let nib = UINib(nibName: CameraCollectionViewCell.identifier, bundle: nil)
         self.collectionView?.register(nib, forCellWithReuseIdentifier: CameraCollectionViewCell.identifier)
         self.automaticallyAdjustsScrollViewInsets = false
@@ -58,6 +56,8 @@ class CameraListChannelViewController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.collectionView?.backgroundColor = AppConfigure.sharedInstance.appSkin.pageControllerViewBackgroundColor()
+        
         self.setNavigationBarItem()
         
         if AppConfigure.sharedInstance.isLoginUser == false {

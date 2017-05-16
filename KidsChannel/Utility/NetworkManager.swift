@@ -261,7 +261,14 @@ class NetworkManager: NSObject {
                         continue
                 }
                 
-                let camera = Camera(idx: cameraIdx, name: cameraName, ip: cameraIp, port: cameraPort, id: cameraId, password: cameraPassword, number: cameraNumber, updateTime: updateTime, cameraCaptureUrl: cameraCaptureUrl)
+                var cameraRtspUrl: String
+                if json["camera_rtsp_url"] != nil {
+                    cameraRtspUrl = json["camera_rtsp_url"] as! String
+                } else {
+                    cameraRtspUrl = ""
+                }
+                
+                let camera = Camera(idx: cameraIdx, name: cameraName, ip: cameraIp, port: cameraPort, id: cameraId, password: cameraPassword, number: cameraNumber, updateTime: updateTime, cameraCaptureUrl: cameraCaptureUrl, cameraRtspUrl: cameraRtspUrl)
                 cameras.append(camera)
             }
             

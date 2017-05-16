@@ -30,13 +30,13 @@ class FourChannelContentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = AppConfigure.sharedInstance.appSkin.pageControllerViewBackgroundColor()
         self.navigationController?.navigationBar.isHidden = true
         
         self.setupConstraint()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.view.backgroundColor = AppConfigure.sharedInstance.appSkin.pageControllerViewBackgroundColor()
         if collectionOfViews.count == camerasList.count {
             return
         }
