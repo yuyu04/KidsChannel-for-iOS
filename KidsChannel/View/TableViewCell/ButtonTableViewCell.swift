@@ -24,11 +24,7 @@ class ButtonTableViewCell: BaseTableViewCell {
     @IBOutlet weak var cellTextLabel: UILabel!
     
     override func awakeFromNib() {
-        //super.awakeFromNib()
-        // Initialization code
-        cellTextLabel.textColor = AppConfigure.sharedInstance.appSkin.userMenuFontColor()
         
-        cellImageView.tintColor = AppConfigure.sharedInstance.appSkin.iconsNormalTintColor()
     }
     
     override class func height() -> CGFloat {

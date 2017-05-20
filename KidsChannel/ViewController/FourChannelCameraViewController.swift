@@ -73,7 +73,6 @@ class FourChannelCameraViewController: UIViewController {
             self.view.addSubview(self.pageController!.view)
         }
         
-        //let pageViewRect = self.view.bounds
         self.pageController!.view.frame = self.view.bounds
         self.pageController!.didMove(toParentViewController: self)
     }
@@ -106,7 +105,6 @@ class FourChannelCameraViewController: UIViewController {
 
 extension FourChannelCameraViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        //var index = self.indexOfViewController(viewController: viewController as! FourChannelContentViewController)
         let navigationController = viewController as! UINavigationController
         let controller = navigationController.viewControllers.first as! FourChannelContentViewController
         

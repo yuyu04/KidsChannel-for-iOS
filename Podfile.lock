@@ -1,5 +1,5 @@
 PODS:
-  - CryptoSwift (0.6.8)
+  - CryptoSwift (0.6.9)
   - IQKeyboardManagerSwift (4.0.9)
   - MobileVLCKit (2.2.2)
   - ReachabilitySwift (3)
@@ -15,7 +15,7 @@ DEPENDENCIES:
   - UIScrollView-InfiniteScroll (~> 1.0.0)
 
 SPEC CHECKSUMS:
-  CryptoSwift: f21ea03ed3a94e79d241648ce26652cd4810508a
+  CryptoSwift: a22f6ba238e9ce4d26ee7bf45b9ed82e7122d4a0
   IQKeyboardManagerSwift: 2eefe6c429b86aa08bfbc1b5c891164d754adf91
   MobileVLCKit: 75c2c36b0e3478c3f18cac3a2e7fa127cda0ff92
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
@@ -24,4 +24,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 9678b11904f1ce52daeaf0fd153ae8466c86860d
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0

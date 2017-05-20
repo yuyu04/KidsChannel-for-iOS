@@ -11,6 +11,7 @@ import SlideMenuControllerSwift
 
 enum RightMenu: Int {
     case close = 0
+    case cameraList
     case fourChennel
     case eightChennel
     case cameraListChennel
@@ -24,7 +25,7 @@ protocol RightMenuProtocol : class {
 class CameraMenuViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    var menus = ["", "4ch 카메라 뷰어", "8ch 카메라 뷰어", "리스트 카메라 뷰어", "갤러리 뷰어"]
+    var menus = ["", "카메라 뷰어", "4ch 카메라 뷰어", "8ch 카메라 뷰어", "리스트 카메라 뷰어", "갤러리 뷰어"]
     var mainViewController: UIViewController!
     var fourChViewController: UIViewController!
     var eightChViewController: UIViewController!
@@ -38,9 +39,6 @@ class CameraMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        self.tableView.separatorColor = AppConfigure.sharedInstance.appSkin.tableSeparatorColor()
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let fourChViewController = storyboard.instantiateViewController(withIdentifier: "FourChannelCameraViewController") as! FourChannelCameraViewController
         self.fourChViewController = UINavigationController(rootViewController: fourChViewController)
@@ -54,9 +52,14 @@ class CameraMenuViewController: UIViewController {
         let galleryViewController = storyboard.instantiateViewController(withIdentifier: "GalleryViewController") as! GalleryViewController
         self.galleryViewController = UINavigationController(rootViewController: galleryViewController)
         
-        self.tableView.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuViewBackgrounColor()
         self.tableView.registerCellNib(ButtonTableViewCell.self)
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tableView.separatorColor = AppConfigure.sharedInstance.appSkin.tableSeparatorColor()
+        self.tableView.backgroundColor = AppConfigure.sharedInstance.appSkin.userMenuViewBackgrounColor()
+        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -88,7 +91,7 @@ extension CameraMenuViewController : UITableViewDelegate {
             switch menu {
             case .close:
                 return ButtonTableViewCell.height()+UIApplication.shared.statusBarFrame.height
-            case .fourChennel, .eightChennel, .cameraListChennel, .gellery:
+            case .cameraList, .fourChennel, .eightChennel, .cameraListChennel, .gellery:
                 return ButtonTableViewCell.height()
             }
         }
@@ -126,12 +129,9 @@ extension CameraMenuViewController : UITableViewDataSource {
             switch menu {
             case .close:
                 data = ButtonTableViewCellData(image: nil, text: menus[indexPath.row])
-            case .fourChennel:
+            case .cameraList:
                 data = ButtonTableViewCellData(image: AppConfigure.sharedInstance.appSkin.fourCameraChannelIcon(), text: menus[indexPath.row])
-            case .eightChennel:
-                data = ButtonTableViewCellData(image: nil, text: menus[indexPath.row])
-                cell.backgroundColor = AppConfigure.sharedInstance.appSkin.otherChannelBackgroundColor()
-            case .cameraListChennel:
+            case .fourChennel, .eightChennel, .cameraListChennel:
                 data = ButtonTableViewCellData(image: nil, text: menus[indexPath.row])
                 cell.backgroundColor = AppConfigure.sharedInstance.appSkin.otherChannelBackgroundColor()
             case .gellery:

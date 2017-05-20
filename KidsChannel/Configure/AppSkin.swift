@@ -208,7 +208,7 @@ class secondSkin: AppSkin {
     }
     
     func navigationBarImage() -> UIImage {
-        return UIImage(named: "title")!
+        return UIImage(named: "title_dark")!
     }
     
     func navigationIconColor() -> UIColor {
@@ -380,7 +380,7 @@ class thirdSkin: AppSkin {
     }
     
     func iconsNormalTintColor() -> UIColor {
-        return UIColor(hex: "E0F3F0")
+        return UIColor(hex: "E1F3F0")
     }
     
     func iconsSelectTintColor() -> UIColor {
@@ -400,7 +400,7 @@ class thirdSkin: AppSkin {
     }
     
     func userMenuFontColor() -> UIColor {
-        return UIColor(hex: "CBE5E5")
+        return UIColor(hex: "D1E8E7")
     }
     
     func cameraInfoListIcon() -> UIImage {

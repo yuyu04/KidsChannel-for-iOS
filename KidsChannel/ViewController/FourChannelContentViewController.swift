@@ -100,9 +100,6 @@ class FourChannelContentViewController: UIViewController {
                     self.collectionOfIndicatorView[i].isHidden = false
                     self.collectionOfIndicatorView[i].startAnimating()
                 } else {
-                    /*if self.cameraView[index!].cameraUrlPath == nil {
-                        self.cameraView[index!].setStreamUrl()
-                    }*/
                     if self.cameraView[index!].isPlayerPlaying() == false {
                         self.cameraView[index!].setVideoView(view: self.collectionOfViews[index!])
                         self.cameraView[index!].setStreamUrl()
@@ -134,7 +131,7 @@ extension FourChannelContentViewController: CameraViewDelegate {
         fullCameraViewController.delegate = self
         OrientationManager.lockOrientation(.landscapeRight)
         self.present(fullCameraViewController, animated: true) { () in
-            
+
         }
     }
     

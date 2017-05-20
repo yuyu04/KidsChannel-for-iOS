@@ -20,10 +20,14 @@ extension UIView {
     
     func setBackgrounImage(url: String) {
         NetworkManager.requestImageData(url: url) { (data) in
-            guard let data = data else {return}
-            
-            DispatchQueue.main.async {
-                self.setBackgroundImage(data: data)
+            if let data = data {
+                DispatchQueue.main.async {
+                    self.setBackgroundImage(data: data)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.setBackgroundImage(named: "viewer_ipcamera")
+                }
             }
         }
     }
@@ -31,6 +35,17 @@ extension UIView {
     func setBackgroundImage(data: Data) {
         UIGraphicsBeginImageContext(self.frame.size)
         UIImage(data: data)?.draw(in: self.bounds)
+        
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        
+        UIGraphicsEndImageContext()
+        
+        self.backgroundColor = UIColor(patternImage: image)
+    }
+    
+    func setBackgroundImage(named: String) {
+        UIGraphicsBeginImageContext(self.frame.size)
+        UIImage(named: named)!.draw(in: self.bounds)
         
         let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         

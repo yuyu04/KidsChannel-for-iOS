@@ -38,9 +38,6 @@ class CameraView: NSObject {
         if cameraUrlPath == nil {
             self.setStreamUrl()
         }
-        
-        //self.movieView.frame = view.bounds
-        //view.addSubview(self.movieView)
     }
     
     func setVideoView(view: UIView) {

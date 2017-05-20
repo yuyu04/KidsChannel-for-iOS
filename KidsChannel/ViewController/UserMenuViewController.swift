@@ -160,6 +160,9 @@ extension UserMenuViewController : UITableViewDataSource {
             cell.layoutMargins = UIEdgeInsets.zero
             cell.backgroundColor = UIColor.clear
             
+            cell.cellTextLabel.textColor = AppConfigure.sharedInstance.appSkin.userMenuFontColor()
+            cell.cellImageView.tintColor = AppConfigure.sharedInstance.appSkin.iconsNormalTintColor()
+            
             switch menu {
             case .login where AppConfigure.sharedInstance.isLoginUser:
                 data = ButtonTableViewCellData(image: AppConfigure.sharedInstance.appSkin.userInfoIcon(), text: menus[indexPath.row+1])
