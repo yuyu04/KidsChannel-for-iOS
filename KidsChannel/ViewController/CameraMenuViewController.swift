@@ -125,6 +125,9 @@ extension CameraMenuViewController : UITableViewDataSource {
             cell.layoutMargins = UIEdgeInsets.zero
             cell.backgroundColor = UIColor.clear
             
+            cell.cellTextLabel.textColor = AppConfigure.sharedInstance.appSkin.cameraMenuFontColor()
+            cell.cellImageView.tintColor = AppConfigure.sharedInstance.appSkin.iconsNormalTintColor()
+            
             var data: ButtonTableViewCellData?
             switch menu {
             case .close:

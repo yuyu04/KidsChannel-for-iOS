@@ -40,6 +40,7 @@ protocol AppSkin {
     func userMenuButtonColor2() -> UIColor
     func userMenuButtonColor3() -> UIColor
     
+    func cameraMenuFontColor() -> UIColor
     func fourCameraChannelIcon() -> UIImage
     func otherChannelBackgroundColor() -> UIColor
     func galleryIcon() -> UIImage
@@ -154,6 +155,10 @@ class firstSkin: AppSkin {
     
     func userMenuButtonColor3() -> UIColor {
         return UIColor(hex: "535352")
+    }
+    
+    func cameraMenuFontColor() -> UIColor {
+        return UIColor(hex: "999999")
     }
     
     func fourCameraChannelIcon() -> UIImage {
@@ -293,6 +298,10 @@ class secondSkin: AppSkin {
     
     func userMenuButtonColor3() -> UIColor {
         return UIColor(hex: "535352")
+    }
+    
+    func cameraMenuFontColor() -> UIColor {
+        return UIColor(hex: "A5A6A5")
     }
     
     func fourCameraChannelIcon() -> UIImage {
@@ -435,6 +444,10 @@ class thirdSkin: AppSkin {
         return UIColor(hex: "535352")
     }
     
+    func cameraMenuFontColor() -> UIColor {
+        return UIColor(hex: "607678")
+    }
+    
     func fourCameraChannelIcon() -> UIImage {
         return UIImage(named: "ic_skin03_view_01")!
     }
@@ -573,6 +586,10 @@ class forthSkin: AppSkin {
     
     func userMenuButtonColor3() -> UIColor {
         return UIColor(hex: "535352")
+    }
+    
+    func cameraMenuFontColor() -> UIColor {
+        return UIColor(hex: "B5B5B1")
     }
     
     func fourCameraChannelIcon() -> UIImage {

@@ -26,7 +26,7 @@ class ExSlideMenuController : SlideMenuController {
     }
     
     override func track(_ trackAction: TrackAction) {
-        switch trackAction {
+        /*switch trackAction {
         case .leftTapOpen:
             print("TrackAction: left tap open.")
         case .leftTapClose:
@@ -43,6 +43,6 @@ class ExSlideMenuController : SlideMenuController {
             print("TrackAction: right flick open.")
         case .rightFlickClose:
             print("TrackAction: right flick close.")
-        }   
+        } */
     }
 }

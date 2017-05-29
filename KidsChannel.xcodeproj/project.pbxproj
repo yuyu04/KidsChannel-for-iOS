@@ -258,7 +258,6 @@
 				C160F0251E89F21000789D5E /* ViewController */,
 				C160F05A1E8A34B800789D5E /* Configure */,
 				C160F0231E89F21000789D5E /* Utility */,
-				C160F01B1E89EE7100789D5E /* DataBase */,
 				C160EFE91E89EA3400789D5E /* AppDelegate.swift */,
 				C160EFED1E89EA3400789D5E /* Main.storyboard */,
 				C160EFF31E89EA3400789D5E /* Assets.xcassets */,
@@ -286,13 +285,6 @@
 				C160F00E1E89EA3400789D5E /* Info.plist */,
 			);
 			path = KidsChannelUITests;
-			sourceTree = "<group>";
-		};
-		C160F01B1E89EE7100789D5E /* DataBase */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DataBase;
 			sourceTree = "<group>";
 		};
 		C160F0231E89F21000789D5E /* Utility */ = {
