@@ -30,9 +30,19 @@ class FourChannelCameraViewController: UIViewController {
         
         self.cameras = AppConfigure.sharedInstance.cameras
         
-        if AppConfigure.sharedInstance.isLoginUser {
-            self.searchCameraStreamUrl()
+        if AppConfigure.sharedInstance.isLoginUser == false {
+            let alertController = UIAlertController(title: "알림",
+                                                    message: "로그인이 필요한 서비스 입니다.",
+                                                    preferredStyle: UIAlertControllerStyle.alert)
+            let cacelAction = UIAlertAction(title: "확인", style: UIAlertActionStyle.cancel) { (result) in
+                AppConfigure.sharedInstance.leftMenuDelegate?.changeViewController(LeftMenu.mainView)
+            }
+            alertController.addAction(cacelAction)
+            self.present(alertController, animated: true, completion: nil)
+            return
         }
+        
+        self.searchCameraStreamUrl()
     }
     
     func streamForUrl(cameras: [Camera]) {

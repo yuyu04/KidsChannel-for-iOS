@@ -1,6 +1,6 @@
 PODS:
   - CryptoSwift (0.6.9)
-  - IQKeyboardManagerSwift (4.0.9)
+  - IQKeyboardManagerSwift (4.0.10)
   - MobileVLCKit (2.2.2)
   - ReachabilitySwift (3)
   - SlideMenuControllerSwift (3.0.1)
@@ -16,7 +16,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   CryptoSwift: a22f6ba238e9ce4d26ee7bf45b9ed82e7122d4a0
-  IQKeyboardManagerSwift: 2eefe6c429b86aa08bfbc1b5c891164d754adf91
+  IQKeyboardManagerSwift: 75ba21a23794a1e6b6fe6d9a267ea17f80e06771
   MobileVLCKit: 75c2c36b0e3478c3f18cac3a2e7fa127cda0ff92
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   SlideMenuControllerSwift: 9a163b16d54afab734add42858cba7ef7c307755

@@ -61,6 +61,14 @@ class CameraListChannelViewController: UICollectionViewController {
         self.setNavigationBarItem()
         
         if AppConfigure.sharedInstance.isLoginUser == false {
+            let alertController = UIAlertController(title: "알림",
+                                                    message: "로그인이 필요한 서비스 입니다.",
+                                                    preferredStyle: UIAlertControllerStyle.alert)
+            let cacelAction = UIAlertAction(title: "확인", style: UIAlertActionStyle.cancel) { (result) in
+                AppConfigure.sharedInstance.leftMenuDelegate?.changeViewController(LeftMenu.mainView)
+            }
+            alertController.addAction(cacelAction)
+            self.present(alertController, animated: true, completion: nil)
             return
         }
         
