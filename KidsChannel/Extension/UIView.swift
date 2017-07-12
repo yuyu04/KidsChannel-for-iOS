@@ -32,6 +32,12 @@ extension UIView {
         }
     }
     
+    func setBackgroundImageForNotYetServiceTime() {
+        DispatchQueue.main.async {
+            self.setBackgroundImage(named: "viewer_not_service")
+        }
+    }
+    
     func setBackgroundImage(data: Data) {
         UIGraphicsBeginImageContext(self.frame.size)
         UIImage(data: data)?.draw(in: self.bounds)

@@ -303,4 +303,38 @@ class NetworkManager: NSObject {
             print("post record data. responseData=\(String(describing: responseJson))")
         }
     }
+    
+    static func requestServiceStatus(status: @escaping (_ status: Bool) -> Void) {
+        guard let userId = AppConfigure.sharedInstance.userDefaults.string(forKey: "UserId") else {
+            status(false)
+            return
+        }
+        
+        let urlString = "http://emwkids.blaubit.co.kr/schdule/check/" + userId
+        NetworkManager.requestData(url: urlString, parameter: "", method: "GET") { (responseJson) in
+            if responseJson == nil {
+                DispatchQueue.main.async {
+                    status(false)
+                }
+                return
+            }
+            
+            guard let result: Bool = responseJson?["check"] as? Bool else {
+                DispatchQueue.main.async {
+                    status(false)
+                }
+                return
+            }
+            
+            if result {
+                DispatchQueue.main.async {
+                    status(true)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    status(false)
+                }
+            }
+        }
+    }
 }

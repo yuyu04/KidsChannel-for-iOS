@@ -79,6 +79,8 @@ enum SkinNumber : Int {
     }
 }
 
+let ServiceStatusNotification: NSNotification.Name = NSNotification.Name("ServiceStatusNotification")
+
 class AppConfigure: NSObject {
     static let sharedInstance = AppConfigure()
     
@@ -87,6 +89,7 @@ class AppConfigure: NSObject {
     var skinNumber: SkinNumber!
     var appSkin: AppSkin!
     var kindergartenName = ""
+    var timer: Timer?
     weak var leftMenuDelegate: LeftMenuProtocol?
     
     var cameras = [Camera]()
@@ -119,6 +122,26 @@ class AppConfigure: NSObject {
             appSkin = thirdSkin()
         case .forth:
             appSkin = forthSkin()
+        }
+    }
+    
+    func startScheduling() {
+        if timer == nil {
+            timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(loop), userInfo: nil, repeats: true)
+        }
+    }
+    
+    func stopScheduling() {
+        if timer != nil {
+            timer?.invalidate()
+            timer = nil
+        }
+    }
+    
+    func loop() {
+        NetworkManager.requestServiceStatus() { (status) in
+            let userInfo: [String:Any] = ["status": status]
+            NotificationCenter.default.post(name: ServiceStatusNotification, object: nil, userInfo: userInfo)
         }
     }
     

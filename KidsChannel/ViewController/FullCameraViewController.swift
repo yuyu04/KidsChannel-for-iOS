@@ -20,6 +20,7 @@ class FullCameraViewController: UIViewController {
     var delegate: FullCameraViewControllerDelegate?
     var recordStartTime: Date?
     var viewStartTime: Date?
+    var isCanService = false
     
     @IBOutlet weak var screenView: UIView!
     @IBOutlet weak var recordStartButton: UIButton!
@@ -36,30 +37,22 @@ class FullCameraViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        AppConfigure.sharedInstance.startScheduling()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.handleServiceStatusNotification(_:)), name: ServiceStatusNotification, object: nil)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        guard let camera = camera else {
-            return
-        }
-        
-        if cameraView == nil {
-            cameraView = CameraView(camera: camera, view: screenView)
-            cameraView?.delegate = self
-        }
-        
-        guard let isPlaying = cameraView?.isPlayerPlaying() else {
-            return
-        }
-        
-        viewStartTime = Date()
-        if isPlaying == false {
-            cameraView?.setVideoView(view: screenView)
-            indicatorView.isHidden = false
-            indicatorView.startAnimating()
-            cameraView?.startPlay()
+        self.indicatorView.isHidden = true
+        NetworkManager.requestServiceStatus() { (status) in
+            if status == true {
+                self.indicatorView.isHidden = false
+                self.isCanService = true
+                self.setCameraView()
+            } else {
+                self.screenView.setBackgroundImageForNotYetServiceTime()
+            }
         }
     }
     
@@ -74,11 +67,39 @@ class FullCameraViewController: UIViewController {
             let cameraIdx = self.camera?.idx,
             let viewStartTime = self.viewStartTime else { return }
         NetworkManager.requestViewWatch(userId: userId, cameraIdx: cameraIdx, viewStartTime: viewStartTime, viewEndTime: Date())
+        
+        AppConfigure.sharedInstance.stopScheduling()
+        NotificationCenter.default.removeObserver(self, name: ServiceStatusNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setCameraView() {
+        guard let camera = camera else {
+            return
+        }
+        
+        if cameraView == nil {
+            cameraView = CameraView(camera: camera, view: screenView)
+            cameraView?.delegate = self
+        }
+        
+        guard let isPlaying = cameraView?.isPlayerPlaying() else {
+            return
+        }
+        
+        viewStartTime = Date()
+        
+        if isPlaying == false {
+            cameraView?.setVideoView(view: screenView)
+            indicatorView.isHidden = false
+            indicatorView.startAnimating()
+            cameraView?.startPlay()
+        }
+        
     }
     
     func recordingStartAfterProcess(error: Error?, sender: UIButton) {
@@ -158,5 +179,27 @@ extension FullCameraViewController: CameraViewDelegate {
     func cameraView(didFinishLoading cameraView: CameraView) {
         self.indicatorView.stopAnimating()
         self.indicatorView.isHidden = true        
+    }
+}
+
+extension FullCameraViewController {
+    func handleServiceStatusNotification(_ notification: NSNotification) {
+        guard let status = notification.userInfo!["status"] as? Bool else {
+            return
+        }
+        
+        if self.isCanService == true && status == false {
+            cameraView?.stopPlay()
+            self.screenView.setBackgroundImageForNotYetServiceTime()
+            self.isCanService = false
+        } else if self.isCanService == false && status == true && cameraView == nil {
+            self.setCameraView()
+            self.isCanService = true
+            self.indicatorView.isHidden = false
+        } else if self.isCanService == false && status == true {
+            cameraView?.startPlay()
+            self.isCanService = true
+            self.indicatorView.isHidden = false
+        }
     }
 }

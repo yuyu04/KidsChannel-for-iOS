@@ -27,6 +27,7 @@ class FourChannelContentViewController: UIViewController {
     var cameraView = [CameraView]()
     var dispatchQueue: DispatchQueue?
     var dispatchWorkItem: DispatchWorkItem?
+    var isCanService = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,8 @@ class FourChannelContentViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.isCanService = false
+        
         self.view.backgroundColor = AppConfigure.sharedInstance.appSkin.pageControllerViewBackgroundColor()
         if collectionOfViews.count == camerasList.count {
             return
@@ -45,11 +48,24 @@ class FourChannelContentViewController: UIViewController {
             indicator.isHidden = true
         }
         
-        self.setCameraViewsBackgroundImage()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.handleServiceStatusNotification(_:)), name: ServiceStatusNotification, object: nil)
         
+        self.setCameraViewsBackgroundImage(true)
+
         self.dispatchQueue = DispatchQueue.global(qos: .background)
         self.dispatchWorkItem = DispatchWorkItem {
-            self.setCameraView()
+            DispatchQueue.main.async {
+                AppConfigure.sharedInstance.startScheduling()
+            }
+            
+            NetworkManager.requestServiceStatus() { (status) in
+                if status == true {
+                    self.isCanService = true                    
+                    self.setCameraView()
+                } else {
+                    self.setCameraViewsBackgroundImage(false)
+                }
+            }
         }
         
         if self.dispatchWorkItem != nil {
@@ -66,12 +82,21 @@ class FourChannelContentViewController: UIViewController {
         for camera in self.cameraView  {
             camera.stopPlay()
         }
+        
+        AppConfigure.sharedInstance.stopScheduling()
+        NotificationCenter.default.removeObserver(self, name: ServiceStatusNotification, object: nil)
     }
     
-    func setCameraViewsBackgroundImage() {
-        for i in 0 ..< cameraInfo.count {
-            let filePath = cameraInfo[i].cameraCaptureUrl
-            collectionOfViews[i].setBackgrounImage(url: filePath)
+    func setCameraViewsBackgroundImage(_ isService: Bool) {
+        if isService {
+            for i in 0 ..< cameraInfo.count {
+                let filePath = cameraInfo[i].cameraCaptureUrl
+                collectionOfViews[i].setBackgrounImage(url: filePath)
+            }
+        } else {
+            for i in 0 ..< cameraInfo.count {
+                collectionOfViews[i].setBackgroundImageForNotYetServiceTime()
+            }
         }
     }
     
@@ -147,6 +172,35 @@ extension FourChannelContentViewController: FullCameraViewControllerDelegate {
     func fullCameraViewControllerDidFinish(_ fullCameraViewController: FullCameraViewController) {
         OrientationManager.lockOrientation(.portrait, andRotateTo: .portrait)
         dismiss(animated: false) { () in
+        }
+    }
+}
+
+extension FourChannelContentViewController {
+    func handleServiceStatusNotification(_ notification: NSNotification) {
+        guard let status = notification.userInfo!["status"] as? Bool else {
+            return
+        }
+        
+        if self.isCanService == true && status == false {
+            for camera in self.cameraView  {
+                camera.stopPlay()
+                self.setCameraViewsBackgroundImage(false)
+                self.isCanService = false
+            }
+        } else if self.isCanService == false && status == true && self.cameraView.count > 1 {
+            for camera in self.cameraView  {
+                camera.startPlay()
+                self.isCanService = true
+            }
+            
+            for indicatorView in self.collectionOfIndicatorView {
+                indicatorView.isHidden = false
+            }
+        } else if self.isCanService == false && status == true {
+            self.setCameraViewsBackgroundImage(true)
+            self.setCameraView()
+            self.isCanService = true
         }
     }
 }
